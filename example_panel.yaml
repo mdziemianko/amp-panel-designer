@@ -1,0 +1,66 @@
+name: "My Amp Panel"
+width: 400
+height: 150
+background_color: "#dddddd"
+
+elements:
+  - type: group
+    id: "preamp"
+    x: 20
+    y: 20
+    width: 140
+    height: 100
+    label: "PREAMP"
+    border:
+      type: full
+      thickness: 2
+      color: "#555555"
+    elements:
+      - type: socket
+        id: "input_1"
+        x: 20
+        y: 40
+        label: "INPUT"
+      
+      - type: group
+        id: "eq"
+        x: 60
+        y: 0
+        width: 80
+        height: 80
+        label: "EQ"
+        border:
+          type: bottom
+          style: dotted
+          thickness: 1
+        elements:
+           - type: potentiometer
+             id: "bass"
+             x: 20
+             y: 40
+             label: "BASS"
+             
+           - type: potentiometer
+             id: "treble"
+             x: 60
+             y: 40
+             label: "TREBLE"
+
+  - type: group
+    id: "master"
+    x: 250
+    y: 20
+    width: 100
+    height: 100
+    label: "MASTER"
+    border:
+      type: full
+      style: dashed
+      color: "red"
+    elements:
+      - type: potentiometer
+        id: "volume"
+        x: 50
+        y: 40
+        label: "VOLUME"
+        scale: 0-10
