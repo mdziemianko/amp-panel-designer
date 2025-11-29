@@ -1,6 +1,7 @@
 import argparse
 import yaml
 import sys
+import traceback
 from models import Panel
 from renderer import PanelRenderer
 
@@ -29,7 +30,7 @@ def main():
         print(f"Error parsing YAML: {e}")
         sys.exit(1)
     except Exception as e:
-        print(f"An error occurred: {e}")
+        traceback.print_exc()
         sys.exit(1)
 
 if __name__ == "__main__":

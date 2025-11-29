@@ -14,6 +14,12 @@ def to_mm(value) -> float:
             return float(val[:-2]) * 25.4
         elif val.endswith('"'):
             return float(val[:-1]) * 25.4
+        elif val.endswith('pt'):
+            # 1 pt = 1/72 inch = 25.4 / 72 mm approx 0.352778 mm
+            return float(val[:-2]) * (25.4 / 72.0)
+        elif val.endswith('px'):
+            # 1 px = 1/96 inch = 25.4 / 96 mm approx 0.264583 mm
+            return float(val[:-2]) * (25.4 / 96.0)
         else:
             try:
                 return float(val)
@@ -22,7 +28,7 @@ def to_mm(value) -> float:
                 return value
     return value
 
-DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness', 'font_size'}
+DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness', 'font_size', 'size'}
 
 def normalize_data(data: dict) -> dict:
     new_data = data.copy()
@@ -45,6 +51,7 @@ class Element:
     y: float
     type: str
     label: Optional[str] = None
+    label_position: Optional[str] = None # top, bottom, etc.
     font_style: Optional[FontStyle] = None
 
     @staticmethod
@@ -54,11 +61,6 @@ class Element:
         
         # Extract font style
         font_data = data.pop('font_style', None)
-        # Also support flatten style props for convenience if desired, but sticking to structure for now or maybe checks below?
-        # Let's check if there are font_ keys at top level and move them? No, let's keep it structured 'font: { ... }' or 'font_style: { ... }'
-        # The user asked "font size, color and font" - probably under a key or top level?
-        # Let's support a 'font' dictionary.
-        
         font_dict = data.pop('font', None)
 
         element_type = data.get('type')
