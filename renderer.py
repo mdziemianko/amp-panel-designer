@@ -1,6 +1,6 @@
 import svgwrite
 import math
-from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle
+from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle, Component
 
 class PanelRenderer:
     def __init__(self, panel: Panel):
@@ -25,6 +25,26 @@ class PanelRenderer:
             except ValueError:
                 font_size = 3.0 # fallback approx 10-12pt
         return len(text) * font_size * 0.6
+
+    def _render_drill_pattern(self, x: float, y: float, diameter: float):
+        r = diameter / 2
+        # Hole
+        self.dwg.add(self.dwg.circle(center=(x, y), r=r, fill='none', stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
+        # Cross center
+        # Extends 3mm outside
+        # Radius + 3mm
+        cross_len = r + 3.0
+        self.dwg.add(self.dwg.line(start=(x - cross_len, y), end=(x + cross_len, y), stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
+        self.dwg.add(self.dwg.line(start=(x, y - cross_len), end=(x, y + cross_len), stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
+
+    def _should_show_component(self):
+        return self.panel.render_mode in ('show', 'both')
+
+    def _should_show_drill(self):
+        return self.panel.render_mode in ('hide', 'both')
+        
+    def _is_both_mode(self):
+        return self.panel.render_mode == 'both'
 
     def _render_group(self, elements: list[Element], offset_x: float, offset_y: float):
         for element in elements:
@@ -165,22 +185,24 @@ class PanelRenderer:
         # Constants and defaults
         knob_radius = pot.knob_diameter / 2
         
-        # Border (Circular)
+        # Determine opacity for "both" mode
+        component_opacity = 0.5 if self._is_both_mode() else 1.0
+        
+        # Render drill pattern if enabled
+        if self._should_show_drill():
+            self._render_drill_pattern(x, y, pot.install_diameter)
+
+        # Scales and borders should be visible even in hide mode as they are printed on the panel
+        # Render border (Circular)
         if pot.border_thickness > 0:
             border_r = pot.border_diameter / 2
             # For a circle border (full 360)
             self.dwg.add(self.dwg.circle(center=(x, y), r=border_r, 
                                          fill='none', stroke='black', stroke_width=pot.border_thickness))
 
-        # Scale
+        # Render Scale
         if pot.scale:
              s = pot.scale
-             
-             # Calculate angles
-             # User: 0 is down (6 o'clock), clockwise.
-             # SVG: 0 is right (3 o'clock), clockwise.
-             # Transform: SVG = User + 90
-             
              start_angle_user = pot.angle_start
              sweep_angle_user = pot.angle_width
              
@@ -188,17 +210,7 @@ class PanelRenderer:
              if s.num_ticks > 0:
                 step = sweep_angle_user / (s.num_ticks - 1) if s.num_ticks > 1 else 0
                 
-                # Scale radius: relative to what? usually outside the knob or border
-                # If position is 'outside', maybe based on border_diameter or knob_diameter?
-                # User said "scale position with respect ot border".
-                # Let's assume default radius is slightly larger than border radius if border exists, or knob radius.
-                # Default logic: radius = border_diameter/2 + tick_size/2 + padding?
-                # Or maybe s.radius if provided?
-                # Let's define base radius:
                 base_radius = (pot.border_diameter / 2) if pot.border_diameter > pot.knob_diameter else (pot.knob_diameter / 2)
-                # Apply position modifier? Just use base_radius + 2mm padding for now or if position logic is strictly needed.
-                # Simplification: ticks start at base_radius + 2
-                
                 tick_r_start = base_radius + 1.0 # gap from component
                 
                 for i in range(s.num_ticks):
@@ -210,16 +222,11 @@ class PanelRenderer:
                     
                     current_tick_len = s.tick_size if is_major else s.tick_size * 0.5
                     
-                    # Coords
-                    # x = cx + r * cos(a)
-                    # y = cy + r * sin(a)
-                    
                     x1 = x + tick_r_start * math.cos(angle_rad)
                     y1 = y + tick_r_start * math.sin(angle_rad)
                     
                     if s.tick_style == 'dot':
                         r_dot = (current_tick_len / 2) if is_major else (current_tick_len / 4) # rough scaling
-                        # For dot, (x1, y1) is center? No, let's push it out by radius so it sits outside
                         x_dot = x + (tick_r_start + r_dot) * math.cos(angle_rad)
                         y_dot = y + (tick_r_start + r_dot) * math.sin(angle_rad)
                         
@@ -229,15 +236,24 @@ class PanelRenderer:
                         y2 = y + (tick_r_start + current_tick_len) * math.sin(angle_rad)
                         self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), stroke='black', stroke_width=1 if not is_major else 1.5))
 
-        # Knob (drawn on top)
-        self.dwg.add(self.dwg.circle(center=(x, y), r=knob_radius, fill='white', stroke='black', stroke_width=1))
-        # Knob marker (pointing to current value? defaults to center/up?)
-        # Let's point it to center of travel? Or just up? User said 0 degrees is straight down.
-        # Let's point it up (180 deg user => 270 deg svg).
-        # Or let's just keep the simple line up for now.
-        self.dwg.add(self.dwg.line(start=(x, y), end=(x, y - knob_radius + 2), stroke='black', stroke_width=2))
-        
-        # Label
+        # Render component (knob) if enabled
+        if self._should_show_component():
+            # Knob (drawn on top)
+            self.dwg.add(self.dwg.circle(center=(x, y), r=knob_radius, fill='white', stroke='black', stroke_width=1, opacity=component_opacity))
+            
+            # Knob marker
+            self.dwg.add(self.dwg.line(start=(x, y), end=(x, y - knob_radius + 2), stroke='black', stroke_width=2, opacity=component_opacity))
+            
+        # Label (always show unless hidden explicitly? Assuming labels are part of component viz, but usually labels are printed on panel regardless of drill)
+        # But if we are in 'hide' mode (drill template), maybe we still want labels? 
+        # Usually drill templates are just holes. But context says "'hide' shows drill pattern instead of the component".
+        # Let's assume label is marking on panel, so it should be visible in 'show' and 'both', but maybe not 'hide' if it's purely for drilling?
+        # Actually, "show drill pattern instead of the component" implies replacing the component visual. Labels are often silk screen.
+        # Let's keep labels in 'show' and 'both'. In 'hide' (drill template), usually we don't need labels or maybe we do for reference.
+        # Let's show labels in all modes for now as they are panel markings, unless user specified otherwise.
+        # But if 'hide' is strictly drill template, maybe no labels? 
+        # The prompt says "render of components... 'hide' shows drill pattern instead of the component".
+        # It doesn't explicitly say hide labels. Let's keep labels.
         if pot.label:
             pos = pot.label_position if pot.label_position else 'bottom'
             
@@ -258,10 +274,17 @@ class PanelRenderer:
             self._render_text(pot.label, x, label_y, font_style=pot.font_style)
 
     def _render_socket(self, socket: Socket, x: float, y: float):
-        # Outer circle
-        self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius, fill='#333333', stroke='black', stroke_width=1))
-        # Inner hole
-        self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius/2, fill='black'))
+        # Determine opacity
+        component_opacity = 0.5 if self._is_both_mode() else 1.0
+        
+        if self._should_show_drill():
+             self._render_drill_pattern(x, y, socket.install_diameter)
+
+        if self._should_show_component():
+            # Outer circle
+            self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius, fill='#333333', stroke='black', stroke_width=1, opacity=component_opacity))
+            # Inner hole
+            self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius/2, fill='black', opacity=component_opacity))
         
         if socket.label:
             pos = socket.label_position if socket.label_position else 'bottom'
@@ -272,12 +295,19 @@ class PanelRenderer:
             self._render_text(socket.label, x, label_y, font_style=socket.font_style)
 
     def _render_switch(self, switch: Switch, x: float, y: float):
-        # Rect
-        self.dwg.add(self.dwg.rect(insert=(x - switch.width/2, y - switch.height/2), 
-                                   size=(switch.width, switch.height), 
-                                   fill='#cccccc', stroke='black'))
-        # Lever
-        self.dwg.add(self.dwg.circle(center=(x, y), r=switch.width/2 - 2, fill='black'))
+        # Determine opacity
+        component_opacity = 0.5 if self._is_both_mode() else 1.0
+        
+        if self._should_show_drill():
+             self._render_drill_pattern(x, y, switch.install_diameter)
+
+        if self._should_show_component():
+            # Rect
+            self.dwg.add(self.dwg.rect(insert=(x - switch.width/2, y - switch.height/2), 
+                                       size=(switch.width, switch.height), 
+                                       fill='#cccccc', stroke='black', opacity=component_opacity))
+            # Lever
+            self.dwg.add(self.dwg.circle(center=(x, y), r=switch.width/2 - 2, fill='black', opacity=component_opacity))
         
         if switch.label:
             pos = switch.label_position if switch.label_position else 'bottom'

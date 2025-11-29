@@ -2,6 +2,7 @@ name: "My Amp Panel with Units"
 width: "45cm"       # 400mm
 height: "150mm"
 background_color: "#dddddd"
+render_mode: "both" # show, hide, both
 
 elements:
   - type: group
@@ -26,6 +27,7 @@ elements:
         x: "20mm"
         y: "40mm"
         radius: "0.25in" # ~6.35mm standard jack size
+        install_diameter: "10mm"
         label: "INPUT"
         label_position: "top"
       
@@ -56,6 +58,7 @@ elements:
                major_tick_interval: 2
                tick_style: "line"
                tick_size: "3mm"
+             install_diameter: "6mm"
              
            - type: potentiometer
              id: "treble"
@@ -71,6 +74,7 @@ elements:
                major_tick_interval: 5
                tick_style: "dot"
                tick_size: "2mm"
+             install_diameter: "6mm"
 
   - type: group
     id: "master"
@@ -100,3 +104,4 @@ elements:
         font:
            weight: "bold"
            size: "14"
+        install_diameter: "8mm" # Larger pot

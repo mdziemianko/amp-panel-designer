@@ -29,7 +29,8 @@ def to_mm(value) -> float:
     return value
 
 DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness', 'font_size', 'size', 
-                  'knob_diameter', 'border_diameter', 'border_thickness', 'tick_size'}
+                  'knob_diameter', 'border_diameter', 'border_thickness', 'tick_size',
+                  'install_diameter'}
 
 def normalize_data(data: dict) -> dict:
     new_data = data.copy()
@@ -89,7 +90,7 @@ def _filter_args(cls, data):
 
 @dataclass
 class Component(Element):
-    pass
+    install_diameter: float = 0.0 # Will be set by subclasses default
 
 @dataclass
 class Scale:
@@ -107,6 +108,7 @@ class Potentiometer(Component):
     angle_start: float = 45.0 # User degrees: 0 down, clockwise
     angle_width: float = 270.0
     scale: Optional[Scale] = None
+    install_diameter: float = 6.0
     
     # Deprecated/Mapped
     radius: Optional[float] = None # Old field
@@ -133,10 +135,6 @@ class Potentiometer(Component):
                 scale_data = normalize_data(scale_data)
                 pot.scale = Scale(**_filter_args(Scale, scale_data))
             elif isinstance(scale_data, str):
-                # Handle old "0-10" string format if needed?
-                # User said "The scale should be configurable with following options: ..."
-                # If it's a string, maybe ignore or try to parse simple range?
-                # Let's assume complex object for new features.
                 pass
         
         return pot
@@ -145,12 +143,14 @@ class Potentiometer(Component):
 class Socket(Component):
     # e.g., 6.3mm jack
     radius: float = 10.0
+    install_diameter: float = 10.0
 
 @dataclass
 class Switch(Component):
     # Toggle switch
     width: float = 10.0
     height: float = 20.0
+    install_diameter: float = 5.0
 
 @dataclass
 class Border:
@@ -193,6 +193,7 @@ class Panel:
     height: float
     elements: List[Element] = field(default_factory=list)
     background_color: str = "#ffffff"
+    render_mode: str = "both" # show, hide, both
 
     @staticmethod
     def from_dict(data: dict):
