@@ -22,7 +22,7 @@ def to_mm(value) -> float:
                 return value
     return value
 
-DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness'}
+DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness', 'font_size'}
 
 def normalize_data(data: dict) -> dict:
     new_data = data.copy()
@@ -32,29 +32,52 @@ def normalize_data(data: dict) -> dict:
     return new_data
 
 @dataclass
+class FontStyle:
+    size: Optional[float] = None # in mm or points? SVG standard default is usually px, here we treat numbers as user units
+    color: Optional[str] = None
+    family: Optional[str] = None
+    weight: Optional[str] = None
+
+@dataclass
 class Element:
     id: str
     x: float
     y: float
     type: str
     label: Optional[str] = None
+    font_style: Optional[FontStyle] = None
 
     @staticmethod
     def from_dict(data: dict):
         # We normalize here for base properties like x, y
         data = normalize_data(data)
         
+        # Extract font style
+        font_data = data.pop('font_style', None)
+        # Also support flatten style props for convenience if desired, but sticking to structure for now or maybe checks below?
+        # Let's check if there are font_ keys at top level and move them? No, let's keep it structured 'font: { ... }' or 'font_style: { ... }'
+        # The user asked "font size, color and font" - probably under a key or top level?
+        # Let's support a 'font' dictionary.
+        
+        font_dict = data.pop('font', None)
+
         element_type = data.get('type')
         if element_type == 'group':
-            return Group.from_dict(data)
+            obj = Group.from_dict(data)
         elif element_type == 'potentiometer':
-            return Potentiometer(**_filter_args(Potentiometer, data))
+            obj = Potentiometer(**_filter_args(Potentiometer, data))
         elif element_type == 'socket':
-            return Socket(**_filter_args(Socket, data))
+            obj = Socket(**_filter_args(Socket, data))
         elif element_type == 'switch':
-            return Switch(**_filter_args(Switch, data))
+            obj = Switch(**_filter_args(Switch, data))
         else:
             raise ValueError(f"Unknown element type: {element_type}")
+        
+        if font_dict:
+            font_dict = normalize_data(font_dict) # normalize font_size if present
+            obj.font_style = FontStyle(**_filter_args(FontStyle, font_dict))
+            
+        return obj
 
 def _filter_args(cls, data):
     import inspect

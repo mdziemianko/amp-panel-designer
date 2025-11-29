@@ -11,6 +11,10 @@ elements:
     width: "14cm"   # 140mm
     height: "100mm"
     label: "PREAMP"
+    font:
+      size: "16pt"
+      color: "blue"
+      family: "serif"
     border:
       type: full
       thickness: "2mm"
@@ -40,12 +44,18 @@ elements:
              x: "20mm"
              y: "40mm"
              label: "BASS"
+             font:
+                size: "10"
+                color: "#444444"
              
            - type: potentiometer
              id: "treble"
              x: "60mm"
              y: "40mm"
              label: "TREBLE"
+             font:
+                size: "10"
+                color: "#444444"
 
   - type: group
     id: "master"
@@ -65,4 +75,6 @@ elements:
         y: "40mm"
         label: "VOLUME"
         scale: 0-10
-
+        font:
+           weight: "bold"
+           size: "14"

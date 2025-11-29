@@ -1,5 +1,5 @@
 import svgwrite
-from models import Panel, Group, Potentiometer, Socket, Switch, Element
+from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle
 
 class PanelRenderer:
     def __init__(self, panel: Panel):
@@ -26,7 +26,10 @@ class PanelRenderer:
                     label_x = abs_x
                     if element.width:
                          label_x += element.width / 2
-                    self._render_text(element.label, label_x, abs_y - 5, font_size=14, font_weight='bold') # Slightly above group origin
+                    
+                    # Use group's font style or default for groups
+                    font_style = element.font_style
+                    self._render_text(element.label, label_x, abs_y - 5, default_size=14, default_weight='bold', font_style=font_style)
                 
                 # Render children
                 self._render_group(element.elements, abs_x, abs_y)
@@ -87,7 +90,7 @@ class PanelRenderer:
         
         # Label
         if pot.label:
-            self._render_text(pot.label, x, y + pot.radius + 15) # Below
+            self._render_text(pot.label, x, y + pot.radius + 15, font_style=pot.font_style) # Below
         
         # Scale (simplified)
         if pot.scale:
@@ -103,7 +106,7 @@ class PanelRenderer:
         self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius/2, fill='black'))
         
         if socket.label:
-            self._render_text(socket.label, x, y + socket.radius + 15)
+            self._render_text(socket.label, x, y + socket.radius + 15, font_style=socket.font_style)
 
     def _render_switch(self, switch: Switch, x: float, y: float):
         # Rect
@@ -114,12 +117,27 @@ class PanelRenderer:
         self.dwg.add(self.dwg.circle(center=(x, y), r=switch.width/2 - 2, fill='black'))
         
         if switch.label:
-            self._render_text(switch.label, x, y + switch.height/2 + 15)
+            self._render_text(switch.label, x, y + switch.height/2 + 15, font_style=switch.font_style)
 
-    def _render_text(self, text: str, x: float, y: float, font_size=12, font_weight='normal'):
+    def _render_text(self, text: str, x: float, y: float, default_size=12, default_weight='normal', font_style: FontStyle = None):
+        size = default_size
+        weight = default_weight
+        color = 'black'
+        family = 'sans-serif'
+        
+        if font_style:
+            if font_style.size:
+                size = font_style.size
+            if font_style.weight:
+                weight = font_style.weight
+            if font_style.color:
+                color = font_style.color
+            if font_style.family:
+                family = font_style.family
+
         self.dwg.add(self.dwg.text(text, insert=(x, y), 
                                    text_anchor="middle", 
-                                   font_family="sans-serif", 
-                                   font_size=font_size,
-                                   font_weight=font_weight,
-                                   fill='black'))
+                                   font_family=family, 
+                                   font_size=size,
+                                   font_weight=weight,
+                                   fill=color))
