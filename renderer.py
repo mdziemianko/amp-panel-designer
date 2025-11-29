@@ -54,24 +54,24 @@ class PanelRenderer:
                     except ValueError:
                         size_val = 4.0
 
-                    pos = element.label_position if element.label_position else 'top'
+                    pos = element.label_position if element.label_position else 'top-outside'
                     label_y = abs_y
                     
                     text_width = self._get_text_width(element.label, size_val)
                     
-                    if pos == 'top':
+                    if pos == 'top-outside':
                         label_y = abs_y - 5
-                    elif pos == 'top_inline':
+                    elif pos == 'top-inline':
                         label_y = abs_y + size_val * 0.35 # Vertical center on line
                         label_gap = (label_x - text_width/2 - 2, label_x + text_width/2 + 2) # Add some padding
-                    elif pos == 'top_internal':
+                    elif pos == 'top-inside':
                          label_y = abs_y + size_val + 2
-                    elif pos == 'bottom':
+                    elif pos == 'bottom-outside':
                         label_y = abs_y + (element.height if element.height else 0) + size_val + 2
-                    elif pos == 'bottom_inline':
+                    elif pos == 'bottom-inline':
                          label_y = abs_y + (element.height if element.height else 0) + size_val * 0.35
                          label_gap = (label_x - text_width/2 - 2, label_x + text_width/2 + 2)
-                    elif pos == 'bottom_internal':
+                    elif pos == 'bottom-inside':
                          label_y = abs_y + (element.height if element.height else 0) - 5
 
                     self._render_text(element.label, label_x, label_y, default_size=default_size, default_weight='bold', font_style=font_style)
@@ -133,13 +133,13 @@ class PanelRenderer:
         if b.type == 'full':
             # Draw manually to support gaps
             # Top
-            if label_pos == 'top_inline':
+            if label_pos == 'top-inline':
                 draw_line_with_gap(x, y, x + group.width, y, label_gap)
             else:
                 draw_line(x, y, x + group.width, y)
                 
             # Bottom
-            if label_pos == 'bottom_inline':
+            if label_pos == 'bottom-inline':
                 draw_line_with_gap(x, y + group.height, x + group.width, y + group.height, label_gap)
             else:
                 draw_line(x, y + group.height, x + group.width, y + group.height)
@@ -150,12 +150,12 @@ class PanelRenderer:
             draw_line(x + group.width, y, x + group.width, y + group.height)
             
         elif b.type == 'top':
-             if label_pos == 'top_inline':
+             if label_pos == 'top-inline':
                  draw_line_with_gap(x, y, x + group.width, y, label_gap)
              else:
                 draw_line(x, y, x + group.width, y)
         elif b.type == 'bottom':
-             if label_pos == 'bottom_inline':
+             if label_pos == 'bottom-inline':
                  draw_line_with_gap(x, y + group.height, x + group.width, y + group.height, label_gap)
              else:
                 draw_line(x, y + group.height, x + group.width, y + group.height)

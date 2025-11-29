@@ -11,7 +11,7 @@ elements:
     width: "14cm"   # 140mm
     height: "100mm"
     label: " [PREAMP] "
-    label_position: "top_inline"
+    label_position: "top-inline"
     font:
       size: "25pt"
       color: "blue"
@@ -36,7 +36,7 @@ elements:
         width: "80mm"
         height: "80mm"
         label: "EQ"
-        label_position: "bottom_inline"
+        label_position: "bottom-inline"
         border:
           type: bottom
           style: dotted
@@ -69,7 +69,7 @@ elements:
     width: "100mm"
     height: "100mm"
     label: "MASTER"
-    label_position: "top_internal"
+    label_position: "top-inside"
     border:
       type: full
       style: dashed
