@@ -51,6 +51,11 @@ elements:
              font:
                 size: "10"
                 color: "#444444"
+             scale:
+               num_ticks: 11
+               major_tick_interval: 2
+               tick_style: "line"
+               tick_size: "3mm"
              
            - type: potentiometer
              id: "treble"
@@ -61,6 +66,11 @@ elements:
              font:
                 size: "10"
                 color: "#444444"
+             scale:
+               num_ticks: 11
+               major_tick_interval: 5
+               tick_style: "dot"
+               tick_size: "2mm"
 
   - type: group
     id: "master"
@@ -81,7 +91,12 @@ elements:
         y: "40mm"
         label: "VOLUME"
         label_position: "bottom"
-        scale: 0-10
+        knob_diameter: "25mm"
+        border_diameter: "35mm"
+        border_thickness: "1mm"
+        scale: 
+          num_ticks: 11
+          tick_size: "4mm"
         font:
            weight: "bold"
            size: "14"

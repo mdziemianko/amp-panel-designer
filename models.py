@@ -28,7 +28,8 @@ def to_mm(value) -> float:
                 return value
     return value
 
-DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness', 'font_size', 'size'}
+DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness', 'font_size', 'size', 
+                  'knob_diameter', 'border_diameter', 'border_thickness', 'tick_size'}
 
 def normalize_data(data: dict) -> dict:
     new_data = data.copy()
@@ -67,7 +68,7 @@ class Element:
         if element_type == 'group':
             obj = Group.from_dict(data)
         elif element_type == 'potentiometer':
-            obj = Potentiometer(**_filter_args(Potentiometer, data))
+            obj = Potentiometer.from_dict(data)
         elif element_type == 'socket':
             obj = Socket(**_filter_args(Socket, data))
         elif element_type == 'switch':
@@ -91,10 +92,54 @@ class Component(Element):
     pass
 
 @dataclass
+class Scale:
+    num_ticks: int = 11
+    major_tick_interval: int = 1
+    tick_style: str = "line" # "line" or "dot"
+    tick_size: float = 2.0
+    position: str = "outside" # relative to border? Or just standard position.
+
+@dataclass
 class Potentiometer(Component):
-    scale: Optional[str] = None
-    # Diameter or style could be added here
-    radius: float = 15.0
+    knob_diameter: float = 20.0
+    border_diameter: float = 25.0
+    border_thickness: float = 0.0
+    angle_start: float = 45.0 # User degrees: 0 down, clockwise
+    angle_width: float = 270.0
+    scale: Optional[Scale] = None
+    
+    # Deprecated/Mapped
+    radius: Optional[float] = None # Old field
+
+    @staticmethod
+    def from_dict(data: dict):
+        scale_data = data.pop('scale', None)
+        
+        # Map old radius to knob_diameter if present and no knob_diameter
+        if 'radius' in data and 'knob_diameter' not in data:
+             # radius was 15.0 (30mm dia) default in old code, new default is 20mm.
+             # If user provided radius, use it.
+             data['knob_diameter'] = data['radius'] * 2.0
+        
+        # clean_data = _filter_args(Potentiometer, data)
+        # pot = Potentiometer(**clean_data)
+        # We use standard constructor via filter_args
+        
+        # Need to handle nested scale object
+        pot = Potentiometer(**_filter_args(Potentiometer, data))
+        
+        if scale_data:
+            if isinstance(scale_data, dict):
+                scale_data = normalize_data(scale_data)
+                pot.scale = Scale(**_filter_args(Scale, scale_data))
+            elif isinstance(scale_data, str):
+                # Handle old "0-10" string format if needed?
+                # User said "The scale should be configurable with following options: ..."
+                # If it's a string, maybe ignore or try to parse simple range?
+                # Let's assume complex object for new features.
+                pass
+        
+        return pot
 
 @dataclass
 class Socket(Component):

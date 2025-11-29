@@ -1,4 +1,5 @@
 import svgwrite
+import math
 from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle
 
 class PanelRenderer:
@@ -161,27 +162,100 @@ class PanelRenderer:
                 draw_line(x, y + group.height, x + group.width, y + group.height)
 
     def _render_potentiometer(self, pot: Potentiometer, x: float, y: float):
-        # Circle
-        self.dwg.add(self.dwg.circle(center=(x, y), r=pot.radius, fill='none', stroke='black', stroke_width=1))
-        # Knob marker (pointing up for now)
-        self.dwg.add(self.dwg.line(start=(x, y), end=(x, y - pot.radius + 2), stroke='black', stroke_width=2))
+        # Constants and defaults
+        knob_radius = pot.knob_diameter / 2
+        
+        # Border (Circular)
+        if pot.border_thickness > 0:
+            border_r = pot.border_diameter / 2
+            # For a circle border (full 360)
+            self.dwg.add(self.dwg.circle(center=(x, y), r=border_r, 
+                                         fill='none', stroke='black', stroke_width=pot.border_thickness))
+
+        # Scale
+        if pot.scale:
+             s = pot.scale
+             
+             # Calculate angles
+             # User: 0 is down (6 o'clock), clockwise.
+             # SVG: 0 is right (3 o'clock), clockwise.
+             # Transform: SVG = User + 90
+             
+             start_angle_user = pot.angle_start
+             sweep_angle_user = pot.angle_width
+             
+             # Draw ticks
+             if s.num_ticks > 0:
+                step = sweep_angle_user / (s.num_ticks - 1) if s.num_ticks > 1 else 0
+                
+                # Scale radius: relative to what? usually outside the knob or border
+                # If position is 'outside', maybe based on border_diameter or knob_diameter?
+                # User said "scale position with respect ot border".
+                # Let's assume default radius is slightly larger than border radius if border exists, or knob radius.
+                # Default logic: radius = border_diameter/2 + tick_size/2 + padding?
+                # Or maybe s.radius if provided?
+                # Let's define base radius:
+                base_radius = (pot.border_diameter / 2) if pot.border_diameter > pot.knob_diameter else (pot.knob_diameter / 2)
+                # Apply position modifier? Just use base_radius + 2mm padding for now or if position logic is strictly needed.
+                # Simplification: ticks start at base_radius + 2
+                
+                tick_r_start = base_radius + 1.0 # gap from component
+                
+                for i in range(s.num_ticks):
+                    angle_user = start_angle_user + i * step
+                    angle_svg_deg = angle_user + 90
+                    angle_rad = math.radians(angle_svg_deg)
+                    
+                    is_major = (i % s.major_tick_interval == 0) if s.major_tick_interval > 0 else True
+                    
+                    current_tick_len = s.tick_size if is_major else s.tick_size * 0.5
+                    
+                    # Coords
+                    # x = cx + r * cos(a)
+                    # y = cy + r * sin(a)
+                    
+                    x1 = x + tick_r_start * math.cos(angle_rad)
+                    y1 = y + tick_r_start * math.sin(angle_rad)
+                    
+                    if s.tick_style == 'dot':
+                        r_dot = (current_tick_len / 2) if is_major else (current_tick_len / 4) # rough scaling
+                        # For dot, (x1, y1) is center? No, let's push it out by radius so it sits outside
+                        x_dot = x + (tick_r_start + r_dot) * math.cos(angle_rad)
+                        y_dot = y + (tick_r_start + r_dot) * math.sin(angle_rad)
+                        
+                        self.dwg.add(self.dwg.circle(center=(x_dot, y_dot), r=r_dot, fill='black'))
+                    else: # line
+                        x2 = x + (tick_r_start + current_tick_len) * math.cos(angle_rad)
+                        y2 = y + (tick_r_start + current_tick_len) * math.sin(angle_rad)
+                        self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), stroke='black', stroke_width=1 if not is_major else 1.5))
+
+        # Knob (drawn on top)
+        self.dwg.add(self.dwg.circle(center=(x, y), r=knob_radius, fill='white', stroke='black', stroke_width=1))
+        # Knob marker (pointing to current value? defaults to center/up?)
+        # Let's point it to center of travel? Or just up? User said 0 degrees is straight down.
+        # Let's point it up (180 deg user => 270 deg svg).
+        # Or let's just keep the simple line up for now.
+        self.dwg.add(self.dwg.line(start=(x, y), end=(x, y - knob_radius + 2), stroke='black', stroke_width=2))
         
         # Label
         if pot.label:
             pos = pot.label_position if pot.label_position else 'bottom'
+            
+            # Distance from center depends on knob, border, and scale
+            # Max radius involved
+            outer_radius = (pot.border_diameter / 2)
+            if pot.scale:
+                # Add tick length + padding
+                outer_radius += pot.scale.tick_size + 2
+                
+            dist = max(outer_radius, pot.knob_diameter/2) + 2 # + padding
+            
             if pos == 'top':
-                 label_y = y - pot.radius - 5
+                 label_y = y - dist - 4 # font height approx
             else:
-                 label_y = y + pot.radius + 15
+                 label_y = y + dist + 4 + 2
             
             self._render_text(pot.label, x, label_y, font_style=pot.font_style)
-        
-        # Scale (simplified)
-        if pot.scale:
-             # Just drawing a few ticks for representation
-            for i in range(-135, 136, 27): # -135 to +135 degrees
-                # Need math for coords, skipping for simplicity of first pass or adding basic math
-                pass
 
     def _render_socket(self, socket: Socket, x: float, y: float):
         # Outer circle
