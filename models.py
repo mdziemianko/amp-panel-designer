@@ -1,6 +1,36 @@
 from dataclasses import dataclass, field
 from typing import List, Optional, Union
 
+def to_mm(value) -> float:
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        val = value.strip().lower()
+        if val.endswith('mm'):
+            return float(val[:-2])
+        elif val.endswith('cm'):
+            return float(val[:-2]) * 10.0
+        elif val.endswith('in'):
+            return float(val[:-2]) * 25.4
+        elif val.endswith('"'):
+            return float(val[:-1]) * 25.4
+        else:
+            try:
+                return float(val)
+            except ValueError:
+                # Return original if parsing fails, let validation downstream handle it or it might be a non-numeric string meant for something else (though we filter keys)
+                return value
+    return value
+
+DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness'}
+
+def normalize_data(data: dict) -> dict:
+    new_data = data.copy()
+    for key, value in new_data.items():
+        if key in DIMENSION_KEYS:
+            new_data[key] = to_mm(value)
+    return new_data
+
 @dataclass
 class Element:
     id: str
@@ -11,6 +41,9 @@ class Element:
 
     @staticmethod
     def from_dict(data: dict):
+        # We normalize here for base properties like x, y
+        data = normalize_data(data)
+        
         element_type = data.get('type')
         if element_type == 'group':
             return Group.from_dict(data)
@@ -69,10 +102,14 @@ class Group(Element):
         elements_data = data.pop('elements', [])
         border_data = data.pop('border', None)
         
+        # data is already normalized if coming from Element.from_dict, but safe to do again or for Group specific props
+        data = normalize_data(data)
+        
         clean_data = _filter_args(Group, data)
         group = Group(**clean_data)
         
         if border_data:
+            border_data = normalize_data(border_data)
             group.border = Border(**_filter_args(Border, border_data))
             
         for el_data in elements_data:
@@ -89,6 +126,7 @@ class Panel:
 
     @staticmethod
     def from_dict(data: dict):
+        data = normalize_data(data)
         elements_data = data.pop('elements', [])
         clean_data = _filter_args(Panel, data)
         panel = Panel(**clean_data)

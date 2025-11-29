@@ -1,0 +1,68 @@
+name: "My Amp Panel with Units"
+width: "45cm"       # 400mm
+height: "150mm"
+background_color: "#dddddd"
+
+elements:
+  - type: group
+    id: "preamp"
+    x: "20mm"
+    y: "20mm"
+    width: "14cm"   # 140mm
+    height: "100mm"
+    label: "PREAMP"
+    border:
+      type: full
+      thickness: "2mm"
+      color: "#555555"
+    elements:
+      - type: socket
+        id: "input_1"
+        x: "20mm"
+        y: "40mm"
+        radius: "0.25in" # ~6.35mm standard jack size
+        label: "INPUT"
+      
+      - type: group
+        id: "eq"
+        x: "60mm"
+        y: "0mm"
+        width: "80mm"
+        height: "80mm"
+        label: "EQ"
+        border:
+          type: bottom
+          style: dotted
+          thickness: "1mm"
+        elements:
+           - type: potentiometer
+             id: "bass"
+             x: "20mm"
+             y: "40mm"
+             label: "BASS"
+             
+           - type: potentiometer
+             id: "treble"
+             x: "60mm"
+             y: "40mm"
+             label: "TREBLE"
+
+  - type: group
+    id: "master"
+    x: "250mm"
+    y: "20mm"
+    width: "100mm"
+    height: "100mm"
+    label: "MASTER"
+    border:
+      type: full
+      style: dashed
+      color: "red"
+    elements:
+      - type: potentiometer
+        id: "volume"
+        x: "50mm"
+        y: "40mm"
+        label: "VOLUME"
+        scale: 0-10
+
