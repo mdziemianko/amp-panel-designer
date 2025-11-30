@@ -68,9 +68,9 @@ A container for other elements.
 - `mount`: Mounting hole configuration (see below). Default diameter: `5mm`.
 
 **Toggle Switch Specifics:**
-- `label_top`: Text label above the switch.
-- `label_bottom`: Text label below the switch.
-- `label_center`: Text label to the right/center.
+- `label_top`: Text label above the switch. Can be a string or a Label object (see below).
+- `label_bottom`: Text label below the switch. Can be a string or a Label object.
+- `label_center`: Text label to the right/center. Can be a string or a Label object.
 
 **Rotary Switch Specifics:**
 - `scale`: Same configuration as Potentiometer scale.
@@ -95,6 +95,7 @@ mount:
 ```
 
 #### Label Configuration
+This structure is used for the main `label` parameter and also for `label_top`, `label_bottom`, `label_center` on toggle switches.
 ```yaml
 label:
   text: "VOLUME"
@@ -105,6 +106,7 @@ label:
     family: "serif"
     weight: "bold"
 ```
+*Note: `position` is only applicable for the main component label.*
 
 #### Border
 Applies to Groups.

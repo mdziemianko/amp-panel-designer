@@ -1,3 +1,4 @@
-** Important **
-- Always update the readme if new options are added or the functionality is modified
-- Always update the example file to demonstrate new functionality. Add new componetns if needed.
+** important **
+- always update readme if the new options are added or changed.
+- update the example to show new functionality, add new compontents if needed 
+- store the output of the rendering in output folder

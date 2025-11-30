@@ -297,14 +297,23 @@ class PanelRenderer:
         # Switch Labels (Top/Center/Bottom)
         if switch.switch_type == 'toggle':
             # Render labels always (printed)
-            font_style = self._get_element_font(switch)
+            default_font_style = self._get_element_font(switch)
+            
             if switch.label_top:
-                self._render_text(switch.label_top, x, y - switch.height/2 - 5, font_style=font_style)
+                font = switch.label_top.font if switch.label_top.font else default_font_style
+                text = switch.label_top.text
+                self._render_text(text, x, y - switch.height/2 - 5, font_style=font)
+                
             if switch.label_bottom:
-                self._render_text(switch.label_bottom, x, y + switch.height/2 + 8, font_style=font_style)
+                font = switch.label_bottom.font if switch.label_bottom.font else default_font_style
+                text = switch.label_bottom.text
+                self._render_text(text, x, y + switch.height/2 + 8, font_style=font)
+                
             if switch.label_center:
+                font = switch.label_center.font if switch.label_center.font else default_font_style
+                text = switch.label_center.text
                 # To the right?
-                self._render_text(switch.label_center, x + switch.width/2 + 8, y + 2, font_style=font_style)
+                self._render_text(text, x + switch.width/2 + 8, y + 2, font_style=font)
 
         # Rotary Switch Scale and Labels
         if switch.switch_type == 'rotary':

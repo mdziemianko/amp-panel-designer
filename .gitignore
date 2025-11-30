@@ -1,0 +1,6 @@
+output/
+.cursorrules
+venv/
+__pycache__/
+*.py[codz]
+*$py.class

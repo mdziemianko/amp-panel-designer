@@ -65,6 +65,25 @@ class Element:
     font_style: Optional[FontStyle] = None
 
     @staticmethod
+    def _parse_label_param(value) -> Optional[Label]:
+        if value is None:
+            return None
+        if isinstance(value, str):
+            return Label(text=value)
+        if isinstance(value, dict):
+            value = normalize_data(value)
+            lbl_font_dict = value.pop('font', None)
+            lbl_font = None
+            if lbl_font_dict:
+                lbl_font_dict = normalize_data(lbl_font_dict)
+                lbl_font = FontStyle(**_filter_args(FontStyle, lbl_font_dict))
+            
+            lbl_text = value.pop('text', "")
+            lbl_pos = value.pop('position', None)
+            return Label(text=lbl_text, position=lbl_pos, font=lbl_font)
+        return None
+
+    @staticmethod
     def from_dict(data: dict):
         data = normalize_data(data)
         
@@ -92,28 +111,20 @@ class Element:
             font_dict = normalize_data(font_dict) 
             obj.font_style = FontStyle(**_filter_args(FontStyle, font_dict))
             
-        # Handle Label
+        # Handle Label (Main)
         if label_data:
-            if isinstance(label_data, dict):
-                label_data = normalize_data(label_data)
-                
-                # Extract font from label dict
-                lbl_font_dict = label_data.pop('font', None)
-                lbl_font = None
-                if lbl_font_dict:
-                    lbl_font_dict = normalize_data(lbl_font_dict)
-                    lbl_font = FontStyle(**_filter_args(FontStyle, lbl_font_dict))
-                
-                lbl_text = label_data.pop('text', "")
-                lbl_pos = label_data.pop('position', None)
-                if not lbl_pos and label_position:
-                    lbl_pos = label_position
-                
-                obj.label = Label(text=lbl_text, position=lbl_pos, font=lbl_font)
-                
-            elif isinstance(label_data, str):
-                obj.label = Label(text=label_data, position=label_position, font=None)
-        
+            # Re-use _parse_label_param but handle legacy label_position merging
+            parsed = Element._parse_label_param(label_data)
+            if parsed:
+                 if not parsed.position and label_position:
+                      parsed.position = label_position
+                 obj.label = parsed
+        elif label_position:
+             # Just position? Probably redundant without text, but legacy might expect label=""?
+             # Old code handled `label: str` with separate `label_position`
+             # If label is missing, user might just have label_position but no text?
+             pass
+
         return obj
 
 def _filter_args(cls, data):
@@ -206,26 +217,6 @@ class Socket(Component):
     
     @staticmethod
     def from_dict(data: dict):
-         # Socket isn't using from_dict in Element.from_dict logic currently? 
-         # Element.from_dict uses: obj = Socket(**_filter_args(Socket, data))
-         # Wait, I need to check Element.from_dict in this file content.
-         # It uses **_filter_args. So I should probably add a from_dict for Socket too or update Element logic.
-         # Element.from_dict logic:
-         # elif element_type == 'socket':
-         #    obj = Socket(**_filter_args(Socket, data))
-         pass 
-
-# Correction: Socket was just using __init__. I need to override parsing to handle mount.
-# But Element.from_dict calls Socket constructor directly in original code. 
-# I should change Element.from_dict to call Socket.from_dict if I implement it, or handle mount there.
-# Better to implement Socket.from_dict.
-
-@dataclass
-class Socket(Component):
-    radius: float = 10.0
-    
-    @staticmethod
-    def from_dict(data: dict):
         mount = Component._parse_mount(data, default_diameter=10.0)
         obj = Socket(**_filter_args(Socket, data))
         obj.mount = mount
@@ -239,9 +230,9 @@ class Switch(Component):
     height: float = 20.0
     knob_diameter: float = 20.0 # for rotary
     
-    label_top: Optional[str] = None
-    label_center: Optional[str] = None
-    label_bottom: Optional[str] = None
+    label_top: Optional[Label] = None
+    label_center: Optional[Label] = None
+    label_bottom: Optional[Label] = None
     
     angle_start: float = 45.0
     angle_width: float = 270.0
@@ -253,12 +244,20 @@ class Switch(Component):
         scale_data = data.pop('scale', None)
         scale_labels = data.pop('scale_labels', [])
         
+        # Extract new labels using helper
+        lt = Element._parse_label_param(data.pop('label_top', None))
+        lc = Element._parse_label_param(data.pop('label_center', None))
+        lb = Element._parse_label_param(data.pop('label_bottom', None))
+
         # Default diameter 5.0 for switch
         mount = Component._parse_mount(data, default_diameter=5.0)
         
         obj = Switch(**_filter_args(Switch, data))
         obj.scale_labels = scale_labels
         obj.mount = mount
+        obj.label_top = lt
+        obj.label_center = lc
+        obj.label_bottom = lb
         
         if scale_data:
             if isinstance(scale_data, dict):

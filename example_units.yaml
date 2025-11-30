@@ -92,7 +92,11 @@ elements:
         mount:
             width: "6mm"
             height: "12mm"
-        label_top: "ON"
+        label_top: 
+           text: "ON"
+           font:
+              size: "8"
+              color: "green"
         label_bottom: "OFF"
         label:
           text: "BRIGHT"
@@ -114,7 +118,7 @@ elements:
     elements:
       - type: potentiometer
         id: "volume"
-        x: "30mm"
+        x: "0mm"
         y: "40mm"
         label:
           text: "VOLUME"
