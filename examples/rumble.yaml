@@ -2,7 +2,7 @@ name: "Rumble Amp Panel"
 width: "480mm"       # 400mm
 height: "70mm"
 background_color: "#dddddd"
-render_mode: "components" # components, drill_mask, both
+render_mode: "drill_mask" # components, drill_mask, both
 
 
 elements:

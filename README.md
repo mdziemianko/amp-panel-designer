@@ -4,14 +4,12 @@ A tool to design instrument amplifier panels declaratively using YAML.
 
 The generated output can be used to generate engraver or laser cutter gcode or imported into any vector graphics editing software.
 
+![Example Panel](examples/example.svg)
+
 ## Usage
 
 1. Define your panel in a YAML file (e.g., `panel.yaml`).
 2. Run the generator: `python main.py panel.yaml output.svg`.
-
-## Project Description
-
-![Example Panel](examples/example.svg)
 
 ## Features
 
