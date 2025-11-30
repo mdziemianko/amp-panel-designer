@@ -53,7 +53,7 @@ elements:
     y: "110mm"
     switch_type: "rotary"
     label: "SELECT"
-    knob_diameter: "20mm"
+    knob_diameter: "15mm"
     scale:
       num_ticks: 3
 
@@ -91,3 +91,15 @@ elements:
         - text: "insane"
           font: { color: "red" }
 
+  # 7. Rocker Switch
+  - type: switch
+    id: "rocker_sw"
+    x: "30mm"
+    y: "170mm"
+    switch_type: "rocker"
+    mount:
+      width: "15mm"
+      height: "25mm"
+    label: "ROCKER"
+    label_top: "I"
+    label_bottom: "O"

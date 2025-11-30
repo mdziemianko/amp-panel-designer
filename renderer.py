@@ -76,8 +76,8 @@ class PanelRenderer:
                                        size=(m_width, m_height), 
                                        fill='none', stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
             # Cross center
-            cross_len_h = m_width/2 + 3.0
-            cross_len_v = m_height/2 + 3.0
+            cross_len_h = m_width/2
+            cross_len_v = m_height/2
             self.dwg.add(self.dwg.line(start=(x - cross_len_h, y), end=(x + cross_len_h, y), 
                                        stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
             self.dwg.add(self.dwg.line(start=(x, y - cross_len_v), end=(x, y + cross_len_v), 
@@ -86,7 +86,7 @@ class PanelRenderer:
             # Circular hole
             r = m_diameter / 2
             self.dwg.add(self.dwg.circle(center=(x, y), r=r, fill='none', stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
-            cross_len = r + 3.0
+            cross_len = r
             self.dwg.add(self.dwg.line(start=(x - cross_len, y), end=(x + cross_len, y), stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
             self.dwg.add(self.dwg.line(start=(x, y - cross_len), end=(x, y + cross_len), stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
 
@@ -640,11 +640,65 @@ class PanelRenderer:
                 self.dwg.add(self.dwg.circle(center=(x, y), r=knob_radius, fill='white', stroke='black', stroke_width=1, opacity=component_opacity))
                 # Marker
                 self.dwg.add(self.dwg.line(start=(x, y), end=(x, y - knob_radius + 2), stroke='black', stroke_width=2, opacity=component_opacity))
-            else: # toggle
-                self.dwg.add(self.dwg.rect(insert=(x - switch.width/2, y - switch.height/2), 
-                                           size=(switch.width, switch.height), 
-                                           fill='#cccccc', stroke='black', opacity=component_opacity))
-                self.dwg.add(self.dwg.circle(center=(x, y), r=switch.width/2 - 2, fill='black', opacity=component_opacity))
+            
+            elif switch.switch_type == 'rocker':
+                # Rectangle 1.2x bigger than mounting hole
+                m_width, m_height = 0, 0
+                if switch.mount:
+                    if switch.mount.width and switch.mount.height:
+                        m_width = switch.mount.width
+                        m_height = switch.mount.height
+                    elif switch.mount.diameter:
+                        m_width = switch.mount.diameter
+                        m_height = switch.mount.diameter
+                else:
+                    # Fallback if no mount (shouldn't happen given defaults but safety first)
+                    m_width = switch.width
+                    m_height = switch.height
+                
+                vis_w = m_width * 1.2
+                vis_h = m_height * 1.2
+                
+                self.dwg.add(self.dwg.rect(insert=(x - vis_w/2, y - vis_h/2), 
+                                           size=(vis_w, vis_h), 
+                                           fill='#333333', stroke='black', opacity=component_opacity))
+                # Add a subtle shading or line to indicate rocker shape?
+                self.dwg.add(self.dwg.rect(insert=(x - vis_w/2 + 2, y - vis_h/2 + 2), 
+                                           size=(vis_w - 4, vis_h - 4), 
+                                           fill='#444444', stroke='none', opacity=component_opacity))
+
+            else: # toggle (default)
+                # Check mount type first: if Rectangular mount, render Rectangular switch body
+                is_rect_mount = False
+                m_width, m_height = 0, 0
+                
+                if switch.mount and switch.mount.width and switch.mount.height:
+                    is_rect_mount = True
+                    m_width = switch.mount.width
+                    m_height = switch.mount.height
+
+                if is_rect_mount:
+                     vis_w = m_width * 1.2
+                     vis_h = m_height * 1.2
+                     self.dwg.add(self.dwg.rect(insert=(x - vis_w/2, y - vis_h/2), 
+                                                size=(vis_w, vis_h), 
+                                                fill='#cccccc', stroke='black', opacity=component_opacity))
+                     # Inner toggle lever (circle inside rect?) or rect lever? Usually rect.
+                     # Let's keep circle lever for toggle feel
+                     self.dwg.add(self.dwg.circle(center=(x, y), r=min(vis_w, vis_h)/2 * 0.6, fill='gray', stroke='black', opacity=component_opacity))
+                else:
+                    # Circular mount or default -> Circular body
+                    m_dim = 0
+                    if switch.mount and switch.mount.diameter:
+                        m_dim = switch.mount.diameter
+                    else:
+                        m_dim = 5.0 # fallback default mount
+
+                    vis_r = (m_dim * 1.2) / 2
+                    
+                    self.dwg.add(self.dwg.circle(center=(x, y), r=vis_r, fill='#cccccc', stroke='black', opacity=component_opacity))
+                    # Inner toggle lever
+                    self.dwg.add(self.dwg.circle(center=(x, y), r=vis_r * 0.6, fill='gray', stroke='black', opacity=component_opacity))
         
         # Main Label
         # Distance logic for toggle vs rotary

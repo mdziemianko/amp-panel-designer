@@ -18,9 +18,9 @@ elements:
     x: "80mm"
     y: "30mm"
     label:
-      text: "STANDARD"
+      text: "SMALL KNOB"
       position: "bottom"
-    knob_diameter: "20mm"
+    knob_diameter: "15mm"
     scale:
       num_ticks: 11
       tick_size: "3mm"

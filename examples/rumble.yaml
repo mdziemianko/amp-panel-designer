@@ -2,7 +2,7 @@ name: "Rumble Amp Panel"
 width: "480mm"       # 400mm
 height: "70mm"
 background_color: "#dddddd"
-render_mode: "both" # show, hide, both
+render_mode: "hide" # show, hide, both
 
 
 elements:
@@ -23,7 +23,7 @@ elements:
         id: "power_switch"
         x: "25mm"
         y: "25mm"
-        switch_type: "toggle"
+        switch_type: "rocker"
         mount:
           width: "6mm"
           height: "12mm"
@@ -39,7 +39,7 @@ elements:
         id: "power_switch"
         x: "50mm"
         y: "25mm"
-        switch_type: "toggle"
+        switch_type: "rocker"
         mount:
           width: "6mm"
           height: "12mm"
@@ -64,7 +64,7 @@ elements:
         family: "sans-serif"
     border:
       type: bottom
-      thickness: "2mm"
+      thickness: "1mm"
       color: "#555555"
     elements:
       - type: potentiometer
@@ -182,7 +182,7 @@ elements:
         family: "sans-serif"
     border:
       type: bottom
-      thickness: "2mm"
+      thickness: "1mm"
       color: "#555555"
     elements:
       - type: switch
@@ -204,17 +204,18 @@ elements:
           font:
             size: "12pt"
             family: "sans-serif"
-          distance: "10mm"
+          distance: "8mm"
         label_bottom:
           text: "OFF"
           font:
             size: "12pt"
             family: "sans-serif"
-          distance: "10mm"
+          distance: "8mm"
       - type: potentiometer
         id: "tone"
         x: "30mm"
         y: "25mm"
+        knob_diameter: "20mm"
         mount:
           diameter: "6mm"
         scale:
@@ -272,6 +273,7 @@ elements:
         label:
           text: "2"
           position: "left"
+          distance: "5mm"
         mount:
           diameter: "6mm"
       - type: socket
@@ -282,6 +284,7 @@ elements:
         label:
           text: "2"
           position: "left"
+          distance: "5mm"
         mount:
           diameter: "6mm"
       - type: socket
@@ -292,6 +295,7 @@ elements:
         label:
           text: "1"
           position: "right"
+          distance: "5mm"
         mount:
           diameter: "6mm"
       - type: socket
@@ -302,6 +306,7 @@ elements:
         label:
           text: "1"
           position: "right"
+          distance: "5mm"
         mount:
           diameter: "6mm"
       
