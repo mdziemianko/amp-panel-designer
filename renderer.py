@@ -228,7 +228,7 @@ class PanelRenderer:
                             label_x = base_x + 5
                             anchor = 'start'
 
-                    self._render_text(label_text, label_x, label_y, default_size=default_size, default_weight='bold', font_style=font_style, anchor=anchor)
+                    self._render_text(label_text, label_x, label_y, default_size=default_size, default_weight='normal', font_style=font_style, anchor=anchor)
 
                 self._render_border(element, abs_x, abs_y, label_gap=label_gap, label_gap_side=label_gap_side)
                 self._render_group(element.elements, abs_x, abs_y)

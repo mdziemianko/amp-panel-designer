@@ -55,9 +55,9 @@ elements:
     x: "175mm"
     y: "10mm"
     width: "120mm"   # 140mm
-    height: "50mm"
+    height: "45mm"
     label:
-      text: "Channel 2"
+      text: "CHANNEL 2"
       position: "bottom-inline"
       font:
         size: "12pt"
@@ -173,9 +173,9 @@ elements:
     x: "325mm"
     y: "10mm"
     width: "60mm"   # 140mm
-    height: "50mm"
+    height: "45mm"
     label:
-      text: "Channel 1"
+      text: "CHANNEL 1"
       position: "bottom-inline"
       font:
         size: "12pt"
