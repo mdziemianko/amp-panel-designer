@@ -14,28 +14,36 @@ class PanelRenderer:
         self.dwg.saveas(filename)
 
     def _get_text_width(self, text: str, font_size: float) -> float:
-        # Simple estimation: average character width approx 0.6 * font_size
-        # font_size is expected to be in mm (user units)
-        # If it somehow comes in as a string (e.g. from default or unparsed), try to parse float
         if isinstance(font_size, str):
             try:
-                # Naive strip if units persist
                 val = font_size.lower().replace("pt", "").replace("px", "").replace("mm", "")
                 font_size = float(val)
             except ValueError:
-                font_size = 3.0 # fallback approx 10-12pt
+                font_size = 3.0 # fallback
         return len(text) * font_size * 0.6
 
-    def _render_drill_pattern(self, x: float, y: float, diameter: float):
-        r = diameter / 2
-        # Hole
-        self.dwg.add(self.dwg.circle(center=(x, y), r=r, fill='none', stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
-        # Cross center
-        # Extends 3mm outside
-        # Radius + 3mm
-        cross_len = r + 3.0
-        self.dwg.add(self.dwg.line(start=(x - cross_len, y), end=(x + cross_len, y), stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
-        self.dwg.add(self.dwg.line(start=(x, y - cross_len), end=(x, y + cross_len), stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
+    def _render_drill_pattern(self, x: float, y: float, diameter: float, shape='circular', width=None, height=None):
+        if shape == 'rectangular' and width and height:
+            # Rectangular hole
+            self.dwg.add(self.dwg.rect(insert=(x - width/2, y - height/2), 
+                                       size=(width, height), 
+                                       fill='none', stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
+            # Cross center (use width/height for extension base?)
+            # Extends 3mm outside
+            
+            # Horizontal line: from x - width/2 - 3 to x + width/2 + 3
+            self.dwg.add(self.dwg.line(start=(x - width/2 - 3, y), end=(x + width/2 + 3, y), 
+                                       stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
+            # Vertical line: from y - height/2 - 3 to y + height/2 + 3
+            self.dwg.add(self.dwg.line(start=(x, y - height/2 - 3), end=(x, y + height/2 + 3), 
+                                       stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
+        else:
+            # Circular hole (default)
+            r = diameter / 2
+            self.dwg.add(self.dwg.circle(center=(x, y), r=r, fill='none', stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
+            cross_len = r + 3.0
+            self.dwg.add(self.dwg.line(start=(x - cross_len, y), end=(x + cross_len, y), stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
+            self.dwg.add(self.dwg.line(start=(x, y - cross_len), end=(x, y + cross_len), stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
 
     def _should_show_component(self):
         return self.panel.render_mode in ('show', 'both')
@@ -60,12 +68,10 @@ class PanelRenderer:
                     if element.width:
                          label_x += element.width / 2
                     
-                    # Use group's font style or default for groups
                     font_style = element.font_style
-                    default_size = 4.0 # approx 11-12pt in mm
+                    default_size = 4.0
                     size = font_style.size if font_style and font_style.size else default_size
                     
-                    # Ensure size is a float for calculations
                     try:
                         if isinstance(size, str):
                              val = size.lower().replace("pt", "").replace("px", "").replace("mm", "")
@@ -83,8 +89,8 @@ class PanelRenderer:
                     if pos == 'top-outside':
                         label_y = abs_y - 5
                     elif pos == 'top-inline':
-                        label_y = abs_y + size_val * 0.35 # Vertical center on line
-                        label_gap = (label_x - text_width/2 - 2, label_x + text_width/2 + 2) # Add some padding
+                        label_y = abs_y + size_val * 0.35 
+                        label_gap = (label_x - text_width/2 - 2, label_x + text_width/2 + 2)
                     elif pos == 'top-inside':
                          label_y = abs_y + size_val + 2
                     elif pos == 'bottom-outside':
@@ -97,10 +103,7 @@ class PanelRenderer:
 
                     self._render_text(element.label, label_x, label_y, default_size=default_size, default_weight='bold', font_style=font_style)
 
-                # Render border with potential gap
                 self._render_border(element, abs_x, abs_y, label_gap=label_gap, label_pos=element.label_position)
-                
-                # Render children
                 self._render_group(element.elements, abs_x, abs_y)
             
             elif isinstance(element, Potentiometer):
@@ -117,7 +120,6 @@ class PanelRenderer:
             return
             
         if not group.width or not group.height:
-             # Can't draw border without dimensions
             return
 
         b = group.border
@@ -127,7 +129,6 @@ class PanelRenderer:
         elif b.style == 'dashed':
              stroke_dasharray = "5,5"
         
-        # Helper to draw line
         def draw_line(x1, y1, x2, y2):
              kwargs = {
                  'stroke': b.color,
@@ -137,37 +138,29 @@ class PanelRenderer:
                  kwargs['stroke_dasharray'] = stroke_dasharray
              self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), **kwargs))
 
-        # Helper for gap line
         def draw_line_with_gap(x1, y1, x2, y2, gap):
             if not gap:
                 draw_line(x1, y1, x2, y2)
                 return
             
             gap_start, gap_end = gap
-            # Draw left part
             if gap_start > x1:
                  draw_line(x1, y1, gap_start, y1)
-            # Draw right part
             if gap_end < x2:
                  draw_line(gap_end, y1, x2, y1)
 
         if b.type == 'full':
-            # Draw manually to support gaps
-            # Top
             if label_pos == 'top-inline':
                 draw_line_with_gap(x, y, x + group.width, y, label_gap)
             else:
                 draw_line(x, y, x + group.width, y)
                 
-            # Bottom
             if label_pos == 'bottom-inline':
                 draw_line_with_gap(x, y + group.height, x + group.width, y + group.height, label_gap)
             else:
                 draw_line(x, y + group.height, x + group.width, y + group.height)
                 
-            # Left
             draw_line(x, y, x, y + group.height)
-            # Right
             draw_line(x + group.width, y, x + group.width, y + group.height)
             
         elif b.type == 'top':
@@ -182,36 +175,27 @@ class PanelRenderer:
                 draw_line(x, y + group.height, x + group.width, y + group.height)
 
     def _render_potentiometer(self, pot: Potentiometer, x: float, y: float):
-        # Constants and defaults
         knob_radius = pot.knob_diameter / 2
-        
-        # Determine opacity for "both" mode
         component_opacity = 0.5 if self._is_both_mode() else 1.0
         
-        # Render drill pattern if enabled
         if self._should_show_drill():
             self._render_drill_pattern(x, y, pot.install_diameter)
 
-        # Scales and borders should be visible even in hide mode as they are printed on the panel
-        # Render border (Circular)
         if pot.border_thickness > 0:
             border_r = pot.border_diameter / 2
-            # For a circle border (full 360)
             self.dwg.add(self.dwg.circle(center=(x, y), r=border_r, 
                                          fill='none', stroke='black', stroke_width=pot.border_thickness))
 
-        # Render Scale
         if pot.scale:
              s = pot.scale
              start_angle_user = pot.angle_start
              sweep_angle_user = pot.angle_width
              
-             # Draw ticks
              if s.num_ticks > 0:
                 step = sweep_angle_user / (s.num_ticks - 1) if s.num_ticks > 1 else 0
                 
                 base_radius = (pot.border_diameter / 2) if pot.border_diameter > pot.knob_diameter else (pot.knob_diameter / 2)
-                tick_r_start = base_radius + 1.0 # gap from component
+                tick_r_start = base_radius + 1.0 
                 
                 for i in range(s.num_ticks):
                     angle_user = start_angle_user + i * step
@@ -226,7 +210,7 @@ class PanelRenderer:
                     y1 = y + tick_r_start * math.sin(angle_rad)
                     
                     if s.tick_style == 'dot':
-                        r_dot = (current_tick_len / 2) if is_major else (current_tick_len / 4) # rough scaling
+                        r_dot = (current_tick_len / 2) if is_major else (current_tick_len / 4)
                         x_dot = x + (tick_r_start + r_dot) * math.cos(angle_rad)
                         y_dot = y + (tick_r_start + r_dot) * math.sin(angle_rad)
                         
@@ -236,54 +220,34 @@ class PanelRenderer:
                         y2 = y + (tick_r_start + current_tick_len) * math.sin(angle_rad)
                         self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), stroke='black', stroke_width=1 if not is_major else 1.5))
 
-        # Render component (knob) if enabled
         if self._should_show_component():
-            # Knob (drawn on top)
             self.dwg.add(self.dwg.circle(center=(x, y), r=knob_radius, fill='white', stroke='black', stroke_width=1, opacity=component_opacity))
-            
-            # Knob marker
             self.dwg.add(self.dwg.line(start=(x, y), end=(x, y - knob_radius + 2), stroke='black', stroke_width=2, opacity=component_opacity))
             
-        # Label (always show unless hidden explicitly? Assuming labels are part of component viz, but usually labels are printed on panel regardless of drill)
-        # But if we are in 'hide' mode (drill template), maybe we still want labels? 
-        # Usually drill templates are just holes. But context says "'hide' shows drill pattern instead of the component".
-        # Let's assume label is marking on panel, so it should be visible in 'show' and 'both', but maybe not 'hide' if it's purely for drilling?
-        # Actually, "show drill pattern instead of the component" implies replacing the component visual. Labels are often silk screen.
-        # Let's keep labels in 'show' and 'both'. In 'hide' (drill template), usually we don't need labels or maybe we do for reference.
-        # Let's show labels in all modes for now as they are panel markings, unless user specified otherwise.
-        # But if 'hide' is strictly drill template, maybe no labels? 
-        # The prompt says "render of components... 'hide' shows drill pattern instead of the component".
-        # It doesn't explicitly say hide labels. Let's keep labels.
         if pot.label:
             pos = pot.label_position if pot.label_position else 'bottom'
             
-            # Distance from center depends on knob, border, and scale
-            # Max radius involved
             outer_radius = (pot.border_diameter / 2)
             if pot.scale:
-                # Add tick length + padding
                 outer_radius += pot.scale.tick_size + 2
                 
-            dist = max(outer_radius, pot.knob_diameter/2) + 2 # + padding
+            dist = max(outer_radius, pot.knob_diameter/2) + 2 
             
             if pos == 'top':
-                 label_y = y - dist - 4 # font height approx
+                 label_y = y - dist - 4 
             else:
                  label_y = y + dist + 4 + 2
             
             self._render_text(pot.label, x, label_y, font_style=pot.font_style)
 
     def _render_socket(self, socket: Socket, x: float, y: float):
-        # Determine opacity
         component_opacity = 0.5 if self._is_both_mode() else 1.0
         
         if self._should_show_drill():
              self._render_drill_pattern(x, y, socket.install_diameter)
 
         if self._should_show_component():
-            # Outer circle
             self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius, fill='#333333', stroke='black', stroke_width=1, opacity=component_opacity))
-            # Inner hole
             self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius/2, fill='black', opacity=component_opacity))
         
         if socket.label:
@@ -295,26 +259,105 @@ class PanelRenderer:
             self._render_text(socket.label, x, label_y, font_style=socket.font_style)
 
     def _render_switch(self, switch: Switch, x: float, y: float):
-        # Determine opacity
         component_opacity = 0.5 if self._is_both_mode() else 1.0
         
+        # Drill pattern
         if self._should_show_drill():
-             self._render_drill_pattern(x, y, switch.install_diameter)
+             self._render_drill_pattern(x, y, switch.install_diameter, shape=switch.mounting_type, 
+                                        width=switch.mount_width, height=switch.mount_height)
+
+        # Switch Labels (Top/Center/Bottom)
+        if switch.switch_type == 'toggle':
+            # Render labels always (printed)
+            if switch.label_top:
+                self._render_text(switch.label_top, x, y - switch.height/2 - 5, font_style=switch.font_style)
+            if switch.label_bottom:
+                self._render_text(switch.label_bottom, x, y + switch.height/2 + 8, font_style=switch.font_style)
+            if switch.label_center:
+                # To the right?
+                self._render_text(switch.label_center, x + switch.width/2 + 8, y + 2, font_style=switch.font_style)
+
+        # Rotary Switch Scale and Labels
+        if switch.switch_type == 'rotary':
+             # Reuse potentiometer logic partially or fully?
+             # It needs to render labels at ticks
+             if switch.scale:
+                 s = switch.scale
+                 start_angle_user = switch.angle_start
+                 sweep_angle_user = switch.angle_width
+                 
+                 step = sweep_angle_user / (s.num_ticks - 1) if s.num_ticks > 1 else 0
+                 
+                 # Base radius for ticks
+                 # Rotary usually has knob_diameter
+                 base_radius = switch.knob_diameter / 2
+                 tick_r_start = base_radius + 1.0
+                 
+                 for i in range(s.num_ticks):
+                    angle_user = start_angle_user + i * step
+                    angle_svg_deg = angle_user + 90
+                    angle_rad = math.radians(angle_svg_deg)
+                    
+                    is_major = (i % s.major_tick_interval == 0) if s.major_tick_interval > 0 else True
+                    
+                    current_tick_len = s.tick_size if is_major else s.tick_size * 0.5
+                    
+                    x1 = x + tick_r_start * math.cos(angle_rad)
+                    y1 = y + tick_r_start * math.sin(angle_rad)
+                    
+                    # Draw tick
+                    if s.tick_style == 'dot':
+                        r_dot = (current_tick_len / 2) if is_major else (current_tick_len / 4)
+                        x_dot = x + (tick_r_start + r_dot) * math.cos(angle_rad)
+                        y_dot = y + (tick_r_start + r_dot) * math.sin(angle_rad)
+                        self.dwg.add(self.dwg.circle(center=(x_dot, y_dot), r=r_dot, fill='black'))
+                        label_anchor_radius = tick_r_start + r_dot * 2 + 2 # push out
+                    else: # line
+                        x2 = x + (tick_r_start + current_tick_len) * math.cos(angle_rad)
+                        y2 = y + (tick_r_start + current_tick_len) * math.sin(angle_rad)
+                        self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), stroke='black', stroke_width=1 if not is_major else 1.5))
+                        label_anchor_radius = tick_r_start + current_tick_len + 3 # push out
+                    
+                    # Draw label if exists
+                    if i < len(switch.scale_labels):
+                        label_text = switch.scale_labels[i]
+                        lx = x + label_anchor_radius * math.cos(angle_rad)
+                        ly = y + label_anchor_radius * math.sin(angle_rad)
+                        # Adjust ly slightly for vertical centering? _render_text does some of that
+                        self._render_text(label_text, lx, ly + 1.5, default_size=3.0, font_style=switch.font_style)
 
         if self._should_show_component():
-            # Rect
-            self.dwg.add(self.dwg.rect(insert=(x - switch.width/2, y - switch.height/2), 
-                                       size=(switch.width, switch.height), 
-                                       fill='#cccccc', stroke='black', opacity=component_opacity))
-            # Lever
-            self.dwg.add(self.dwg.circle(center=(x, y), r=switch.width/2 - 2, fill='black', opacity=component_opacity))
+            if switch.switch_type == 'rotary':
+                # Similar to potentiometer knob
+                knob_radius = switch.knob_diameter / 2
+                self.dwg.add(self.dwg.circle(center=(x, y), r=knob_radius, fill='white', stroke='black', stroke_width=1, opacity=component_opacity))
+                # Marker
+                self.dwg.add(self.dwg.line(start=(x, y), end=(x, y - knob_radius + 2), stroke='black', stroke_width=2, opacity=component_opacity))
+            else: # toggle
+                self.dwg.add(self.dwg.rect(insert=(x - switch.width/2, y - switch.height/2), 
+                                           size=(switch.width, switch.height), 
+                                           fill='#cccccc', stroke='black', opacity=component_opacity))
+                self.dwg.add(self.dwg.circle(center=(x, y), r=switch.width/2 - 2, fill='black', opacity=component_opacity))
         
+        # Main Label
         if switch.label:
             pos = switch.label_position if switch.label_position else 'bottom'
-            if pos == 'top':
-                 label_y = y - switch.height/2 - 5
+            
+            # Distance logic for toggle vs rotary
+            if switch.switch_type == 'rotary':
+                 # calculate max radius used by scale/labels
+                 # Simplify: knob/2 + tick size + padding + label space
+                 dist = switch.knob_diameter/2 + 5 
+                 if switch.scale:
+                     dist += switch.scale.tick_size + 5
             else:
-                 label_y = y + switch.height/2 + 15
+                 dist = switch.height/2 + 10 # toggle height based
+            
+            if pos == 'top':
+                 label_y = y - dist - 5
+            else:
+                 label_y = y + dist + 5
+                 
             self._render_text(switch.label, x, label_y, font_style=switch.font_style)
 
     def _render_text(self, text: str, x: float, y: float, default_size=12, default_weight='normal', font_style: FontStyle = None):

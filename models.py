@@ -15,22 +15,19 @@ def to_mm(value) -> float:
         elif val.endswith('"'):
             return float(val[:-1]) * 25.4
         elif val.endswith('pt'):
-            # 1 pt = 1/72 inch = 25.4 / 72 mm approx 0.352778 mm
             return float(val[:-2]) * (25.4 / 72.0)
         elif val.endswith('px'):
-            # 1 px = 1/96 inch = 25.4 / 96 mm approx 0.264583 mm
             return float(val[:-2]) * (25.4 / 96.0)
         else:
             try:
                 return float(val)
             except ValueError:
-                # Return original if parsing fails, let validation downstream handle it or it might be a non-numeric string meant for something else (though we filter keys)
                 return value
     return value
 
 DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness', 'font_size', 'size', 
                   'knob_diameter', 'border_diameter', 'border_thickness', 'tick_size',
-                  'install_diameter'}
+                  'install_diameter', 'mount_width', 'mount_height'}
 
 def normalize_data(data: dict) -> dict:
     new_data = data.copy()
@@ -41,7 +38,7 @@ def normalize_data(data: dict) -> dict:
 
 @dataclass
 class FontStyle:
-    size: Optional[float] = None # in mm or points? SVG standard default is usually px, here we treat numbers as user units
+    size: Optional[float] = None
     color: Optional[str] = None
     family: Optional[str] = None
     weight: Optional[str] = None
@@ -53,15 +50,13 @@ class Element:
     y: float
     type: str
     label: Optional[str] = None
-    label_position: Optional[str] = None # top, bottom, etc.
+    label_position: Optional[str] = None 
     font_style: Optional[FontStyle] = None
 
     @staticmethod
     def from_dict(data: dict):
-        # We normalize here for base properties like x, y
         data = normalize_data(data)
         
-        # Extract font style
         font_data = data.pop('font_style', None)
         font_dict = data.pop('font', None)
 
@@ -73,12 +68,12 @@ class Element:
         elif element_type == 'socket':
             obj = Socket(**_filter_args(Socket, data))
         elif element_type == 'switch':
-            obj = Switch(**_filter_args(Switch, data))
+            obj = Switch.from_dict(data)
         else:
             raise ValueError(f"Unknown element type: {element_type}")
         
         if font_dict:
-            font_dict = normalize_data(font_dict) # normalize font_size if present
+            font_dict = normalize_data(font_dict) 
             obj.font_style = FontStyle(**_filter_args(FontStyle, font_dict))
             
         return obj
@@ -90,73 +85,90 @@ def _filter_args(cls, data):
 
 @dataclass
 class Component(Element):
-    install_diameter: float = 0.0 # Will be set by subclasses default
+    install_diameter: float = 0.0 
 
 @dataclass
 class Scale:
     num_ticks: int = 11
     major_tick_interval: int = 1
-    tick_style: str = "line" # "line" or "dot"
+    tick_style: str = "line"
     tick_size: float = 2.0
-    position: str = "outside" # relative to border? Or just standard position.
+    position: str = "outside"
 
 @dataclass
 class Potentiometer(Component):
     knob_diameter: float = 20.0
     border_diameter: float = 25.0
     border_thickness: float = 0.0
-    angle_start: float = 45.0 # User degrees: 0 down, clockwise
+    angle_start: float = 45.0
     angle_width: float = 270.0
     scale: Optional[Scale] = None
     install_diameter: float = 6.0
-    
-    # Deprecated/Mapped
-    radius: Optional[float] = None # Old field
+    radius: Optional[float] = None
 
     @staticmethod
     def from_dict(data: dict):
         scale_data = data.pop('scale', None)
         
-        # Map old radius to knob_diameter if present and no knob_diameter
         if 'radius' in data and 'knob_diameter' not in data:
-             # radius was 15.0 (30mm dia) default in old code, new default is 20mm.
-             # If user provided radius, use it.
              data['knob_diameter'] = data['radius'] * 2.0
         
-        # clean_data = _filter_args(Potentiometer, data)
-        # pot = Potentiometer(**clean_data)
-        # We use standard constructor via filter_args
-        
-        # Need to handle nested scale object
         pot = Potentiometer(**_filter_args(Potentiometer, data))
         
         if scale_data:
             if isinstance(scale_data, dict):
                 scale_data = normalize_data(scale_data)
                 pot.scale = Scale(**_filter_args(Scale, scale_data))
-            elif isinstance(scale_data, str):
-                pass
         
         return pot
 
 @dataclass
 class Socket(Component):
-    # e.g., 6.3mm jack
     radius: float = 10.0
     install_diameter: float = 10.0
 
 @dataclass
 class Switch(Component):
-    # Toggle switch
+    switch_type: str = "toggle" # toggle, rotary
+    
     width: float = 10.0
     height: float = 20.0
-    install_diameter: float = 5.0
+    knob_diameter: float = 20.0 # for rotary
+    
+    mounting_type: str = "circular" # circular, rectangular
+    install_diameter: float = 5.0 
+    mount_width: float = 5.0 
+    mount_height: float = 10.0
+    
+    label_top: Optional[str] = None
+    label_center: Optional[str] = None
+    label_bottom: Optional[str] = None
+    
+    angle_start: float = 45.0
+    angle_width: float = 270.0
+    scale: Optional[Scale] = None
+    scale_labels: List[str] = field(default_factory=list)
+
+    @staticmethod
+    def from_dict(data: dict):
+        scale_data = data.pop('scale', None)
+        scale_labels = data.pop('scale_labels', [])
+        
+        obj = Switch(**_filter_args(Switch, data))
+        obj.scale_labels = scale_labels
+        
+        if scale_data:
+            if isinstance(scale_data, dict):
+                scale_data = normalize_data(scale_data)
+                obj.scale = Scale(**_filter_args(Scale, scale_data))
+        
+        return obj
 
 @dataclass
 class Border:
-    type: str = "none" # none, full, top, bottom
+    type: str = "none" 
     thickness: float = 1.0
-    style: str = "full" # full, dotted, dashed
+    style: str = "full" 
     color: str = "black"
 
 @dataclass
@@ -168,11 +180,8 @@ class Group(Element):
 
     @staticmethod
     def from_dict(data: dict):
-        # specific handling for recursion
         elements_data = data.pop('elements', [])
         border_data = data.pop('border', None)
-        
-        # data is already normalized if coming from Element.from_dict, but safe to do again or for Group specific props
         data = normalize_data(data)
         
         clean_data = _filter_args(Group, data)
@@ -193,7 +202,7 @@ class Panel:
     height: float
     elements: List[Element] = field(default_factory=list)
     background_color: str = "#ffffff"
-    render_mode: str = "both" # show, hide, both
+    render_mode: str = "both"
 
     @staticmethod
     def from_dict(data: dict):

@@ -75,12 +75,26 @@ elements:
                tick_style: "dot"
                tick_size: "2mm"
              install_diameter: "6mm"
+      
+      - type: switch
+        id: "bright"
+        x: "160mm"
+        y: "40mm"
+        switch_type: "toggle"
+        mounting_type: "rectangular"
+        mount_width: "6mm"
+        mount_height: "12mm"
+        install_diameter: "6mm"
+        label_top: "ON"
+        label_bottom: "OFF"
+        label: "BRIGHT"
+        label_position: "bottom"
 
   - type: group
     id: "master"
     x: "250mm"
     y: "20mm"
-    width: "100mm"
+    width: "150mm"
     height: "100mm"
     label: "MASTER"
     label_position: "top-inside"
@@ -91,7 +105,7 @@ elements:
     elements:
       - type: potentiometer
         id: "volume"
-        x: "50mm"
+        x: "30mm"
         y: "40mm"
         label: "VOLUME"
         label_position: "bottom"
@@ -105,3 +119,19 @@ elements:
            weight: "bold"
            size: "14"
         install_diameter: "8mm" # Larger pot
+        
+      - type: switch
+        id: "impedance"
+        x: "90mm"
+        y: "40mm"
+        switch_type: "rotary"
+        knob_diameter: "20mm"
+        label: "IMPEDANCE"
+        label_position: "bottom"
+        scale:
+          num_ticks: 3
+          tick_size: "4mm"
+          tick_style: "line"
+        scale_labels: ["4", "8", "16"]
+        angle_start: 315
+        angle_width: 90
