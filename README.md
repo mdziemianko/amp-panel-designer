@@ -146,9 +146,14 @@ Defined within the `label` block.
 - `weight`: Font weight.
 
 ### Label Positioning
-- **Components**: `top`, `bottom`.
-- **Groups**: `top-outside` (default), `bottom-outside`, `top-inline`, `bottom-inline`, `top-inside`, `bottom-inside`.
-- **Inline**: For groups, `*-inline` positions center the label on the border line and interrupt the border.
+- **General**: All elements (groups and components) support `top`, `bottom`, `left`, `right`.
+- **Modes**: These positions can be modified with `-outside` (default), `-inside`, or `-inline` (e.g., `top-inside`, `left-inline`).
+- **Group Specifics**:
+    - `center`: Places the label in the center of the group area.
+    - `*-inline`: Interrupts the border line to place text.
+    - `*-inside`: Places text inside the border.
+- **Component Specifics**:
+    - `inside`: May have different interpretation depending on component context (usually closer to center). `distance` parameter is recommended for precise control.
 
 ### Units
 If no unit is specified, `mm` is assumed.

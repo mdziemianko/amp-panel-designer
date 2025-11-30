@@ -5,28 +5,44 @@ background_color: "#ffffff"
 render_mode: "both"
 
 elements:
-  # 1. Full Border Group
+  # 1. Full Border Group with Left/Right Labels
   - type: group
-    id: "grp_full"
+    id: "grp_left"
     x: "10mm"
     y: "10mm"
-    width: "80mm"
-    height: "80mm"
-    label: "PREAMP"
+    width: "40mm"
+    height: "60mm"
+    label: 
+      text: "LEFT"
+      position: "left-outside"
     border:
       type: "full"
       thickness: "1mm"
     elements:
       - type: potentiometer
-        id: "grp_full_gain"
+        id: "grp_left_p1"
         x: "20mm"
-        y: "40mm"
-        label: "GAIN"
+        y: "30mm"
+        label: "P1"
+
+  - type: group
+    id: "grp_right"
+    x: "60mm"
+    y: "10mm"
+    width: "40mm"
+    height: "60mm"
+    label: 
+      text: "RIGHT"
+      position: "right-inline"
+    border:
+      type: "full"
+      style: "dotted"
+    elements:
       - type: potentiometer
-        id: "grp_full_vol"
-        x: "60mm"
-        y: "40mm"
-        label: "VOL"
+        id: "grp_right_p2"
+        x: "20mm"
+        y: "30mm"
+        label: "P2"
 
   # 2. Top/Bottom Border with Inline Label
   - type: group
@@ -34,7 +50,7 @@ elements:
     x: "110mm"
     y: "10mm"
     width: "80mm"
-    height: "80mm"
+    height: "60mm"
     label: 
       text: "EQUALIZER"
       position: "top-inline"
@@ -45,40 +61,44 @@ elements:
       - type: potentiometer
         id: "grp_eq_low"
         x: "20mm"
-        y: "40mm"
+        y: "30mm"
         label: "LOW"
       - type: potentiometer
         id: "grp_eq_high"
         x: "60mm"
-        y: "40mm"
+        y: "30mm"
         label: "HIGH"
 
-  # 3. Bottom Border Only
+  # 3. Center Label Group
   - type: group
-    id: "grp_master"
+    id: "grp_center"
     x: "10mm"
-    y: "110mm"
+    y: "80mm"
     width: "80mm"
-    height: "60mm"
+    height: "50mm"
     label:
-      text: "MASTER SECTION"
-      position: "bottom-inline"
+      text: "CENTERED"
+      position: "center"
     border:
-      type: "bottom"
-      thickness: "2mm"
-      color: "red"
+      type: "full"
     elements:
-      - type: potentiometer
-        id: "grp_master_level"
-        x: "40mm"
-        y: "30mm"
-        label: "LEVEL"
+       # Components around center text
+      - type: switch
+        id: "grp_center_sw1"
+        x: "15mm"
+        y: "25mm"
+        label: "SW1"
+      - type: switch
+        id: "grp_center_sw2"
+        x: "65mm"
+        y: "25mm"
+        label: "SW2"
 
-  # 4. Nested Group
+  # 4. Nested Group with Left Inside
   - type: group
     id: "grp_outer"
     x: "110mm"
-    y: "110mm"
+    y: "80mm"
     width: "80mm"
     height: "80mm"
     label: "OUTER"
@@ -91,8 +111,8 @@ elements:
         y: "20mm"
         width: "60mm"
         height: "40mm"
-        label: "INNER"
-        label_position: "top-inside"
+        label: "INNER-LEFT"
+        label_position: "left-inside"
         border:
           type: "full"
           style: "dashed"
@@ -102,3 +122,42 @@ elements:
              x: "30mm"
              y: "20mm"
              label: "TEST"
+             
+  # 5. Component Labels Left/Right
+  - type: group
+    id: "grp_comp_labels"
+    x: "10mm"
+    y: "140mm"
+    width: "180mm"
+    height: "50mm"
+    border:
+       type: "none"
+    elements:
+      - type: potentiometer
+        id: "pot_left"
+        x: "30mm"
+        y: "25mm"
+        label: 
+           text: "LEFT"
+           position: "left"
+      - type: potentiometer
+        id: "pot_right"
+        x: "70mm"
+        y: "25mm"
+        label: 
+           text: "RIGHT"
+           position: "right"
+      - type: switch
+        id: "sw_left_in"
+        x: "110mm"
+        y: "25mm"
+        label:
+           text: "L-IN"
+           position: "left-inside"
+      - type: socket
+        id: "soc_right_in"
+        x: "150mm"
+        y: "25mm"
+        label:
+           text: "R-IN"
+           position: "right-inline"

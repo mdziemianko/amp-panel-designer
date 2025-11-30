@@ -1,6 +1,6 @@
 import svgwrite
 import math
-from typing import Optional
+from typing import Optional, Tuple
 from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle, Component, Custom
 
 class PanelRenderer:
@@ -106,6 +106,17 @@ class PanelRenderer:
             return element.label.font
         return element.font_style
 
+    def _parse_position(self, pos: str) -> Tuple[str, str]:
+        """Parses position string like 'top-outside' into ('top', 'outside')."""
+        if not pos:
+            return 'bottom', 'outside' # default
+        parts = pos.split('-')
+        side = parts[0]
+        mode = parts[1] if len(parts) > 1 else 'outside'
+        
+        # Normalize side for group shortcuts if any, though existing map is explicit
+        return side, mode
+
     def _render_group(self, elements: list[Element], offset_x: float, offset_y: float):
         for element in elements:
             abs_x = offset_x + element.x
@@ -113,19 +124,18 @@ class PanelRenderer:
             
             if isinstance(element, Group):
                 label_gap = None
+                label_gap_side = None # 'top', 'bottom', 'left', 'right'
                 
                 # Render group label if exists
                 if element.label and element.label.text:
                     label_text = element.label.text
-                    label_x = abs_x
-                    if element.width:
-                         label_x += element.width / 2
                     
                     font_style = self._get_element_font(element)
                     
                     default_size = 12 * 25.4 / 72.0
                     size = font_style.size if font_style and font_style.size else default_size
                     
+                    # Convert font size to mm
                     try:
                         if isinstance(size, str):
                              val = size.lower().replace("pt", "").replace("px", "").replace("mm", "")
@@ -135,29 +145,92 @@ class PanelRenderer:
                     except ValueError:
                         size_val = default_size
 
-                    pos = element.label.position if element.label.position else 'top-outside'
-                    label_y = abs_y
-                    
+                    raw_pos = element.label.position if element.label.position else 'top-outside'
+                    side, mode = self._parse_position(raw_pos)
+
                     text_width = self._get_text_width(label_text, size_val)
                     
-                    if pos == 'top-outside':
-                        label_y = abs_y - 5
-                    elif pos == 'top-inline':
-                        label_y = abs_y + size_val * 0.35 
-                        label_gap = (label_x - text_width/2 - 2, label_x + text_width/2 + 2)
-                    elif pos == 'top-inside':
-                         label_y = abs_y + size_val + 2
-                    elif pos == 'bottom-outside':
-                        label_y = abs_y + (element.height if element.height else 0) + size_val + 2
-                    elif pos == 'bottom-inline':
-                         label_y = abs_y + (element.height if element.height else 0) + size_val * 0.35
-                         label_gap = (label_x - text_width/2 - 2, label_x + text_width/2 + 2)
-                    elif pos == 'bottom-inside':
-                         label_y = abs_y + (element.height if element.height else 0) - 5
+                    # Defaults
+                    label_x = abs_x
+                    label_y = abs_y
+                    anchor = 'middle'
 
-                    self._render_text(label_text, label_x, label_y, default_size=default_size, default_weight='bold', font_style=font_style)
+                    # Calculate positions
+                    if side == 'center':
+                        label_x = abs_x + (element.width / 2 if element.width else 0)
+                        label_y = abs_y + (element.height / 2 if element.height else 0) + size_val * 0.35 # vertical center approx
+                        anchor = 'middle'
+                    
+                    elif side == 'top':
+                        label_x = abs_x + (element.width / 2 if element.width else 0)
+                        if mode == 'inline':
+                            label_y = abs_y + size_val * 0.35 
+                            label_gap = (label_x - text_width/2 - 2, label_x + text_width/2 + 2)
+                            label_gap_side = 'top'
+                        elif mode == 'inside':
+                            label_y = abs_y + size_val + 2
+                        else: # outside
+                            label_y = abs_y - 5
+                    
+                    elif side == 'bottom':
+                        label_x = abs_x + (element.width / 2 if element.width else 0)
+                        base_y = abs_y + (element.height if element.height else 0)
+                        if mode == 'inline':
+                            label_y = base_y + size_val * 0.35
+                            label_gap = (label_x - text_width/2 - 2, label_x + text_width/2 + 2)
+                            label_gap_side = 'bottom'
+                        elif mode == 'inside':
+                            label_y = base_y - 5
+                        else: # outside
+                            label_y = base_y + size_val + 2
+                            
+                    elif side == 'left':
+                        label_y = abs_y + (element.height / 2 if element.height else 0) + size_val * 0.35
+                        if mode == 'inline':
+                            label_x = abs_x
+                            # Gap on vertical line: y-coordinates
+                            # text_width is horizontal width. 
+                            # Since we don't rotate text for now, the gap logic for left/right inline needs checking.
+                            # Usually side labels are rotated? If not, they just sit on the line.
+                            # If text is horizontal, it will cross the line.
+                            # gap is (y_start, y_end)
+                            # But current logic is horizontal text.
+                            # A horizontal text on a vertical line looks weird if inline.
+                            # Assuming horizontal text centered on line.
+                            # We'll gap the line around the text height? Or text width?
+                            # Text crosses line perpendicularly.
+                            # We can just gap around the middle.
+                            # Gap size = font_size (height) roughly?
+                            gap_size = size_val
+                            label_gap = (label_y - gap_size/2 - 2, label_y + gap_size/2 + 2) # Vertical gap
+                            label_gap_side = 'left'
+                            anchor = 'middle'
+                        elif mode == 'inside':
+                            label_x = abs_x + 5
+                            anchor = 'start'
+                        else: # outside
+                            label_x = abs_x - 5
+                            anchor = 'end'
 
-                self._render_border(element, abs_x, abs_y, label_gap=label_gap, label_pos=element.label.position if element.label else None)
+                    elif side == 'right':
+                        label_y = abs_y + (element.height / 2 if element.height else 0) + size_val * 0.35
+                        base_x = abs_x + (element.width if element.width else 0)
+                        if mode == 'inline':
+                            label_x = base_x
+                            gap_size = size_val
+                            label_gap = (label_y - gap_size/2 - 2, label_y + gap_size/2 + 2)
+                            label_gap_side = 'right'
+                            anchor = 'middle'
+                        elif mode == 'inside':
+                            label_x = base_x - 5
+                            anchor = 'end'
+                        else: # outside
+                            label_x = base_x + 5
+                            anchor = 'start'
+
+                    self._render_text(label_text, label_x, label_y, default_size=default_size, default_weight='bold', font_style=font_style, anchor=anchor)
+
+                self._render_border(element, abs_x, abs_y, label_gap=label_gap, label_gap_side=label_gap_side)
                 self._render_group(element.elements, abs_x, abs_y)
             
             elif isinstance(element, Potentiometer):
@@ -172,7 +245,7 @@ class PanelRenderer:
             elif isinstance(element, Custom):
                 self._render_custom(element, abs_x, abs_y)
 
-    def _render_border(self, group: Group, x: float, y: float, label_gap=None, label_pos=None):
+    def _render_border(self, group: Group, x: float, y: float, label_gap=None, label_gap_side=None):
         if not group.border or group.border.type == 'none':
             return
             
@@ -184,7 +257,7 @@ class PanelRenderer:
         if b.style == 'dotted':
             stroke_dasharray = "2,2"
         elif b.style == 'dashed':
-             stroke_dasharray = "5,5"
+            stroke_dasharray = "5,5"
         
         def draw_line(x1, y1, x2, y2):
              kwargs = {
@@ -195,41 +268,168 @@ class PanelRenderer:
                  kwargs['stroke_dasharray'] = stroke_dasharray
              self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), **kwargs))
 
-        def draw_line_with_gap(x1, y1, x2, y2, gap):
+        def draw_line_with_gap(x1, y1, x2, y2, gap, is_vertical=False):
             if not gap:
                 draw_line(x1, y1, x2, y2)
                 return
             
             gap_start, gap_end = gap
-            if gap_start > x1:
-                 draw_line(x1, y1, gap_start, y1)
-            if gap_end < x2:
-                 draw_line(gap_end, y1, x2, y1)
+            # Normalize gap direction
+            if is_vertical:
+                # Line is vertical, x1==x2. coordinate of interest is y.
+                start_coord = min(y1, y2)
+                end_coord = max(y1, y2)
+                
+                # Draw segments
+                if gap_start > start_coord:
+                    draw_line(x1, start_coord, x1, gap_start)
+                if gap_end < end_coord:
+                    draw_line(x1, gap_end, x1, end_coord)
+            else:
+                # Horizontal
+                start_coord = min(x1, x2)
+                end_coord = max(x1, x2)
+                
+                if gap_start > start_coord:
+                    draw_line(start_coord, y1, gap_start, y1)
+                if gap_end < end_coord:
+                    draw_line(gap_end, y1, end_coord, y1)
 
+        # Edges
+        # Top
+        if b.type in ('full', 'top'):
+            if label_gap_side == 'top':
+                draw_line_with_gap(x, y, x + group.width, y, label_gap, is_vertical=False)
+            else:
+                draw_line(x, y, x + group.width, y)
+        
+        # Bottom
+        if b.type in ('full', 'bottom'):
+            if label_gap_side == 'bottom':
+                draw_line_with_gap(x, y + group.height, x + group.width, y + group.height, label_gap, is_vertical=False)
+            else:
+                draw_line(x, y + group.height, x + group.width, y + group.height)
+                
+        # Left and Right (only for full border usually? or if user asks for specific sides later. Currently full or top/bottom)
+        # But wait, Group border type is 'none', 'full', 'top', 'bottom'.
+        # If 'full', we draw sides.
         if b.type == 'full':
-            if label_pos == 'top-inline':
-                draw_line_with_gap(x, y, x + group.width, y, label_gap)
+            # Left
+            if label_gap_side == 'left':
+                draw_line_with_gap(x, y, x, y + group.height, label_gap, is_vertical=True)
             else:
-                draw_line(x, y, x + group.width, y)
-                
-            if label_pos == 'bottom-inline':
-                draw_line_with_gap(x, y + group.height, x + group.width, y + group.height, label_gap)
-            else:
-                draw_line(x, y + group.height, x + group.width, y + group.height)
-                
-            draw_line(x, y, x, y + group.height)
-            draw_line(x + group.width, y, x + group.width, y + group.height)
+                draw_line(x, y, x, y + group.height)
             
-        elif b.type == 'top':
-             if label_pos == 'top-inline':
-                 draw_line_with_gap(x, y, x + group.width, y, label_gap)
-             else:
-                draw_line(x, y, x + group.width, y)
-        elif b.type == 'bottom':
-             if label_pos == 'bottom-inline':
-                 draw_line_with_gap(x, y + group.height, x + group.width, y + group.height, label_gap)
-             else:
-                draw_line(x, y + group.height, x + group.width, y + group.height)
+            # Right
+            if label_gap_side == 'right':
+                draw_line_with_gap(x + group.width, y, x + group.width, y + group.height, label_gap, is_vertical=True)
+            else:
+                draw_line(x + group.width, y, x + group.width, y + group.height)
+
+
+    def _calculate_label_pos(self, x, y, side, mode, dist, font_size, text_width=0) -> Tuple[float, float, str]:
+        """Calculates (lx, ly, anchor) for a component label."""
+        # Default behavior (outside)
+        lx, ly = x, y
+        anchor = 'middle'
+        
+        if side == 'top':
+            if mode == 'inside':
+                 # Inside component boundary? 
+                 # For components, "inside" might mean below top edge of bounding box?
+                 # Or just closer to center than outside.
+                 # Let's interpret 'inside' as: center - dist
+                 # Wait, 'top-outside' means above center by dist.
+                 # 'top-inside' usually means below top border, so closer to center?
+                 # If we treat 'dist' as distance from center:
+                 ly = y - dist
+            elif mode == 'inline':
+                 ly = y - dist # On the edge?
+            else: # outside
+                 ly = y - dist
+                 
+            # Adjust for baseline if needed.
+            # Usually top label baseline is y - dist.
+            
+        elif side == 'bottom':
+            ly = y + dist + font_size * 0.7
+            
+        elif side == 'left':
+            lx = x - dist
+            ly = y + font_size * 0.35
+            anchor = 'end'
+            if mode == 'inside':
+                 anchor = 'start'
+                 lx = x - dist + text_width # ? No.
+                 # If left-inside, it's inside the left edge.
+                 # Since components are usually centered at x,y with radius/width.
+                 # dist is typically from center.
+                 # So left-inside would be x - dist (closer to center?)
+                 # Actually for components, "inside/outside" relative to a border ring:
+                 # Outside: > radius. Inside: < radius.
+                 # If user supplies 'distance', we use it.
+                 pass
+
+        elif side == 'right':
+            lx = x + dist
+            ly = y + font_size * 0.35
+            anchor = 'start'
+            if mode == 'inside':
+                 anchor = 'end'
+                 pass
+        
+        return lx, ly, anchor
+
+    def _render_component_label(self, element: Component, x: float, y: float, default_dist: float):
+        if element.label and element.label.text:
+            raw_pos = element.label.position if element.label.position else 'bottom-outside'
+            side, mode = self._parse_position(raw_pos)
+            
+            font_style = self._get_element_font(element)
+            font_size = self._get_font_size_mm(font_style)
+            
+            dist = default_dist
+            if element.label.distance is not None:
+                dist = element.label.distance
+            
+            # Calculate coordinates
+            lx, ly = x, y
+            anchor = 'middle'
+            
+            if side == 'top':
+                # Dist is up
+                ly = y - dist
+                # If inline, maybe adjust?
+            
+            elif side == 'bottom':
+                # Dist is down
+                ly = y + dist + font_size * 0.7
+            
+            elif side == 'left':
+                lx = x - dist
+                ly = y + font_size * 0.35 # Vertically centered
+                anchor = 'end'
+                if mode == 'inside':
+                    anchor = 'start' # ? If inside left edge, text starts there?
+                    # Or 'end' but position is diff?
+                    # Let's keep it simple: left-outside is default.
+                elif mode == 'inline':
+                    anchor = 'middle' # Centered on the line?
+
+            elif side == 'right':
+                lx = x + dist
+                ly = y + font_size * 0.35
+                anchor = 'start'
+                if mode == 'inside':
+                    anchor = 'end'
+                elif mode == 'inline':
+                    anchor = 'middle'
+            
+            elif side == 'center':
+                 ly = y + font_size * 0.35
+                 anchor = 'middle'
+
+            self._render_text(element.label.text, lx, ly, font_style=font_style, anchor=anchor)
 
     def _render_potentiometer(self, pot: Potentiometer, x: float, y: float):
         knob_radius = pot.knob_diameter / 2
@@ -296,7 +496,7 @@ class PanelRenderer:
                     y1 = y + r_start * math.sin(angle_rad)
                     
                     if s.tick_style == 'dot':
-                        r_dot = (current_tick_len / 2) #  if is_major else (current_tick_len / 3) # Minor tick dot radius is 50% of major
+                        r_dot = (current_tick_len / 2) if is_major else (current_tick_len * 0.5 / 2) # Minor tick dot radius is 50% of major
                         # Center of dot
                         if s.position == 'inside':
                              # center at r_start - r_dot
@@ -321,30 +521,13 @@ class PanelRenderer:
             self.dwg.add(self.dwg.line(start=(x, y), end=(x, y - knob_radius + 2), stroke='black', stroke_width=2, opacity=component_opacity))
             
         # Label
-        if pot.label and pot.label.text:
-            pos = pot.label.position if pot.label.position else 'bottom'
-            font_style = self._get_element_font(pot)
-            font_size = self._get_font_size_mm(font_style)
-            
-            # Default distance calculation
-            outer_radius = (pot.border_diameter / 2)
-            if pot.scale:
-                outer_radius += pot.scale.tick_size + 2
-            dist = max(outer_radius, pot.knob_diameter/2) + 2 
-            
-            # Override with explicit distance if provided
-            if pot.label.distance is not None:
-                dist = pot.label.distance
-            
-            # Calculate position
-            # If bottom: Top of label at dist. Baseline = y + dist + font_size*0.7
-            # If top: Bottom of label at dist. Baseline = y - dist
-            if pos == 'top':
-                 label_y = y - dist
-            else:
-                 label_y = y + dist + font_size * 0.7
-            
-            self._render_text(pot.label.text, x, label_y, font_style=font_style)
+        # Default distance calculation
+        outer_radius = (pot.border_diameter / 2)
+        if pot.scale:
+            outer_radius += pot.scale.tick_size + 2
+        default_dist = max(outer_radius, pot.knob_diameter/2) + 2 
+        
+        self._render_component_label(pot, x, y, default_dist)
 
     def _render_socket(self, socket: Socket, x: float, y: float):
         component_opacity = 0.5 if self._is_both_mode() else 1.0
@@ -356,21 +539,8 @@ class PanelRenderer:
             self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius, fill='#333333', stroke='black', stroke_width=1, opacity=component_opacity))
             self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius/2, fill='black', opacity=component_opacity))
         
-        if socket.label and socket.label.text:
-            pos = socket.label.position if socket.label.position else 'bottom'
-            font_style = self._get_element_font(socket)
-            font_size = self._get_font_size_mm(font_style)
-            
-            dist = socket.radius + 5
-            if socket.label.distance is not None:
-                dist = socket.label.distance
-                
-            if pos == 'top':
-                 label_y = y - dist
-            else:
-                 label_y = y + dist + font_size * 0.7
-                 
-            self._render_text(socket.label.text, x, label_y, font_style=font_style)
+        default_dist = socket.radius + 5
+        self._render_component_label(socket, x, y, default_dist)
 
     def _render_switch(self, switch: Switch, x: float, y: float):
         component_opacity = 0.5 if self._is_both_mode() else 1.0
@@ -384,89 +554,6 @@ class PanelRenderer:
             # Render labels always (printed)
             default_font_style = self._get_element_font(switch)
             
-            # Helper for toggle label pos
-            def render_toggle_label(lbl_obj, default_text, default_pos_offset):
-                # default_pos_offset is tuple (dx, dy) from center (x,y)
-                # If explicit distance is provided, it replaces the default offset magnitude?
-                # Toggle logic is tricky because 'top'/'bottom' are positions, not just distance.
-                # Let's keep existing logic but apply font shift if top/bottom
-                
-                # However, toggle labels (label_top, label_bottom) are separate from main label.
-                # They don't have 'distance' property in Label object usually?
-                # Wait, I added distance to Label. So yes they might.
-                
-                font = lbl_obj.font if lbl_obj and lbl_obj.font else default_font_style
-                text = lbl_obj.text if lbl_obj else default_text
-                if not text: return
-                
-                f_size = self._get_font_size_mm(font)
-                
-                # Base offset
-                dx, dy = default_pos_offset
-                
-                # Adjust dy for top/bottom based on distance logic?
-                # If lbl_obj.distance is set, use it.
-                # If top label (dy < 0): distance is from center to bottom of label?
-                #   y_target = y - distance.
-                # If bottom label (dy > 0): distance is from center to top of label?
-                #   y_target = y + distance + font_size * 0.7
-                
-                # We need to know if it's top or bottom label.
-                # Assume based on dy sign.
-                
-                final_x = x + dx
-                final_y = y + dy
-                
-                if lbl_obj and lbl_obj.distance is not None:
-                    d = lbl_obj.distance
-                    if dy < 0: # top
-                        final_y = y - d
-                    elif dy > 0: # bottom
-                        final_y = y + d + f_size * 0.7
-                    # Center label (dy=0)? Distance usually x-offset? 
-                    # Let's ignore distance for center label horizontal shift for now unless requested.
-                else:
-                    # Apply baseline correction to default positions too?
-                    # Default Top: y - height/2 - 5. This is baseline.
-                    # Text is above baseline. So bottom of text is at y - height/2 - 5.
-                    # This matches "Bottom of label if above". OK.
-                    
-                    # Default Bottom: y + height/2 + 8. This is baseline.
-                    # Text is above baseline.
-                    # Top of text is at y + height/2 + 8 - font_size*0.7.
-                    # User wants standard behavior to be "distance is to top of label".
-                    # Here "8" is the padding. 
-                    # If I want padding 5mm, I should set baseline to y + height/2 + 5 + font_size*0.7.
-                    # Current code was just +8. Let's stick to current unless distance is specified?
-                    # Or standardize it.
-                    # Let's standardize: dist = height/2 + 5.
-                    # Top: y - dist.
-                    # Bottom: y + dist + font_size*0.7.
-                    
-                    # But I don't want to break existing look too much if it was fine.
-                    # User complaint is about "specified distance".
-                    pass
-
-                self._render_text(text, final_x, final_y, font_style=font)
-
-            if switch.label_top:
-                # default distance approx
-                dist_top = switch.height/2 + 5
-                # Pass as negative dy for identification
-                render_toggle_label(switch.label_top, "", (0, -dist_top))
-                
-            if switch.label_bottom:
-                # default distance approx
-                dist_bot = switch.height/2 + 5 # use 5 padding like top
-                # But we need to account for font height for baseline
-                # render_toggle_label will handle it if I pass positive dy
-                # Wait, render_toggle_label logic above for default:
-                # "Let's stick to current unless distance is specified" -> I put 'pass' there.
-                # I should implement the standard logic there for consistency.
-                
-                # Re-do render_toggle_label logic inline for clarity
-                pass
-
             # Refactored toggle label rendering
             if switch.label_top:
                 font = switch.label_top.font if switch.label_top.font else default_font_style
@@ -560,30 +647,17 @@ class PanelRenderer:
                 self.dwg.add(self.dwg.circle(center=(x, y), r=switch.width/2 - 2, fill='black', opacity=component_opacity))
         
         # Main Label
-        if switch.label and switch.label.text:
-            pos = switch.label.position if switch.label.position else 'bottom'
-            font_style = self._get_element_font(switch)
-            font_size = self._get_font_size_mm(font_style)
-            
-            # Distance logic for toggle vs rotary
-            if switch.switch_type == 'rotary':
-                 # calculate max radius used by scale/labels
-                 # Simplify: knob/2 + tick size + padding + label space
-                 dist = switch.knob_diameter/2 + 5 
-                 if switch.scale:
-                     dist += switch.scale.tick_size + 5
-            else:
-                 dist = switch.height/2 + 10 # toggle height based
-            
-            if switch.label.distance is not None:
-                dist = switch.label.distance
-
-            if pos == 'top':
-                 label_y = y - dist
-            else:
-                 label_y = y + dist + font_size * 0.7
-            
-            self._render_text(switch.label.text, x, label_y, font_style=font_style)
+        # Distance logic for toggle vs rotary
+        if switch.switch_type == 'rotary':
+             # calculate max radius used by scale/labels
+             # Simplify: knob/2 + tick size + padding + label space
+             dist = switch.knob_diameter/2 + 5 
+             if switch.scale:
+                 dist += switch.scale.tick_size + 5
+        else:
+             dist = switch.height/2 + 10 # toggle height based
+        
+        self._render_component_label(switch, x, y, dist)
 
     def _render_custom(self, custom: Custom, x: float, y: float):
         component_opacity = 0.5 if self._is_both_mode() else 1.0
@@ -619,31 +693,17 @@ class PanelRenderer:
                                                stroke='black', stroke_width=1, opacity=component_opacity))
 
         # Label
-        if custom.label and custom.label.text:
-            # Default to bottom if not specified
-            pos = custom.label.position if custom.label.position else 'bottom'
-            font_style = self._get_element_font(custom)
-            font_size = self._get_font_size_mm(font_style)
-            
-            # Estimate distance based on mount size
-            dist = 10.0 # fallback
-            if custom.mount:
-                if custom.mount.diameter:
-                    dist = custom.mount.diameter / 2 + 5
-                elif custom.mount.height:
-                    dist = custom.mount.height / 2 + 5
-            
-            if custom.label.distance is not None:
-                dist = custom.label.distance
+        # Estimate distance based on mount size
+        dist = 10.0 # fallback
+        if custom.mount:
+            if custom.mount.diameter:
+                dist = custom.mount.diameter / 2 + 5
+            elif custom.mount.height:
+                dist = custom.mount.height / 2 + 5
+        
+        self._render_component_label(custom, x, y, dist)
 
-            if pos == 'top':
-                 label_y = y - dist
-            else:
-                 label_y = y + dist + font_size * 0.7
-            
-            self._render_text(custom.label.text, x, label_y, font_style=font_style)
-
-    def _render_text(self, text: str, x: float, y: float, default_size=None, default_weight='normal', font_style: FontStyle = None):
+    def _render_text(self, text: str, x: float, y: float, default_size=None, default_weight='normal', font_style: FontStyle = None, anchor="middle"):
         if default_size is None:
             default_size = 12 * 25.4 / 72.0
             
@@ -663,7 +723,7 @@ class PanelRenderer:
                 family = font_style.family
 
         self.dwg.add(self.dwg.text(text, insert=(x, y), 
-                                   text_anchor="middle", 
+                                   text_anchor=anchor, 
                                    font_family=family, 
                                    font_size=size,
                                    font_weight=weight,

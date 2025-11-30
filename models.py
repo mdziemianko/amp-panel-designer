@@ -89,7 +89,6 @@ class Element:
     def from_dict(data: dict):
         data = normalize_data(data)
         
-        font_data = data.pop('font_style', None)
         font_dict = data.pop('font', None)
         
         # Parse label

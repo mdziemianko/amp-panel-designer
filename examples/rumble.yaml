@@ -12,16 +12,6 @@ elements:
     y: "10mm"
     width: "50mm"   # 140mm
     height: "50mm"
-    # label:
-    #   text: "POWER"
-    #   position: "bottom-inline"
-    #   font:
-    #     size: "12pt"
-    #     family: "sans-serif"
-    # border:
-    #   type: top
-    #   thickness: "2mm"
-    #   color: "#555555"
     elements:
       - type: custom
         id: "power_led"
@@ -67,7 +57,7 @@ elements:
     width: "120mm"   # 140mm
     height: "50mm"
     label:
-      text: "1974x TMB / JCM800"
+      text: "Channel 2"
       position: "bottom-inline"
       font:
         size: "12pt"
@@ -177,33 +167,15 @@ elements:
           font:
             size: "12pt"
             family: "sans-serif"
-  - type: switch
-    switch_type: "toggle"
-    id: "cascade_switch"
-    x: "325mm"
-    y: "35mm"
-    mount:
-      diameter: "5mm"
-    label_top:
-      text: "JCM800"
-      font:
-        size: "12pt"
-        family: "sans-serif"
-      distance: "10mm"
-    label_bottom:
-      text: "1974x"
-      font:
-        size: "12pt"
-        family: "sans-serif"
-      distance: "10mm"
+  
   - type: group
     id: "channel_2"
-    x: "355mm"
+    x: "325mm"
     y: "10mm"
-    width: "30mm"   # 140mm
+    width: "60mm"   # 140mm
     height: "50mm"
     label:
-      text: "1974x"
+      text: "Channel 1"
       position: "bottom-inline"
       font:
         size: "12pt"
@@ -213,9 +185,35 @@ elements:
       thickness: "2mm"
       color: "#555555"
     elements:
+      - type: switch
+        switch_type: "toggle"
+        id: "cascade_switch"
+        x: "0mm"
+        y: "25mm"
+        mount:
+          diameter: "5mm"
+        label:
+          text: "CASCADE"
+          position: "top"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+          distance: "19mm"
+        label_top:
+          text: "ON"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+          distance: "10mm"
+        label_bottom:
+          text: "OFF"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+          distance: "10mm"
       - type: potentiometer
         id: "tone"
-        x: "0mm"
+        x: "30mm"
         y: "25mm"
         mount:
           diameter: "6mm"
@@ -235,7 +233,7 @@ elements:
             family: "sans-serif"
       - type: potentiometer
         id: "volume_2"
-        x: "30mm"
+        x: "60mm"
         y: "25mm"
         mount:
           diameter: "6mm"
@@ -254,14 +252,14 @@ elements:
             size: "12pt"
             family: "sans-serif"
   - type: group
-    id: "input_1"
+    id: "inputs"
     x: "428mm"
     y: "10mm"
-    width: "0mm"   # 140mm
+    width: "25mm"   # 140mm
     height: "50mm"
     label:
-      text: "1974x TMB"
-      position: "top-inline"
+      text: "INPUTS"
+      position: "center"
       font:
         size: "12pt"
         family: "sans-serif"
@@ -271,6 +269,9 @@ elements:
         x: "0mm"
         y: "12mm"
         radius: "6mm"
+        label:
+          text: "2"
+          position: "left"
         mount:
           diameter: "6mm"
       - type: socket
@@ -278,33 +279,29 @@ elements:
         x: "0mm"
         y: "37mm"
         radius: "6mm"
+        label:
+          text: "2"
+          position: "left"
         mount:
           diameter: "6mm"
-  - type: group
-    id: "input_1"
-    x: "453mm"
-    y: "10mm"
-    width: "0mm"   # 140mm
-    height: "50mm"
-    label:
-      text: "1974x / JCM800"
-      position: "top-inline"
-      font:
-        size: "12pt"
-        family: "sans-serif"
-    elements:
       - type: socket
         id: "input_1"
-        x: "0mm"
+        x: "25mm"
         y: "12mm"
         radius: "6mm"
+        label:
+          text: "1"
+          position: "right"
         mount:
           diameter: "6mm"
       - type: socket
         id: "input_2"
-        x: "0mm"
+        x: "25mm"
         y: "37mm"
         radius: "6mm"
+        label:
+          text: "1"
+          position: "right"
         mount:
           diameter: "6mm"
       
