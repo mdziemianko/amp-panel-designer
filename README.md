@@ -2,7 +2,7 @@
 
 A tool to design instrument amplifier panels declaratively using YAML.
 
-The generated output can be used to generate engraver or laser cutter gcode.
+The generated output can be used to generate engraver or laser cutter gcode or imported into any vector graphics editing software.
 
 ## Usage
 
