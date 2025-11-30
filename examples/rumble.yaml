@@ -2,7 +2,7 @@ name: "Rumble Amp Panel"
 width: "480mm"       # 400mm
 height: "70mm"
 background_color: "#dddddd"
-render_mode: "hide" # show, hide, both
+render_mode: "both" # show, hide, both
 
 
 elements:
@@ -84,10 +84,11 @@ elements:
         scale:
           num_ticks: 11
           major_tick_interval: 2
-          tick_style: "dot"
+          tick_style: "line"
           tick_size: "2mm"
-        border_thickness: 1
-        border_diameter: "10mm"
+          position: "inline"
+        border_thickness: 0
+        border_diameter: "26mm"
         mount:
           diameter: "6mm"
         label:
@@ -105,9 +106,11 @@ elements:
         scale:
           num_ticks: 11
           major_tick_interval: 2
-          tick_style: "dot"
+          tick_style: "line"
           tick_size: "2mm"
-          border_diameter: "8mm"
+          position: "inline"
+        border_thickness: 0
+        border_diameter: "26mm"
         label:
           text: "MIDDLE"
           position: "top"
@@ -123,9 +126,11 @@ elements:
         scale:
           num_ticks: 11
           major_tick_interval: 2
-          tick_style: "dot"
+          tick_style: "line"
           tick_size: "2mm"
-          border_diameter: "8mm"
+          position: "inline"
+        border_thickness: 0
+        border_diameter: "26mm"
         label:
           text: "TREBLE"
           position: "top"
@@ -141,9 +146,11 @@ elements:
         scale:
           num_ticks: 11
           major_tick_interval: 2
-          tick_style: "dot"
+          tick_style: "line"
           tick_size: "2mm"
-          border_diameter: "8mm"
+          position: "inline"
+        border_thickness: 0
+        border_diameter: "26mm"
         label:
           text: "VOLUME"
           position: "top"
@@ -159,9 +166,11 @@ elements:
         scale:
           num_ticks: 11
           major_tick_interval: 2
-          tick_style: "dot"
+          tick_style: "line"
           tick_size: "2mm"
-          border_diameter: "8mm"
+          position: "inline"
+        border_thickness: 0
+        border_diameter: "26mm"
         label:
           text: "GAIN"
           position: "top"
@@ -213,9 +222,11 @@ elements:
         scale:
           num_ticks: 11
           major_tick_interval: 2
-          tick_style: "dot"
+          tick_style: "line"
           tick_size: "2mm"
-          border_diameter: "8mm"
+          position: "inline"
+        border_thickness: 0
+        border_diameter: "26mm"
         label:
           text: "TONE"
           position: "top"
@@ -231,9 +242,11 @@ elements:
         scale:
           num_ticks: 11
           major_tick_interval: 2
-          tick_style: "dot"
+          tick_style: "line"
           tick_size: "2mm"
-          border_diameter: "8mm"
+          position: "inline"
+        border_thickness: 0
+        border_diameter: "26mm"
         label:
           text: "GAIN"
           position: "top"

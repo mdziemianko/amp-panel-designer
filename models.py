@@ -192,7 +192,7 @@ class Scale:
     major_tick_interval: int = 1
     tick_style: str = "line"
     tick_size: float = 2.0
-    position: str = "outside"
+    position: str = "outside" # outside, inside, inline
     labels: List[Label] = field(default_factory=list)
 
     @staticmethod

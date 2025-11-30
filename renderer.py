@@ -251,9 +251,24 @@ class PanelRenderer:
              if s.num_ticks > 0:
                 step = sweep_angle_user / (s.num_ticks - 1) if s.num_ticks > 1 else 0
                 
-                base_radius = (pot.border_diameter / 2) if pot.border_diameter > pot.knob_diameter else (pot.knob_diameter / 2)
-                tick_r_start = base_radius + 1.0 
+                # Determine base radius based on scale position
+                border_r = (pot.border_diameter / 2)
                 
+                if s.position == 'outside':
+                    tick_r_start = border_r + 1.0 # Standard gap outside
+                elif s.position == 'inside':
+                    tick_r_start = border_r - 1.0 # Start inside border
+                elif s.position == 'inline':
+                    # This means centered on the border line
+                    # Wait, we need tick_r_start and current_tick_len.
+                    # If inline, we draw across the border.
+                    # Let's handle it inside loop per tick length.
+                    pass
+                else:
+                    # Fallback logic if position is invalid or default 'outside' logic
+                    base_radius = (pot.border_diameter / 2) if pot.border_diameter > pot.knob_diameter else (pot.knob_diameter / 2)
+                    tick_r_start = base_radius + 1.0 
+
                 for i in range(s.num_ticks):
                     angle_user = start_angle_user + i * step
                     angle_svg_deg = angle_user + 90
@@ -263,18 +278,42 @@ class PanelRenderer:
                     
                     current_tick_len = s.tick_size if is_major else s.tick_size * 0.5
                     
-                    x1 = x + tick_r_start * math.cos(angle_rad)
-                    y1 = y + tick_r_start * math.sin(angle_rad)
+                    # Calculate start/end based on position
+                    if s.position == 'outside':
+                        r_start = tick_r_start
+                        r_end = r_start + current_tick_len
+                    elif s.position == 'inside':
+                        r_start = tick_r_start
+                        r_end = r_start - current_tick_len
+                    elif s.position == 'inline':
+                        r_start = border_r - (current_tick_len / 2)
+                        r_end = border_r + (current_tick_len / 2)
+                    else: # Legacy/default behavior
+                        r_start = tick_r_start
+                        r_end = r_start + current_tick_len
+
+                    x1 = x + r_start * math.cos(angle_rad)
+                    y1 = y + r_start * math.sin(angle_rad)
                     
                     if s.tick_style == 'dot':
-                        r_dot = (current_tick_len / 2) if is_major else (current_tick_len / 4)
-                        x_dot = x + (tick_r_start + r_dot) * math.cos(angle_rad)
-                        y_dot = y + (tick_r_start + r_dot) * math.sin(angle_rad)
+                        r_dot = (current_tick_len / 2) #  if is_major else (current_tick_len / 3) # Minor tick dot radius is 50% of major
+                        # Center of dot
+                        if s.position == 'inside':
+                             # center at r_start - r_dot
+                             r_center = r_start - r_dot
+                        elif s.position == 'inline':
+                             r_center = border_r
+                        else:
+                             # outside: r_start + r_dot
+                             r_center = r_start + r_dot
+                             
+                        x_dot = x + r_center * math.cos(angle_rad)
+                        y_dot = y + r_center * math.sin(angle_rad)
                         
                         self.dwg.add(self.dwg.circle(center=(x_dot, y_dot), r=r_dot, fill='black'))
                     else: # line
-                        x2 = x + (tick_r_start + current_tick_len) * math.cos(angle_rad)
-                        y2 = y + (tick_r_start + current_tick_len) * math.sin(angle_rad)
+                        x2 = x + r_end * math.cos(angle_rad)
+                        y2 = y + r_end * math.sin(angle_rad)
                         self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), stroke='black', stroke_width=1 if not is_major else 1.5))
 
         if self._should_show_component():
@@ -483,7 +522,7 @@ class PanelRenderer:
                     
                     # Draw tick
                     if s.tick_style == 'dot':
-                        r_dot = (current_tick_len / 2) if is_major else (current_tick_len / 4)
+                        r_dot = (current_tick_len / 2) if is_major else (current_tick_len * 0.5 / 2) # Minor tick dot radius is 50% of major
                         x_dot = x + (tick_r_start + r_dot) * math.cos(angle_rad)
                         y_dot = y + (tick_r_start + r_dot) * math.sin(angle_rad)
                         self.dwg.add(self.dwg.circle(center=(x_dot, y_dot), r=r_dot, fill='black'))

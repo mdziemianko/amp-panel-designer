@@ -26,7 +26,7 @@ elements:
       tick_size: "3mm"
       tick_style: "line"
 
-  # 3. Custom Mounting & Border
+  # 3. Custom Mounting & Border (Outside Scale - default)
   - type: potentiometer
     id: "pot_custom_mount"
     x: "130mm"
@@ -42,30 +42,36 @@ elements:
       num_ticks: 11
       position: "outside"
 
-  # 4. Dot scale with major intervals
+  # 4. Dot scale with major intervals (Inside Scale)
   - type: potentiometer
     id: "pot_dots"
     x: "30mm"
     y: "90mm"
-    label: "DOTS"
+    label: "DOTS (IN)"
+    border_diameter: "35mm"
+    border_thickness: "0.5mm"
     scale:
       num_ticks: 21
       major_tick_interval: 5
       tick_style: "dot"
       tick_size: "2mm"
+      position: "inside"
 
-  # 5. Large Knob & Custom Angle
+  # 5. Large Knob & Custom Angle (Inline Scale)
   - type: potentiometer
     id: "pot_large"
     x: "80mm"
     y: "90mm"
-    label: "LARGE"
-    knob_diameter: "35mm"
+    label: "LARGE (INLINE)"
+    knob_diameter: "25mm"
+    border_diameter: "35mm"
     angle_start: 30
     angle_width: 300
     scale:
       num_ticks: 11
       tick_size: "5mm"
+      position: "inline"
+      major_tick_interval: 5
 
   # 6. Custom Font & Color
   - type: potentiometer
@@ -84,3 +90,17 @@ elements:
     scale:
       num_ticks: 11
 
+  # 7. Dots Inline
+  - type: potentiometer
+    id: "pot_dots_inline"
+    x: "30mm"
+    y: "150mm"
+    label: "DOTS (INLINE)"
+    border_diameter: "30mm"
+    border_thickness: "0.5mm"
+    scale:
+      num_ticks: 11
+      tick_style: "dot"
+      tick_size: "4mm"
+      major_tick_interval: 2
+      position: "inline"

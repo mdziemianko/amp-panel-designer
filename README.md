@@ -89,17 +89,14 @@ Applies to Potentiometers and Rotary Switches.
 - `major_tick_interval`: Interval for major (longer) ticks.
 - `tick_style`: `"line"` or `"dot"`.
 - `tick_size`: Length/size of major ticks (minor are half).
+- `position`: Position of scale relative to border diameter: `"outside"` (default), `"inside"`, or `"inline"`.
 - `labels`: List of labels for ticks (mainly for Rotary Switches). Items can be strings or Label objects.
 
 ```yaml
 scale:
-  num_ticks: 3
+  num_ticks: 11
   tick_size: "4mm"
-  labels:
-    - text: "4"
-      font: { color: "red" }
-    - "8"
-    - "16"
+  position: "outside"
 ```
 
 #### Mount Configuration
