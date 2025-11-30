@@ -1,5 +1,0 @@
-** important **
-- always update readme if the new options are added or changed.
-- store the output svg files in output folder
-- examples directory contains exmaple yaml files. Update the example to show new functionality, add new compontents if needed.
-- rerun svg generation for all the examples if the yaml is modified
