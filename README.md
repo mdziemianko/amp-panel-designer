@@ -1,4 +1,4 @@
-# Panel Maker
+# Amplifier Panel Maker
 
 A tool to design instrument amplifier panels declaratively using YAML.
 
@@ -8,6 +8,10 @@ The generated output can be used to generate engraver or laser cutter gcode or i
 
 1. Define your panel in a YAML file (e.g., `panel.yaml`).
 2. Run the generator: `python main.py panel.yaml output.svg`.
+
+## Project Description
+
+![Example Panel](examples/example.svg)
 
 ## Features
 
@@ -61,8 +65,8 @@ Top-level configuration.
 - `width`, `height`: Panel dimensions.
 - `background_color`: Hex color string (e.g., `"#dddddd"`).
 - `render_mode`: Controls component visualization. Options:
-    - `"show"`: Render components fully.
-    - `"hide"`: Render drill patterns only (crosshairs + hole).
+    - `"components"`: Render components fully.
+    - `"drill_mask"`: Render drill patterns only (crosshairs + hole).
     - `"both"` (default): Render components with drill patterns underneath (components are semi-transparent).
 - `elements`: List of root elements.
 

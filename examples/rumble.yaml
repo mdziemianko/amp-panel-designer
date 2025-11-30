@@ -2,7 +2,7 @@ name: "Rumble Amp Panel"
 width: "480mm"       # 400mm
 height: "70mm"
 background_color: "#dddddd"
-render_mode: "hide" # show, hide, both
+render_mode: "components" # components, drill_mask, both
 
 
 elements:
@@ -273,7 +273,7 @@ elements:
         label:
           text: "2"
           position: "left"
-          distance: "5mm"
+          distance: "8mm"
         mount:
           diameter: "6mm"
       - type: socket
@@ -284,7 +284,7 @@ elements:
         label:
           text: "2"
           position: "left"
-          distance: "5mm"
+          distance: "8mm"
         mount:
           diameter: "6mm"
       - type: socket
@@ -295,7 +295,7 @@ elements:
         label:
           text: "1"
           position: "right"
-          distance: "5mm"
+          distance: "8mm"
         mount:
           diameter: "6mm"
       - type: socket
@@ -306,7 +306,7 @@ elements:
         label:
           text: "1"
           position: "right"
-          distance: "5mm"
+          distance: "8mm"
         mount:
           diameter: "6mm"
       

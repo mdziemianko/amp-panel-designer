@@ -92,10 +92,11 @@ class PanelRenderer:
 
 
     def _should_show_component(self):
-        return self.panel.render_mode in ('show', 'both')
+        return self.panel.render_mode in ('components', 'both')
 
     def _should_show_drill(self):
-        return self.panel.render_mode in ('hide', 'both')
+        return self.panel.render_mode in ('drill_mask', 'both')
+
         
     def _is_both_mode(self):
         return self.panel.render_mode == 'both'

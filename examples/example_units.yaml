@@ -2,7 +2,7 @@ name: "My Amp Panel with Units"
 width: "45cm"       # 400mm
 height: "150mm"
 background_color: "#dddddd"
-render_mode: "both" # show, hide, both
+render_mode: "both" # components, drill_mask, both
 
 elements:
   - type: group
