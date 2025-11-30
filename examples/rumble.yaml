@@ -1,0 +1,297 @@
+name: "Rumble Amp Panel"
+width: "480mm"       # 400mm
+height: "70mm"
+background_color: "#dddddd"
+render_mode: "hide" # show, hide, both
+
+
+elements:
+  - type: group
+    id: "power"
+    x: "30mm"
+    y: "10mm"
+    width: "50mm"   # 140mm
+    height: "50mm"
+    # label:
+    #   text: "POWER"
+    #   position: "bottom-inline"
+    #   font:
+    #     size: "12pt"
+    #     family: "sans-serif"
+    # border:
+    #   type: top
+    #   thickness: "2mm"
+    #   color: "#555555"
+    elements:
+      - type: custom
+        id: "power_led"
+        x: "0mm"
+        y: "25mm"
+        mount:
+          diameter: "4mm"
+      - type: switch
+        id: "power_switch"
+        x: "25mm"
+        y: "25mm"
+        switch_type: "toggle"
+        mount:
+          width: "6mm"
+          height: "12mm"
+        label:
+          text: "POWER"
+          position: "top"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+          distance: "15mm"
+
+      - type: switch
+        id: "power_switch"
+        x: "50mm"
+        y: "25mm"
+        switch_type: "toggle"
+        mount:
+          width: "6mm"
+          height: "12mm"
+        label:
+          text: "STANDBY"
+          position: "top"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+          distance: "15mm"
+  - type: group
+    id: "channel_1"
+    x: "175mm"
+    y: "10mm"
+    width: "120mm"   # 140mm
+    height: "50mm"
+    label:
+      text: "1974x TMB / JCM800"
+      position: "bottom-inline"
+      font:
+        size: "12pt"
+        family: "sans-serif"
+    border:
+      type: bottom
+      thickness: "2mm"
+      color: "#555555"
+    elements:
+      - type: potentiometer
+        id: "bass"
+        x: "0mm"
+        y: "25mm"
+        scale:
+          num_ticks: 11
+          major_tick_interval: 2
+          tick_style: "dot"
+          tick_size: "2mm"
+        border_thickness: 1
+        border_diameter: "10mm"
+        mount:
+          diameter: "6mm"
+        label:
+          text: "BASS"
+          position: "top"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+      - type: potentiometer
+        id: "middle"
+        x: "30mm"
+        y: "25mm"
+        mount:
+          diameter: "6mm"
+        scale:
+          num_ticks: 11
+          major_tick_interval: 2
+          tick_style: "dot"
+          tick_size: "2mm"
+          border_diameter: "8mm"
+        label:
+          text: "MIDDLE"
+          position: "top"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+      - type: potentiometer
+        id: "treble"
+        x: "60mm"
+        y: "25mm"
+        mount:
+          diameter: "6mm"
+        scale:
+          num_ticks: 11
+          major_tick_interval: 2
+          tick_style: "dot"
+          tick_size: "2mm"
+          border_diameter: "8mm"
+        label:
+          text: "TREBLE"
+          position: "top"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+      - type: potentiometer
+        id: "volume_1"
+        x: "90mm"
+        y: "25mm"
+        mount:
+          diameter: "6mm"
+        scale:
+          num_ticks: 11
+          major_tick_interval: 2
+          tick_style: "dot"
+          tick_size: "2mm"
+          border_diameter: "8mm"
+        label:
+          text: "VOLUME"
+          position: "top"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+      - type: potentiometer
+        id: "gain_1"
+        x: "120mm"
+        y: "25mm"
+        mount:
+          diameter: "6mm"
+        scale:
+          num_ticks: 11
+          major_tick_interval: 2
+          tick_style: "dot"
+          tick_size: "2mm"
+          border_diameter: "8mm"
+        label:
+          text: "GAIN"
+          position: "top"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+  - type: switch
+    switch_type: "toggle"
+    id: "cascade_switch"
+    x: "325mm"
+    y: "35mm"
+    mount:
+      diameter: "5mm"
+    label_top:
+      text: "JCM800"
+      font:
+        size: "12pt"
+        family: "sans-serif"
+      distance: "10mm"
+    label_bottom:
+      text: "1974x"
+      font:
+        size: "12pt"
+        family: "sans-serif"
+      distance: "10mm"
+  - type: group
+    id: "channel_2"
+    x: "355mm"
+    y: "10mm"
+    width: "30mm"   # 140mm
+    height: "50mm"
+    label:
+      text: "1974x"
+      position: "bottom-inline"
+      font:
+        size: "12pt"
+        family: "sans-serif"
+    border:
+      type: bottom
+      thickness: "2mm"
+      color: "#555555"
+    elements:
+      - type: potentiometer
+        id: "tone"
+        x: "0mm"
+        y: "25mm"
+        mount:
+          diameter: "6mm"
+        scale:
+          num_ticks: 11
+          major_tick_interval: 2
+          tick_style: "dot"
+          tick_size: "2mm"
+          border_diameter: "8mm"
+        label:
+          text: "TONE"
+          position: "top"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+      - type: potentiometer
+        id: "volume_2"
+        x: "30mm"
+        y: "25mm"
+        mount:
+          diameter: "6mm"
+        scale:
+          num_ticks: 11
+          major_tick_interval: 2
+          tick_style: "dot"
+          tick_size: "2mm"
+          border_diameter: "8mm"
+        label:
+          text: "GAIN"
+          position: "top"
+          font:
+            size: "12pt"
+            family: "sans-serif"
+  - type: group
+    id: "input_1"
+    x: "428mm"
+    y: "10mm"
+    width: "0mm"   # 140mm
+    height: "50mm"
+    label:
+      text: "1974x TMB"
+      position: "top-inline"
+      font:
+        size: "12pt"
+        family: "sans-serif"
+    elements:
+      - type: socket
+        id: "input_1"
+        x: "0mm"
+        y: "12mm"
+        radius: "6mm"
+        mount:
+          diameter: "6mm"
+      - type: socket
+        id: "input_2"
+        x: "0mm"
+        y: "37mm"
+        radius: "6mm"
+        mount:
+          diameter: "6mm"
+  - type: group
+    id: "input_1"
+    x: "453mm"
+    y: "10mm"
+    width: "0mm"   # 140mm
+    height: "50mm"
+    label:
+      text: "1974x / JCM800"
+      position: "top-inline"
+      font:
+        size: "12pt"
+        family: "sans-serif"
+    elements:
+      - type: socket
+        id: "input_1"
+        x: "0mm"
+        y: "12mm"
+        radius: "6mm"
+        mount:
+          diameter: "6mm"
+      - type: socket
+        id: "input_2"
+        x: "0mm"
+        y: "37mm"
+        radius: "6mm"
+        mount:
+          diameter: "6mm"
+      

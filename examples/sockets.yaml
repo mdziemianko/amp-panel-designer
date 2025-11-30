@@ -1,0 +1,42 @@
+name: "Socket Examples"
+width: "150mm"
+height: "100mm"
+background_color: "#eeeeee"
+render_mode: "both"
+
+elements:
+  # 1. Basic Socket
+  - type: socket
+    id: "sock_basic"
+    x: "30mm"
+    y: "40mm"
+    label: "INPUT 1"
+
+  # 2. Large Socket with Custom Mount
+  - type: socket
+    id: "sock_large"
+    x: "80mm"
+    y: "40mm"
+    radius: "12mm"
+    mount:
+      diameter: "12mm"
+    label:
+      text: "SPEAKER"
+      position: "top"
+      font:
+        weight: "bold"
+
+  # 3. Small Socket with Styled Label
+  - type: socket
+    id: "sock_small"
+    x: "120mm"
+    y: "40mm"
+    radius: "6mm"
+    label:
+      text: "AUX"
+      position: "bottom"
+      distance: "10mm"
+      font:
+        size: "8pt"
+        color: "#555555"
+

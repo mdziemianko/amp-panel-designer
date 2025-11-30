@@ -1,0 +1,86 @@
+name: "Potentiometer Examples"
+width: "200mm"
+height: "200mm"
+background_color: "#ffffff"
+render_mode: "both"
+
+elements:
+  # 1. Minimal Potentiometer
+  - type: potentiometer
+    id: "pot_minimal"
+    x: "30mm"
+    y: "30mm"
+    label: "MINIMAL"
+
+  # 2. Standard with full scale
+  - type: potentiometer
+    id: "pot_standard"
+    x: "80mm"
+    y: "30mm"
+    label:
+      text: "STANDARD"
+      position: "bottom"
+    knob_diameter: "20mm"
+    scale:
+      num_ticks: 11
+      tick_size: "3mm"
+      tick_style: "line"
+
+  # 3. Custom Mounting & Border
+  - type: potentiometer
+    id: "pot_custom_mount"
+    x: "130mm"
+    y: "30mm"
+    label: 
+      text: "BORDERED"
+      position: "top"
+    mount:
+      diameter: "8mm"
+    border_diameter: "30mm"
+    border_thickness: "1mm"
+    scale:
+      num_ticks: 11
+      position: "outside"
+
+  # 4. Dot scale with major intervals
+  - type: potentiometer
+    id: "pot_dots"
+    x: "30mm"
+    y: "90mm"
+    label: "DOTS"
+    scale:
+      num_ticks: 21
+      major_tick_interval: 5
+      tick_style: "dot"
+      tick_size: "2mm"
+
+  # 5. Large Knob & Custom Angle
+  - type: potentiometer
+    id: "pot_large"
+    x: "80mm"
+    y: "90mm"
+    label: "LARGE"
+    knob_diameter: "35mm"
+    angle_start: 30
+    angle_width: 300
+    scale:
+      num_ticks: 11
+      tick_size: "5mm"
+
+  # 6. Custom Font & Color
+  - type: potentiometer
+    id: "pot_styled"
+    x: "130mm"
+    y: "90mm"
+    label:
+      text: "STYLED"
+      font:
+        size: "14pt"
+        color: "blue"
+        family: "serif"
+        weight: "bold"
+      distance: "25mm"
+    knob_diameter: "25mm"
+    scale:
+      num_ticks: 11
+

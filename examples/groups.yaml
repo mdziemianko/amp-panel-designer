@@ -1,0 +1,104 @@
+name: "Group Examples"
+width: "200mm"
+height: "200mm"
+background_color: "#ffffff"
+render_mode: "both"
+
+elements:
+  # 1. Full Border Group
+  - type: group
+    id: "grp_full"
+    x: "10mm"
+    y: "10mm"
+    width: "80mm"
+    height: "80mm"
+    label: "PREAMP"
+    border:
+      type: "full"
+      thickness: "1mm"
+    elements:
+      - type: potentiometer
+        id: "grp_full_gain"
+        x: "20mm"
+        y: "40mm"
+        label: "GAIN"
+      - type: potentiometer
+        id: "grp_full_vol"
+        x: "60mm"
+        y: "40mm"
+        label: "VOL"
+
+  # 2. Top/Bottom Border with Inline Label
+  - type: group
+    id: "grp_eq"
+    x: "110mm"
+    y: "10mm"
+    width: "80mm"
+    height: "80mm"
+    label: 
+      text: "EQUALIZER"
+      position: "top-inline"
+    border:
+      type: "full"
+      style: "dotted"
+    elements:
+      - type: potentiometer
+        id: "grp_eq_low"
+        x: "20mm"
+        y: "40mm"
+        label: "LOW"
+      - type: potentiometer
+        id: "grp_eq_high"
+        x: "60mm"
+        y: "40mm"
+        label: "HIGH"
+
+  # 3. Bottom Border Only
+  - type: group
+    id: "grp_master"
+    x: "10mm"
+    y: "110mm"
+    width: "80mm"
+    height: "60mm"
+    label:
+      text: "MASTER SECTION"
+      position: "bottom-inline"
+    border:
+      type: "bottom"
+      thickness: "2mm"
+      color: "red"
+    elements:
+      - type: potentiometer
+        id: "grp_master_level"
+        x: "40mm"
+        y: "30mm"
+        label: "LEVEL"
+
+  # 4. Nested Group
+  - type: group
+    id: "grp_outer"
+    x: "110mm"
+    y: "110mm"
+    width: "80mm"
+    height: "80mm"
+    label: "OUTER"
+    border:
+      type: "full"
+    elements:
+      - type: group
+        id: "grp_inner"
+        x: "10mm"
+        y: "20mm"
+        width: "60mm"
+        height: "40mm"
+        label: "INNER"
+        label_position: "top-inside"
+        border:
+          type: "full"
+          style: "dashed"
+        elements:
+           - type: switch
+             id: "grp_inner_switch"
+             x: "30mm"
+             y: "20mm"
+             label: "TEST"

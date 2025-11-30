@@ -1,0 +1,93 @@
+name: "Switch Examples"
+width: "200mm"
+height: "200mm"
+background_color: "#f0f0f0"
+render_mode: "both"
+
+elements:
+  # 1. Basic Toggle
+  - type: switch
+    id: "toggle_basic"
+    x: "30mm"
+    y: "40mm"
+    switch_type: "toggle"
+    label: 
+      text: "BASIC"
+      position: "bottom"
+      font:
+        size: "12pt"
+        family: "sans-serif"
+
+  # 2. Toggle with Position Labels
+  - type: switch
+    id: "toggle_pos"
+    x: "80mm"
+    y: "40mm"
+    switch_type: "toggle"
+    label_top: "ON"
+    label_bottom: "OFF"
+    label:
+      text: "POWER"
+      position: "bottom"
+
+  # 3. Rectangular Mount Toggle
+  - type: switch
+    id: "toggle_rect"
+    x: "130mm"
+    y: "40mm"
+    switch_type: "toggle"
+    mount:
+      width: "10mm"
+      height: "20mm"
+    label_top: 
+      text: "HIGH"
+      font: { color: "red" }
+    label_center: "MID"
+    label_bottom: "LOW"
+    label: "MODE"
+
+  # 4. Basic Rotary
+  - type: switch
+    id: "rotary_basic"
+    x: "30mm"
+    y: "110mm"
+    switch_type: "rotary"
+    label: "SELECT"
+    knob_diameter: "20mm"
+    scale:
+      num_ticks: 3
+
+  # 5. Rotary with Labeled Ticks
+  - type: switch
+    id: "rotary_labels"
+    x: "90mm"
+    y: "110mm"
+    switch_type: "rotary"
+    label: "IMPEDANCE"
+    knob_diameter: "25mm"
+    angle_start: 315
+    angle_width: 90
+    scale:
+      num_ticks: 3
+      tick_size: "4mm"
+      labels: ["4", "8", "16"]
+
+  # 6. Rotary with Styled Labels
+  - type: switch
+    id: "rotary_styled"
+    x: "150mm"
+    y: "110mm"
+    switch_type: "rotary"
+    label: "INPUT"
+    knob_diameter: "20mm"
+    scale:
+      num_ticks: 4
+      tick_style: "dot"
+      labels:
+        - text: "1"
+          font: { color: "blue", weight: "bold" }
+        - "2"
+        - "3"
+        - text: "insane"
+          font: { color: "red" }
+

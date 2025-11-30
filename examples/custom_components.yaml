@@ -1,0 +1,40 @@
+name: "Custom Component Examples"
+width: "150mm"
+height: "100mm"
+background_color: "#ffffff"
+render_mode: "both"
+
+elements:
+  # 1. Circular Custom (e.g. Fuse)
+  - type: custom
+    id: "custom_fuse"
+    x: "30mm"
+    y: "40mm"
+    mount:
+      diameter: "15mm"
+    label: "FUSE"
+
+  # 2. Rectangular Custom (e.g. Display)
+  - type: custom
+    id: "custom_display"
+    x: "80mm"
+    y: "40mm"
+    mount:
+      width: "40mm"
+      height: "20mm"
+    label:
+      text: "DISPLAY"
+      position: "top"
+
+  # 3. Small Hole
+  - type: custom
+    id: "custom_led"
+    x: "120mm"
+    y: "40mm"
+    mount:
+      diameter: "5mm"
+    label:
+      text: "LED"
+      font:
+        size: "8"
+

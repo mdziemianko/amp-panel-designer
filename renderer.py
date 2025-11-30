@@ -20,10 +20,14 @@ class PanelRenderer:
                 val = font_size.lower().replace("pt", "").replace("px", "").replace("mm", "")
                 font_size = float(val)
             except ValueError:
-                font_size = 3.0 # fallback
+                font_size = 12 * 25.4 / 72.0 # fallback 12pt
         return len(text) * font_size * 0.6
 
-    def _get_font_size_mm(self, font_style: Optional[FontStyle], default_mm=3.0) -> float:
+    def _get_font_size_mm(self, font_style: Optional[FontStyle], default_mm=None) -> float:
+        # Default to 12pt (~4.233mm) if not specified
+        if default_mm is None:
+            default_mm = 12 * 25.4 / 72.0
+
         if not font_style or not font_style.size:
             return default_mm
         
@@ -119,7 +123,7 @@ class PanelRenderer:
                     
                     font_style = self._get_element_font(element)
                     
-                    default_size = 4.0
+                    default_size = 12 * 25.4 / 72.0
                     size = font_style.size if font_style and font_style.size else default_size
                     
                     try:
@@ -129,7 +133,7 @@ class PanelRenderer:
                         else:
                              size_val = float(size)
                     except ValueError:
-                        size_val = 4.0
+                        size_val = default_size
 
                     pos = element.label.position if element.label.position else 'top-outside'
                     label_y = abs_y
@@ -501,7 +505,7 @@ class PanelRenderer:
                         default_font_style = self._get_element_font(switch)
                         font_style = label_obj.font if label_obj.font else default_font_style
                         
-                        self._render_text(label_text, lx, ly + 1.5, default_size=3.0, font_style=font_style)
+                        self._render_text(label_text, lx, ly + 1.5, font_style=font_style)
 
         if self._should_show_component():
             if switch.switch_type == 'rotary':
@@ -600,7 +604,10 @@ class PanelRenderer:
             
             self._render_text(custom.label.text, x, label_y, font_style=font_style)
 
-    def _render_text(self, text: str, x: float, y: float, default_size=12, default_weight='normal', font_style: FontStyle = None):
+    def _render_text(self, text: str, x: float, y: float, default_size=None, default_weight='normal', font_style: FontStyle = None):
+        if default_size is None:
+            default_size = 12 * 25.4 / 72.0
+            
         size = default_size
         weight = default_weight
         color = 'black'
