@@ -179,3 +179,10 @@ elements:
            text: "DISPLAY"
            position: "top"
            font: { color: "blue" }
+
+      - type: custom
+        id: "hole"
+        x: "65mm"
+        y: "100mm"
+        mount:
+          diameter: "4mm"
