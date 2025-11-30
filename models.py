@@ -103,6 +103,8 @@ class Element:
             obj = Socket.from_dict(data)
         elif element_type == 'switch':
             obj = Switch.from_dict(data)
+        elif element_type == 'custom':
+            obj = Custom.from_dict(data)
         else:
             raise ValueError(f"Unknown element type: {element_type}")
         
@@ -172,6 +174,15 @@ class Component(Element):
              return Mount(diameter=default_diameter)
              
         return None
+
+@dataclass
+class Custom(Component):
+    @staticmethod
+    def from_dict(data: dict):
+        mount = Component._parse_mount(data)
+        obj = Custom(**_filter_args(Custom, data))
+        obj.mount = mount
+        return obj
 
 @dataclass
 class Scale:

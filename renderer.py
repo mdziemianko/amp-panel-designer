@@ -1,7 +1,7 @@
 import svgwrite
 import math
 from typing import Optional
-from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle, Component
+from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle, Component, Custom
 
 class PanelRenderer:
     def __init__(self, panel: Panel):
@@ -140,6 +140,9 @@ class PanelRenderer:
             
             elif isinstance(element, Switch):
                 self._render_switch(element, abs_x, abs_y)
+
+            elif isinstance(element, Custom):
+                self._render_custom(element, abs_x, abs_y)
 
     def _render_border(self, group: Group, x: float, y: float, label_gap=None, label_pos=None):
         if not group.border or group.border.type == 'none':
@@ -403,6 +406,60 @@ class PanelRenderer:
             
             font_style = self._get_element_font(switch)
             self._render_text(switch.label.text, x, label_y, font_style=font_style)
+
+    def _render_custom(self, custom: Custom, x: float, y: float):
+        component_opacity = 0.5 if self._is_both_mode() else 1.0
+        
+        # Drill pattern
+        if self._should_show_drill():
+             self._render_drill_pattern(x, y, mount=custom)
+
+        # Component Visual
+        if self._should_show_component():
+            if custom.mount:
+                if custom.mount.diameter:
+                    r = custom.mount.diameter / 2
+                    # Generic circle style
+                    self.dwg.add(self.dwg.circle(center=(x, y), r=r, 
+                                                 fill='#eeeeee', stroke='black', stroke_width=1, opacity=component_opacity))
+                    # Add an X to denote generic
+                    cross_r = r * 0.7
+                    self.dwg.add(self.dwg.line(start=(x - cross_r, y - cross_r), end=(x + cross_r, y + cross_r), 
+                                               stroke='black', stroke_width=1, opacity=component_opacity))
+                    self.dwg.add(self.dwg.line(start=(x + cross_r, y - cross_r), end=(x - cross_r, y + cross_r), 
+                                               stroke='black', stroke_width=1, opacity=component_opacity))
+
+                elif custom.mount.width and custom.mount.height:
+                    w = custom.mount.width
+                    h = custom.mount.height
+                    self.dwg.add(self.dwg.rect(insert=(x - w/2, y - h/2), size=(w, h),
+                                               fill='#eeeeee', stroke='black', stroke_width=1, opacity=component_opacity))
+                    # Add an X
+                    self.dwg.add(self.dwg.line(start=(x - w/2, y - h/2), end=(x + w/2, y + h/2),
+                                               stroke='black', stroke_width=1, opacity=component_opacity))
+                    self.dwg.add(self.dwg.line(start=(x + w/2, y - h/2), end=(x - w/2, y + h/2),
+                                               stroke='black', stroke_width=1, opacity=component_opacity))
+
+        # Label
+        if custom.label and custom.label.text:
+            # Default to bottom if not specified
+            pos = custom.label.position if custom.label.position else 'bottom'
+            
+            # Estimate distance based on mount size
+            dist = 10.0 # fallback
+            if custom.mount:
+                if custom.mount.diameter:
+                    dist = custom.mount.diameter / 2 + 5
+                elif custom.mount.height:
+                    dist = custom.mount.height / 2 + 5
+            
+            if pos == 'top':
+                 label_y = y - dist - 5
+            else:
+                 label_y = y + dist + 5
+            
+            font_style = self._get_element_font(custom)
+            self._render_text(custom.label.text, x, label_y, font_style=font_style)
 
     def _render_text(self, text: str, x: float, y: float, default_size=12, default_weight='normal', font_style: FontStyle = None):
         size = default_size

@@ -9,7 +9,7 @@ A tool to design instrument amplifier panels declaratively using YAML.
 
 ## Features
 
-- **Components**: Potentiometers, Switches, Sockets.
+- **Components**: Potentiometers, Switches, Sockets, Custom components.
 - **Grouping**: Recursive groups with relative positioning.
 - **Styling**: Customizable borders, fonts, and label positioning.
 - **Units**: Support for `mm` (default), `cm`, `in` (inches), `pt` (points), and `px` (pixels).
@@ -31,7 +31,7 @@ Top-level configuration.
 ### Common Properties
 All elements (groups and components) support these properties:
 - `id`: Unique identifier (string).
-- `type`: Element type (`group`, `potentiometer`, `socket`, `switch`).
+- `type`: Element type (`group`, `potentiometer`, `socket`, `switch`, `custom`).
 - `x`, `y`: Position relative to the parent group (or panel origin). Supports units (e.g., `"20mm"`, `"1in"`).
 - `label`: Configuration for the main label.
     - `text`: The label text (string).
@@ -72,6 +72,13 @@ A container for other elements.
 - `scale`: Scale configuration (see below).
 - `angle_start`: Starting angle in degrees (default: 45).
 - `angle_width`: Total sweep angle in degrees (default: 270).
+
+#### Custom
+A generic component defined by its mounting hole.
+- `mount`: Mounting hole configuration (see below). Required for visualization.
+- `label`: Component label.
+
+When rendered (in `show` or `both` mode), it displays a generic shape (circle or rectangle) matching the mounting dimensions.
 
 ### Styling and Configuration
 
@@ -161,17 +168,13 @@ background_color: "#dddddd"
 render_mode: "both"
 
 elements:
-  - type: switch
-    id: "impedance"
-    x: "90mm"
-    y: "40mm"
-    switch_type: "rotary"
-    knob_diameter: "20mm"
+  - type: custom
+    id: "fuse"
+    x: "20mm"
+    y: "20mm"
+    mount:
+      diameter: "12mm"
     label:
-      text: "IMPEDANCE"
+      text: "FUSE"
       position: "bottom"
-    scale:
-      num_ticks: 3
-      tick_size: "4mm"
-      labels: ["4", "8", "16"]
 ```

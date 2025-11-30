@@ -157,3 +157,25 @@ elements:
             - "16"
         angle_start: 315
         angle_width: 90
+        
+      - type: custom
+        id: "fuse"
+        x: "130mm"
+        y: "40mm"
+        mount:
+          diameter: "12mm"
+        label:
+           text: "FUSE"
+           position: "bottom"
+           
+      - type: custom
+        id: "display"
+        x: "60mm"
+        y: "80mm"
+        mount:
+          width: "40mm"
+          height: "20mm"
+        label:
+           text: "DISPLAY"
+           position: "top"
+           font: { color: "blue" }
