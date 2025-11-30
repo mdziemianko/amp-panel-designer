@@ -27,7 +27,7 @@ def to_mm(value) -> float:
 
 DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness', 'font_size', 'size', 
                   'knob_diameter', 'border_diameter', 'border_thickness', 'tick_size',
-                  'install_diameter', 'mount_width', 'mount_height'}
+                  'install_diameter', 'mount_width', 'mount_height', 'diameter'}
 
 def normalize_data(data: dict) -> dict:
     new_data = data.copy()
@@ -44,13 +44,24 @@ class FontStyle:
     weight: Optional[str] = None
 
 @dataclass
+class Label:
+    text: str
+    position: Optional[str] = None
+    font: Optional[FontStyle] = None
+
+@dataclass
+class Mount:
+    diameter: Optional[float] = None
+    width: Optional[float] = None
+    height: Optional[float] = None
+
+@dataclass
 class Element:
     id: str
     x: float
     y: float
     type: str
-    label: Optional[str] = None
-    label_position: Optional[str] = None 
+    label: Optional[Label] = None
     font_style: Optional[FontStyle] = None
 
     @staticmethod
@@ -59,23 +70,50 @@ class Element:
         
         font_data = data.pop('font_style', None)
         font_dict = data.pop('font', None)
-
+        
+        # Parse label
+        label_data = data.pop('label', None)
+        label_position = data.pop('label_position', None)
+        
         element_type = data.get('type')
         if element_type == 'group':
             obj = Group.from_dict(data)
         elif element_type == 'potentiometer':
             obj = Potentiometer.from_dict(data)
         elif element_type == 'socket':
-            obj = Socket(**_filter_args(Socket, data))
+            obj = Socket.from_dict(data)
         elif element_type == 'switch':
             obj = Switch.from_dict(data)
         else:
             raise ValueError(f"Unknown element type: {element_type}")
         
+        # Handle Font at root (applies to Element.font_style)
         if font_dict:
             font_dict = normalize_data(font_dict) 
             obj.font_style = FontStyle(**_filter_args(FontStyle, font_dict))
             
+        # Handle Label
+        if label_data:
+            if isinstance(label_data, dict):
+                label_data = normalize_data(label_data)
+                
+                # Extract font from label dict
+                lbl_font_dict = label_data.pop('font', None)
+                lbl_font = None
+                if lbl_font_dict:
+                    lbl_font_dict = normalize_data(lbl_font_dict)
+                    lbl_font = FontStyle(**_filter_args(FontStyle, lbl_font_dict))
+                
+                lbl_text = label_data.pop('text', "")
+                lbl_pos = label_data.pop('position', None)
+                if not lbl_pos and label_position:
+                    lbl_pos = label_position
+                
+                obj.label = Label(text=lbl_text, position=lbl_pos, font=lbl_font)
+                
+            elif isinstance(label_data, str):
+                obj.label = Label(text=label_data, position=label_position, font=None)
+        
         return obj
 
 def _filter_args(cls, data):
@@ -85,7 +123,44 @@ def _filter_args(cls, data):
 
 @dataclass
 class Component(Element):
-    install_diameter: float = 0.0 
+    mount: Optional[Mount] = None
+    
+    def __post_init__(self):
+        # Validate mount configuration if present
+        if self.mount:
+             if self.mount.diameter is not None:
+                 if self.mount.width is not None or self.mount.height is not None:
+                      raise ValueError(f"Component {self.id}: Cannot specify both diameter and width/height in mount.")
+             else:
+                 if self.mount.width is None or self.mount.height is None:
+                      raise ValueError(f"Component {self.id}: Must specify either diameter OR (width and height) in mount.")
+
+    @staticmethod
+    def _parse_mount(data: dict, default_diameter=None) -> Optional[Mount]:
+        mount_data = data.pop('mount', None)
+        
+        # Legacy mapping for backward compatibility
+        install_diameter = data.pop('install_diameter', None)
+        mount_width = data.pop('mount_width', None)
+        mount_height = data.pop('mount_height', None)
+        mounting_type = data.pop('mounting_type', None) # Consume but ignore logic, use params instead
+
+        if mount_data:
+            mount_data = normalize_data(mount_data)
+            return Mount(**_filter_args(Mount, mount_data))
+        
+        # If no mount block, check legacy fields
+        if install_diameter is not None:
+             install_diameter = to_mm(install_diameter)
+             return Mount(diameter=install_diameter)
+        elif mount_width is not None and mount_height is not None:
+             return Mount(width=to_mm(mount_width), height=to_mm(mount_height))
+        
+        # Default
+        if default_diameter is not None:
+             return Mount(diameter=default_diameter)
+             
+        return None
 
 @dataclass
 class Scale:
@@ -103,7 +178,6 @@ class Potentiometer(Component):
     angle_start: float = 45.0
     angle_width: float = 270.0
     scale: Optional[Scale] = None
-    install_diameter: float = 6.0
     radius: Optional[float] = None
 
     @staticmethod
@@ -113,7 +187,11 @@ class Potentiometer(Component):
         if 'radius' in data and 'knob_diameter' not in data:
              data['knob_diameter'] = data['radius'] * 2.0
         
+        # Parse mount before creating object to remove keys from data
+        mount = Component._parse_mount(data, default_diameter=6.0)
+        
         pot = Potentiometer(**_filter_args(Potentiometer, data))
+        pot.mount = mount
         
         if scale_data:
             if isinstance(scale_data, dict):
@@ -125,7 +203,33 @@ class Potentiometer(Component):
 @dataclass
 class Socket(Component):
     radius: float = 10.0
-    install_diameter: float = 10.0
+    
+    @staticmethod
+    def from_dict(data: dict):
+         # Socket isn't using from_dict in Element.from_dict logic currently? 
+         # Element.from_dict uses: obj = Socket(**_filter_args(Socket, data))
+         # Wait, I need to check Element.from_dict in this file content.
+         # It uses **_filter_args. So I should probably add a from_dict for Socket too or update Element logic.
+         # Element.from_dict logic:
+         # elif element_type == 'socket':
+         #    obj = Socket(**_filter_args(Socket, data))
+         pass 
+
+# Correction: Socket was just using __init__. I need to override parsing to handle mount.
+# But Element.from_dict calls Socket constructor directly in original code. 
+# I should change Element.from_dict to call Socket.from_dict if I implement it, or handle mount there.
+# Better to implement Socket.from_dict.
+
+@dataclass
+class Socket(Component):
+    radius: float = 10.0
+    
+    @staticmethod
+    def from_dict(data: dict):
+        mount = Component._parse_mount(data, default_diameter=10.0)
+        obj = Socket(**_filter_args(Socket, data))
+        obj.mount = mount
+        return obj
 
 @dataclass
 class Switch(Component):
@@ -134,11 +238,6 @@ class Switch(Component):
     width: float = 10.0
     height: float = 20.0
     knob_diameter: float = 20.0 # for rotary
-    
-    mounting_type: str = "circular" # circular, rectangular
-    install_diameter: float = 5.0 
-    mount_width: float = 5.0 
-    mount_height: float = 10.0
     
     label_top: Optional[str] = None
     label_center: Optional[str] = None
@@ -154,8 +253,12 @@ class Switch(Component):
         scale_data = data.pop('scale', None)
         scale_labels = data.pop('scale_labels', [])
         
+        # Default diameter 5.0 for switch
+        mount = Component._parse_mount(data, default_diameter=5.0)
+        
         obj = Switch(**_filter_args(Switch, data))
         obj.scale_labels = scale_labels
+        obj.mount = mount
         
         if scale_data:
             if isinstance(scale_data, dict):

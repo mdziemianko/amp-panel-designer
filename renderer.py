@@ -1,5 +1,6 @@
 import svgwrite
 import math
+from typing import Optional
 from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle, Component
 
 class PanelRenderer:
@@ -22,28 +23,45 @@ class PanelRenderer:
                 font_size = 3.0 # fallback
         return len(text) * font_size * 0.6
 
-    def _render_drill_pattern(self, x: float, y: float, diameter: float, shape='circular', width=None, height=None):
-        if shape == 'rectangular' and width and height:
+    def _render_drill_pattern(self, x: float, y: float, mount: Optional[Component] = None, diameter=None, shape='circular', width=None, height=None):
+        # Allow passing Mount object or legacy args for compatibility/simplicity
+        # If mount object is passed, extract values
+        
+        m_diameter = diameter
+        m_width = width
+        m_height = height
+        m_shape = shape
+        
+        if hasattr(mount, 'mount') and mount.mount:
+             # It's a component with a mount object
+             if mount.mount.diameter:
+                  m_diameter = mount.mount.diameter
+                  m_shape = 'circular'
+             elif mount.mount.width and mount.mount.height:
+                  m_width = mount.mount.width
+                  m_height = mount.mount.height
+                  m_shape = 'rectangular'
+        
+        if m_shape == 'rectangular' and m_width and m_height:
             # Rectangular hole
-            self.dwg.add(self.dwg.rect(insert=(x - width/2, y - height/2), 
-                                       size=(width, height), 
+            self.dwg.add(self.dwg.rect(insert=(x - m_width/2, y - m_height/2), 
+                                       size=(m_width, m_height), 
                                        fill='none', stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
-            # Cross center (use width/height for extension base?)
-            # Extends 3mm outside
-            
-            # Horizontal line: from x - width/2 - 3 to x + width/2 + 3
-            self.dwg.add(self.dwg.line(start=(x - width/2 - 3, y), end=(x + width/2 + 3, y), 
+            # Cross center
+            cross_len_h = m_width/2 + 3.0
+            cross_len_v = m_height/2 + 3.0
+            self.dwg.add(self.dwg.line(start=(x - cross_len_h, y), end=(x + cross_len_h, y), 
                                        stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
-            # Vertical line: from y - height/2 - 3 to y + height/2 + 3
-            self.dwg.add(self.dwg.line(start=(x, y - height/2 - 3), end=(x, y + height/2 + 3), 
+            self.dwg.add(self.dwg.line(start=(x, y - cross_len_v), end=(x, y + cross_len_v), 
                                        stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
-        else:
-            # Circular hole (default)
-            r = diameter / 2
+        elif m_diameter:
+            # Circular hole
+            r = m_diameter / 2
             self.dwg.add(self.dwg.circle(center=(x, y), r=r, fill='none', stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
             cross_len = r + 3.0
             self.dwg.add(self.dwg.line(start=(x - cross_len, y), end=(x + cross_len, y), stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
             self.dwg.add(self.dwg.line(start=(x, y - cross_len), end=(x, y + cross_len), stroke='gray', stroke_width=0.5, stroke_opacity=0.5))
+
 
     def _should_show_component(self):
         return self.panel.render_mode in ('show', 'both')
@@ -54,6 +72,12 @@ class PanelRenderer:
     def _is_both_mode(self):
         return self.panel.render_mode == 'both'
 
+    def _get_element_font(self, element: Element) -> Optional[FontStyle]:
+        # Priority: element.label.font -> element.font_style -> None
+        if element.label and element.label.font:
+            return element.label.font
+        return element.font_style
+
     def _render_group(self, elements: list[Element], offset_x: float, offset_y: float):
         for element in elements:
             abs_x = offset_x + element.x
@@ -63,12 +87,14 @@ class PanelRenderer:
                 label_gap = None
                 
                 # Render group label if exists
-                if element.label:
+                if element.label and element.label.text:
+                    label_text = element.label.text
                     label_x = abs_x
                     if element.width:
                          label_x += element.width / 2
                     
-                    font_style = element.font_style
+                    font_style = self._get_element_font(element)
+                    
                     default_size = 4.0
                     size = font_style.size if font_style and font_style.size else default_size
                     
@@ -81,10 +107,10 @@ class PanelRenderer:
                     except ValueError:
                         size_val = 4.0
 
-                    pos = element.label_position if element.label_position else 'top-outside'
+                    pos = element.label.position if element.label.position else 'top-outside'
                     label_y = abs_y
                     
-                    text_width = self._get_text_width(element.label, size_val)
+                    text_width = self._get_text_width(label_text, size_val)
                     
                     if pos == 'top-outside':
                         label_y = abs_y - 5
@@ -101,9 +127,9 @@ class PanelRenderer:
                     elif pos == 'bottom-inside':
                          label_y = abs_y + (element.height if element.height else 0) - 5
 
-                    self._render_text(element.label, label_x, label_y, default_size=default_size, default_weight='bold', font_style=font_style)
+                    self._render_text(label_text, label_x, label_y, default_size=default_size, default_weight='bold', font_style=font_style)
 
-                self._render_border(element, abs_x, abs_y, label_gap=label_gap, label_pos=element.label_position)
+                self._render_border(element, abs_x, abs_y, label_gap=label_gap, label_pos=element.label.position if element.label else None)
                 self._render_group(element.elements, abs_x, abs_y)
             
             elif isinstance(element, Potentiometer):
@@ -179,7 +205,7 @@ class PanelRenderer:
         component_opacity = 0.5 if self._is_both_mode() else 1.0
         
         if self._should_show_drill():
-            self._render_drill_pattern(x, y, pot.install_diameter)
+            self._render_drill_pattern(x, y, mount=pot)
 
         if pot.border_thickness > 0:
             border_r = pot.border_diameter / 2
@@ -224,8 +250,9 @@ class PanelRenderer:
             self.dwg.add(self.dwg.circle(center=(x, y), r=knob_radius, fill='white', stroke='black', stroke_width=1, opacity=component_opacity))
             self.dwg.add(self.dwg.line(start=(x, y), end=(x, y - knob_radius + 2), stroke='black', stroke_width=2, opacity=component_opacity))
             
-        if pot.label:
-            pos = pot.label_position if pot.label_position else 'bottom'
+        # Label
+        if pot.label and pot.label.text:
+            pos = pot.label.position if pot.label.position else 'bottom'
             
             outer_radius = (pot.border_diameter / 2)
             if pot.scale:
@@ -238,44 +265,46 @@ class PanelRenderer:
             else:
                  label_y = y + dist + 4 + 2
             
-            self._render_text(pot.label, x, label_y, font_style=pot.font_style)
+            font_style = self._get_element_font(pot)
+            self._render_text(pot.label.text, x, label_y, font_style=font_style)
 
     def _render_socket(self, socket: Socket, x: float, y: float):
         component_opacity = 0.5 if self._is_both_mode() else 1.0
         
         if self._should_show_drill():
-             self._render_drill_pattern(x, y, socket.install_diameter)
+             self._render_drill_pattern(x, y, mount=socket)
 
         if self._should_show_component():
             self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius, fill='#333333', stroke='black', stroke_width=1, opacity=component_opacity))
             self.dwg.add(self.dwg.circle(center=(x, y), r=socket.radius/2, fill='black', opacity=component_opacity))
         
-        if socket.label:
-            pos = socket.label_position if socket.label_position else 'bottom'
+        if socket.label and socket.label.text:
+            pos = socket.label.position if socket.label.position else 'bottom'
             if pos == 'top':
                  label_y = y - socket.radius - 5
             else:
                  label_y = y + socket.radius + 15
-            self._render_text(socket.label, x, label_y, font_style=socket.font_style)
+            font_style = self._get_element_font(socket)
+            self._render_text(socket.label.text, x, label_y, font_style=font_style)
 
     def _render_switch(self, switch: Switch, x: float, y: float):
         component_opacity = 0.5 if self._is_both_mode() else 1.0
         
         # Drill pattern
         if self._should_show_drill():
-             self._render_drill_pattern(x, y, switch.install_diameter, shape=switch.mounting_type, 
-                                        width=switch.mount_width, height=switch.mount_height)
+             self._render_drill_pattern(x, y, mount=switch)
 
         # Switch Labels (Top/Center/Bottom)
         if switch.switch_type == 'toggle':
             # Render labels always (printed)
+            font_style = self._get_element_font(switch)
             if switch.label_top:
-                self._render_text(switch.label_top, x, y - switch.height/2 - 5, font_style=switch.font_style)
+                self._render_text(switch.label_top, x, y - switch.height/2 - 5, font_style=font_style)
             if switch.label_bottom:
-                self._render_text(switch.label_bottom, x, y + switch.height/2 + 8, font_style=switch.font_style)
+                self._render_text(switch.label_bottom, x, y + switch.height/2 + 8, font_style=font_style)
             if switch.label_center:
                 # To the right?
-                self._render_text(switch.label_center, x + switch.width/2 + 8, y + 2, font_style=switch.font_style)
+                self._render_text(switch.label_center, x + switch.width/2 + 8, y + 2, font_style=font_style)
 
         # Rotary Switch Scale and Labels
         if switch.switch_type == 'rotary':
@@ -324,7 +353,8 @@ class PanelRenderer:
                         lx = x + label_anchor_radius * math.cos(angle_rad)
                         ly = y + label_anchor_radius * math.sin(angle_rad)
                         # Adjust ly slightly for vertical centering? _render_text does some of that
-                        self._render_text(label_text, lx, ly + 1.5, default_size=3.0, font_style=switch.font_style)
+                        font_style = self._get_element_font(switch)
+                        self._render_text(label_text, lx, ly + 1.5, default_size=3.0, font_style=font_style)
 
         if self._should_show_component():
             if switch.switch_type == 'rotary':
@@ -340,8 +370,8 @@ class PanelRenderer:
                 self.dwg.add(self.dwg.circle(center=(x, y), r=switch.width/2 - 2, fill='black', opacity=component_opacity))
         
         # Main Label
-        if switch.label:
-            pos = switch.label_position if switch.label_position else 'bottom'
+        if switch.label and switch.label.text:
+            pos = switch.label.position if switch.label.position else 'bottom'
             
             # Distance logic for toggle vs rotary
             if switch.switch_type == 'rotary':
@@ -357,8 +387,9 @@ class PanelRenderer:
                  label_y = y - dist - 5
             else:
                  label_y = y + dist + 5
-                 
-            self._render_text(switch.label, x, label_y, font_style=switch.font_style)
+            
+            font_style = self._get_element_font(switch)
+            self._render_text(switch.label.text, x, label_y, font_style=font_style)
 
     def _render_text(self, text: str, x: float, y: float, default_size=12, default_weight='normal', font_style: FontStyle = None):
         size = default_size

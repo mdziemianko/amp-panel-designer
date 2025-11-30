@@ -17,21 +17,26 @@ A tool to design instrument amplifier panels declaratively using YAML.
 
 ## Configuration Reference
 
-### Common Properties
-All elements (groups and components) support these properties:
-- `id`: Unique identifier (string).
-- `type`: Element type (`group`, `potentiometer`, `socket`, `switch`).
-- `x`, `y`: Position relative to the parent group (or panel origin). Supports units (e.g., `"20mm"`, `"1in"`).
-- `label`: Text label (string).
-- `label_position`: Position of the label (see below).
-- `font`: Font styling (see below).
-
 ### Panel
 Top-level configuration.
 - `name`: Panel name.
 - `width`, `height`: Panel dimensions.
 - `background_color`: Hex color string (e.g., `"#dddddd"`).
+- `render_mode`: Controls component visualization. Options:
+    - `"show"`: Render components fully.
+    - `"hide"`: Render drill patterns only (crosshairs + hole).
+    - `"both"` (default): Render components with drill patterns underneath (components are semi-transparent).
 - `elements`: List of root elements.
+
+### Common Properties
+All elements (groups and components) support these properties:
+- `id`: Unique identifier (string).
+- `type`: Element type (`group`, `potentiometer`, `socket`, `switch`).
+- `x`, `y`: Position relative to the parent group (or panel origin). Supports units (e.g., `"20mm"`, `"1in"`).
+- `label`: Configuration for the main label.
+    - `text`: The label text (string).
+    - `position`: Position of the label (see Label Positioning below).
+    - `font`: Font styling (see Font below). This font applies to the label and is used as the default for other text on the component (e.g., scales).
 
 ### Components
 
@@ -40,26 +45,66 @@ A container for other elements.
 - `width`, `height`: Dimensions of the group area.
 - `border`: Border styling (see below).
 - `elements`: List of child elements.
-- `label_position`:
-    - `top-outside` (default), `bottom-outside`
-    - `top-inline`, `bottom-inline`: Centered on the border line (interrupts border).
-    - `top-inside`, `bottom-inside`: Inside the border.
 
 #### Potentiometer
-- `radius`: Radius of the knob/body (default: `15mm`).
-- `scale`: Scale markings (e.g., `0-10`, currently simplified).
-- `label_position`: `top`, `bottom` (default).
+- `knob_diameter`: Diameter of the knob (default: `20mm`).
+- `border_diameter`: Diameter of the surrounding border/scale ring (default: `25mm`).
+- `border_thickness`: Thickness of the ring (default: `0`, no border).
+- `scale`: Scale configuration.
+    - `num_ticks`: Total number of ticks.
+    - `major_tick_interval`: Interval for major (longer) ticks.
+    - `tick_style`: `"line"` or `"dot"`.
+    - `tick_size`: Length/size of major ticks (minor are half).
+- `mount`: Mounting hole configuration (see below). Default diameter: `6mm`.
 
 #### Socket
-- `radius`: Radius of the socket (default: `10mm`).
-- `label_position`: `top`, `bottom` (default).
+- `radius`: Radius of the socket body (default: `10mm`).
+- `mount`: Mounting hole configuration (see below). Default diameter: `10mm`.
 
 #### Switch
-- `width`: Switch body width (default: `10mm`).
-- `height`: Switch body height (default: `20mm`).
-- `label_position`: `top`, `bottom` (default).
+- `switch_type`: `"toggle"` (default) or `"rotary"`.
+- `width`, `height`: Body dimensions (for toggle).
+- `knob_diameter`: Knob diameter (for rotary).
+- `mount`: Mounting hole configuration (see below). Default diameter: `5mm`.
 
-### Styling Options
+**Toggle Switch Specifics:**
+- `label_top`: Text label above the switch.
+- `label_bottom`: Text label below the switch.
+- `label_center`: Text label to the right/center.
+
+**Rotary Switch Specifics:**
+- `scale`: Same configuration as Potentiometer scale.
+- `scale_labels`: List of strings for labels at each tick position.
+- `angle_start`: Starting angle in degrees (default: 45).
+- `angle_width`: Total sweep angle in degrees (default: 270).
+
+### Styling and Configuration
+
+#### Mount Configuration
+Defines the drill hole pattern. You must specify either `diameter` (for circular holes) OR both `width` and `height` (for rectangular holes).
+
+```yaml
+mount:
+  diameter: "10mm"  # Circular hole
+```
+OR
+```yaml
+mount:
+  width: "6mm"      # Rectangular hole
+  height: "12mm"
+```
+
+#### Label Configuration
+```yaml
+label:
+  text: "VOLUME"
+  position: "bottom"
+  font:
+    size: "12pt"
+    color: "black"
+    family: "serif"
+    weight: "bold"
+```
 
 #### Border
 Applies to Groups.
@@ -72,18 +117,16 @@ border:
 ```
 
 #### Font
-Applies to any element.
-```yaml
-font:
-  size: "12pt"      # Font size
-  color: "blue"     # Text color
-  family: "serif"   # Font family (e.g., "sans-serif", "serif", "monospace")
-  weight: "bold"    # Options: "normal", "bold"
-```
+Defined within the `label` block.
+- `size`: Font size (e.g. "12pt", "4mm").
+- `color`: Text color.
+- `family`: Font family.
+- `weight`: Font weight.
 
 ### Label Positioning
 - **Components**: `top`, `bottom`.
-- **Groups**: `top-outside`, `bottom-outside`, `top-inline`, `bottom-inline`, `top-inside`, `bottom-inside`.
+- **Groups**: `top-outside` (default), `bottom-outside`, `top-inline`, `bottom-inline`, `top-inside`, `bottom-inside`.
+- **Inline**: For groups, `*-inline` positions center the label on the border line and interrupt the border.
 
 ### Units
 If no unit is specified, `mm` is assumed.
@@ -100,11 +143,16 @@ name: "My Amp Panel"
 width: "45cm"
 height: "150mm"
 background_color: "#dddddd"
+render_mode: "both"
 
 elements:
   - type: group
-    label: "PREAMP"
-    label_position: "top-inline"
+    label:
+      text: "PREAMP"
+      position: "top-inline"
+      font:
+        size: "14pt"
+        weight: "bold"
     x: "20mm"
     y: "20mm"
     width: "140mm"
@@ -115,9 +163,16 @@ elements:
       thickness: "2mm"
     elements:
       - type: potentiometer
-        label: "VOLUME"
+        label: 
+          text: "VOLUME"
+          position: "bottom"
+          font:
+             size: "12"
         x: "30mm"
         y: "40mm"
-        font:
-          weight: "bold"
+        knob_diameter: "20mm"
+        scale:
+          num_ticks: 11
+        mount:
+          diameter: "7mm"
 ```

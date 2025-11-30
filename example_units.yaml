@@ -11,12 +11,13 @@ elements:
     y: "20mm"
     width: "14cm"   # 140mm
     height: "100mm"
-    label: " [PREAMP] "
-    label_position: "top-inline"
-    font:
-      size: "25pt"
-      color: "blue"
-      family: "serif"
+    label:
+      text: " [PREAMP] "
+      position: "top-inline"
+      font:
+        size: "25pt"
+        color: "blue"
+        family: "serif"
     border:
       type: full
       thickness: "2mm"
@@ -27,9 +28,11 @@ elements:
         x: "20mm"
         y: "40mm"
         radius: "0.25in" # ~6.35mm standard jack size
-        install_diameter: "10mm"
-        label: "INPUT"
-        label_position: "top"
+        mount:
+          diameter: "10mm"
+        label:
+          text: "INPUT"
+          position: "top"
       
       - type: group
         id: "eq"
@@ -37,8 +40,9 @@ elements:
         y: "0mm"
         width: "80mm"
         height: "80mm"
-        label: "EQ"
-        label_position: "bottom-inline"
+        label:
+          text: "EQ"
+          position: "bottom-inline"
         border:
           type: bottom
           style: dotted
@@ -48,47 +52,51 @@ elements:
              id: "bass"
              x: "20mm"
              y: "40mm"
-             label: "BASS"
-             label_position: "bottom"
-             font:
-                size: "10"
-                color: "#444444"
+             label:
+               text: "BASS"
+               position: "bottom"
+               font:
+                  size: "10"
+                  color: "#444444"
              scale:
                num_ticks: 11
                major_tick_interval: 2
                tick_style: "line"
                tick_size: "3mm"
-             install_diameter: "6mm"
+             mount:
+                diameter: "6mm"
              
            - type: potentiometer
              id: "treble"
              x: "60mm"
              y: "40mm"
-             label: "TREBLE"
-             label_position: "top"
-             font:
-                size: "10"
-                color: "#444444"
+             label:
+               text: "TREBLE"
+               position: "top"
+               font:
+                  size: "10"
+                  color: "#444444"
              scale:
                num_ticks: 11
                major_tick_interval: 5
                tick_style: "dot"
                tick_size: "2mm"
-             install_diameter: "6mm"
+             mount:
+                diameter: "6mm"
       
       - type: switch
         id: "bright"
         x: "160mm"
         y: "40mm"
         switch_type: "toggle"
-        mounting_type: "rectangular"
-        mount_width: "6mm"
-        mount_height: "12mm"
-        install_diameter: "6mm"
+        mount:
+            width: "6mm"
+            height: "12mm"
         label_top: "ON"
         label_bottom: "OFF"
-        label: "BRIGHT"
-        label_position: "bottom"
+        label:
+          text: "BRIGHT"
+          position: "bottom"
 
   - type: group
     id: "master"
@@ -96,8 +104,9 @@ elements:
     y: "20mm"
     width: "150mm"
     height: "100mm"
-    label: "MASTER"
-    label_position: "top-inside"
+    label:
+      text: "MASTER"
+      position: "top-inside"
     border:
       type: full
       style: dashed
@@ -107,18 +116,20 @@ elements:
         id: "volume"
         x: "30mm"
         y: "40mm"
-        label: "VOLUME"
-        label_position: "bottom"
+        label:
+          text: "VOLUME"
+          position: "bottom"
+          font:
+             weight: "bold"
+             size: "14"
         knob_diameter: "25mm"
         border_diameter: "35mm"
         border_thickness: "1mm"
         scale: 
           num_ticks: 11
           tick_size: "4mm"
-        font:
-           weight: "bold"
-           size: "14"
-        install_diameter: "8mm" # Larger pot
+        mount:
+           diameter: "8mm" # Larger pot
         
       - type: switch
         id: "impedance"
@@ -126,8 +137,9 @@ elements:
         y: "40mm"
         switch_type: "rotary"
         knob_diameter: "20mm"
-        label: "IMPEDANCE"
-        label_position: "bottom"
+        label:
+          text: "IMPEDANCE"
+          position: "bottom"
         scale:
           num_ticks: 3
           tick_size: "4mm"
