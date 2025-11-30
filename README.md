@@ -50,11 +50,7 @@ A container for other elements.
 - `knob_diameter`: Diameter of the knob (default: `20mm`).
 - `border_diameter`: Diameter of the surrounding border/scale ring (default: `25mm`).
 - `border_thickness`: Thickness of the ring (default: `0`, no border).
-- `scale`: Scale configuration.
-    - `num_ticks`: Total number of ticks.
-    - `major_tick_interval`: Interval for major (longer) ticks.
-    - `tick_style`: `"line"` or `"dot"`.
-    - `tick_size`: Length/size of major ticks (minor are half).
+- `scale`: Scale configuration (see below).
 - `mount`: Mounting hole configuration (see below). Default diameter: `6mm`.
 
 #### Socket
@@ -68,17 +64,35 @@ A container for other elements.
 - `mount`: Mounting hole configuration (see below). Default diameter: `5mm`.
 
 **Toggle Switch Specifics:**
-- `label_top`: Text label above the switch. Can be a string or a Label object (see below).
+- `label_top`: Text label above the switch. Can be a string or a Label object.
 - `label_bottom`: Text label below the switch. Can be a string or a Label object.
 - `label_center`: Text label to the right/center. Can be a string or a Label object.
 
 **Rotary Switch Specifics:**
-- `scale`: Same configuration as Potentiometer scale.
-- `scale_labels`: List of strings for labels at each tick position.
+- `scale`: Scale configuration (see below).
 - `angle_start`: Starting angle in degrees (default: 45).
 - `angle_width`: Total sweep angle in degrees (default: 270).
 
 ### Styling and Configuration
+
+#### Scale Configuration
+Applies to Potentiometers and Rotary Switches.
+- `num_ticks`: Total number of ticks.
+- `major_tick_interval`: Interval for major (longer) ticks.
+- `tick_style`: `"line"` or `"dot"`.
+- `tick_size`: Length/size of major ticks (minor are half).
+- `labels`: List of labels for ticks (mainly for Rotary Switches). Items can be strings or Label objects.
+
+```yaml
+scale:
+  num_ticks: 3
+  tick_size: "4mm"
+  labels:
+    - text: "4"
+      font: { color: "red" }
+    - "8"
+    - "16"
+```
 
 #### Mount Configuration
 Defines the drill hole pattern. You must specify either `diameter` (for circular holes) OR both `width` and `height` (for rectangular holes).
@@ -95,7 +109,7 @@ mount:
 ```
 
 #### Label Configuration
-This structure is used for the main `label` parameter and also for `label_top`, `label_bottom`, `label_center` on toggle switches.
+This structure is used for the main `label` parameter, toggle labels (`label_top` etc.), and items in `scale.labels`.
 ```yaml
 label:
   text: "VOLUME"
@@ -106,7 +120,6 @@ label:
     family: "serif"
     weight: "bold"
 ```
-*Note: `position` is only applicable for the main component label.*
 
 #### Border
 Applies to Groups.
@@ -148,33 +161,17 @@ background_color: "#dddddd"
 render_mode: "both"
 
 elements:
-  - type: group
+  - type: switch
+    id: "impedance"
+    x: "90mm"
+    y: "40mm"
+    switch_type: "rotary"
+    knob_diameter: "20mm"
     label:
-      text: "PREAMP"
-      position: "top-inline"
-      font:
-        size: "14pt"
-        weight: "bold"
-    x: "20mm"
-    y: "20mm"
-    width: "140mm"
-    height: "100mm"
-    border:
-      type: "full"
-      style: "full"
-      thickness: "2mm"
-    elements:
-      - type: potentiometer
-        label: 
-          text: "VOLUME"
-          position: "bottom"
-          font:
-             size: "12"
-        x: "30mm"
-        y: "40mm"
-        knob_diameter: "20mm"
-        scale:
-          num_ticks: 11
-        mount:
-          diameter: "7mm"
+      text: "IMPEDANCE"
+      position: "bottom"
+    scale:
+      num_ticks: 3
+      tick_size: "4mm"
+      labels: ["4", "8", "16"]
 ```

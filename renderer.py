@@ -357,12 +357,16 @@ class PanelRenderer:
                         label_anchor_radius = tick_r_start + current_tick_len + 3 # push out
                     
                     # Draw label if exists
-                    if i < len(switch.scale_labels):
-                        label_text = switch.scale_labels[i]
+                    if i < len(s.labels):
+                        label_obj = s.labels[i]
+                        label_text = label_obj.text
                         lx = x + label_anchor_radius * math.cos(angle_rad)
                         ly = y + label_anchor_radius * math.sin(angle_rad)
-                        # Adjust ly slightly for vertical centering? _render_text does some of that
-                        font_style = self._get_element_font(switch)
+                        
+                        # Use label-specific font or fallback to switch default font
+                        default_font_style = self._get_element_font(switch)
+                        font_style = label_obj.font if label_obj.font else default_font_style
+                        
                         self._render_text(label_text, lx, ly + 1.5, default_size=3.0, font_style=font_style)
 
         if self._should_show_component():

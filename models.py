@@ -180,6 +180,19 @@ class Scale:
     tick_style: str = "line"
     tick_size: float = 2.0
     position: str = "outside"
+    labels: List[Label] = field(default_factory=list)
+
+    @staticmethod
+    def from_dict(data: dict):
+        labels_data = data.pop('labels', [])
+        obj = Scale(**_filter_args(Scale, data))
+        
+        for item in labels_data:
+            parsed = Element._parse_label_param(item)
+            if parsed:
+                obj.labels.append(parsed)
+                
+        return obj
 
 @dataclass
 class Potentiometer(Component):
@@ -207,7 +220,7 @@ class Potentiometer(Component):
         if scale_data:
             if isinstance(scale_data, dict):
                 scale_data = normalize_data(scale_data)
-                pot.scale = Scale(**_filter_args(Scale, scale_data))
+                pot.scale = Scale.from_dict(scale_data)
         
         return pot
 
@@ -237,12 +250,11 @@ class Switch(Component):
     angle_start: float = 45.0
     angle_width: float = 270.0
     scale: Optional[Scale] = None
-    scale_labels: List[str] = field(default_factory=list)
 
     @staticmethod
     def from_dict(data: dict):
         scale_data = data.pop('scale', None)
-        scale_labels = data.pop('scale_labels', [])
+        scale_labels = data.pop('scale_labels', []) # Legacy
         
         # Extract new labels using helper
         lt = Element._parse_label_param(data.pop('label_top', None))
@@ -253,7 +265,6 @@ class Switch(Component):
         mount = Component._parse_mount(data, default_diameter=5.0)
         
         obj = Switch(**_filter_args(Switch, data))
-        obj.scale_labels = scale_labels
         obj.mount = mount
         obj.label_top = lt
         obj.label_center = lc
@@ -262,7 +273,20 @@ class Switch(Component):
         if scale_data:
             if isinstance(scale_data, dict):
                 scale_data = normalize_data(scale_data)
-                obj.scale = Scale(**_filter_args(Scale, scale_data))
+                obj.scale = Scale.from_dict(scale_data)
+        
+        # Backward compatibility: merge legacy scale_labels into scale.labels if scale exists, or create scale
+        if scale_labels:
+            if not obj.scale:
+                # If no scale but legacy labels, create a dummy scale? Or just attach?
+                # Rotary needs scale object for ticks usually. But if user just had labels?
+                # Assume default scale if not present but labels are? Or just ignore if no scale?
+                # Let's create default scale if missing, or use existing.
+                obj.scale = Scale() # Default values
+            
+            # Append legacy labels as Label objects
+            for lbl_str in scale_labels:
+                obj.scale.labels.append(Label(text=str(lbl_str)))
         
         return obj
 

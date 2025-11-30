@@ -148,6 +148,12 @@ elements:
           num_ticks: 3
           tick_size: "4mm"
           tick_style: "line"
-        scale_labels: ["4", "8", "16"]
+          labels:
+            - text: "4"
+              font: 
+                size: "4"
+                color: "red"
+            - text: "8"
+            - "16"
         angle_start: 315
         angle_width: 90
