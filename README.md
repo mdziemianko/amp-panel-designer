@@ -2,6 +2,8 @@
 
 A tool to design instrument amplifier panels declaratively using YAML.
 
+The generated output can be used to generate engraver or laser cutter gcode.
+
 ## Usage
 
 1. Define your panel in a YAML file (e.g., `panel.yaml`).
@@ -14,6 +16,42 @@ A tool to design instrument amplifier panels declaratively using YAML.
 - **Styling**: Customizable borders, fonts, and label positioning.
 - **Units**: Support for `mm` (default), `cm`, `in` (inches), `pt` (points), and `px` (pixels).
 - **Output**: SVG.
+
+## Element Types
+
+### Potentiometer
+Standard potentiometer with customizable knob, scale, and border ring.
+
+![Potentiometers](examples/potentiometers.svg)
+[Example Configuration](examples/potentiometers.yaml)
+
+### Switch
+Supports toggle, rotary, and rocker switches.
+
+![Switches](examples/switches.svg)
+[Example Configuration](examples/switches.yaml)
+
+### Socket
+Input/Output sockets with configurable size.
+
+![Sockets](examples/sockets.svg)
+[Example Configuration](examples/sockets.yaml)
+
+### Group
+Container for organizing elements, supporting borders and labels.
+
+![Groups](examples/groups.svg)
+[Example Configuration](examples/groups.yaml)
+
+### Custom Component
+Generic component defined by its mounting hole (circular or rectangular).
+
+![Custom Components](examples/custom_components.svg)
+[Example Configuration](examples/custom_components.yaml)
+
+### Full Panel Example (with drill mask)
+![Rumble Amp Panel](examples/rumble.svg)
+[Example Configuration](examples/rumble.yaml)
 
 ## Configuration Reference
 
@@ -59,20 +97,21 @@ A container for other elements.
 - `mount`: Mounting hole configuration (see below). Default diameter: `10mm`.
 
 #### Switch
-- `switch_type`: `"toggle"` (default) or `"rotary"`.
-- `width`, `height`: Body dimensions (for toggle).
+- `switch_type`: `"toggle"` (default), `"rotary"`, or `"rocker"`.
+- `width`, `height`: Body dimensions (for toggle/rocker).
 - `knob_diameter`: Knob diameter (for rotary).
 - `mount`: Mounting hole configuration (see below). Default diameter: `5mm`.
+    - Note: If `switch_type` is `"toggle"` but `mount` specifies `width` and `height` (rectangular), the switch body will be rendered as a rectangle instead of a circle.
+- `angle_start`: Starting angle in degrees (default: 45, for rotary).
+- `angle_width`: Total sweep angle in degrees (default: 270, for rotary).
 
-**Toggle Switch Specifics:**
+**Toggle/Rocker Switch Specifics:**
 - `label_top`: Text label above the switch. Can be a string or a Label object.
 - `label_bottom`: Text label below the switch. Can be a string or a Label object.
 - `label_center`: Text label to the right/center. Can be a string or a Label object.
 
 **Rotary Switch Specifics:**
 - `scale`: Scale configuration (see below).
-- `angle_start`: Starting angle in degrees (default: 45).
-- `angle_width`: Total sweep angle in degrees (default: 270).
 
 #### Custom
 A generic component defined by its mounting hole.
@@ -154,6 +193,7 @@ Defined within the `label` block.
     - `*-inside`: Places text inside the border.
 - **Component Specifics**:
     - `inside`: May have different interpretation depending on component context (usually closer to center). `distance` parameter is recommended for precise control.
+    - Component labels also support specific alignment based on side (e.g., `left` aligns text to end at the anchor point).
 
 ### Units
 If no unit is specified, `mm` is assumed.
@@ -162,25 +202,3 @@ If no unit is specified, `mm` is assumed.
 - `in` or `"` (inches)
 - `pt` (points)
 - `px` (pixels)
-
-## Example
-
-```yaml
-name: "My Amp Panel"
-width: "45cm"
-height: "150mm"
-background_color: "#dddddd"
-render_mode: "both"
-
-elements:
-  - type: custom
-    id: "fuse"
-    x: "20mm"
-    y: "20mm"
-    mount:
-      diameter: "12mm"
-    label:
-      text: "FUSE"
-      position: "bottom"
-      distance: "15mm"
-```
