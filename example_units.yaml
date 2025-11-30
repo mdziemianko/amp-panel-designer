@@ -55,6 +55,7 @@ elements:
              label:
                text: "BASS"
                position: "bottom"
+               distance: "15mm"
                font:
                   size: "10"
                   color: "#444444"
@@ -99,6 +100,7 @@ elements:
               color: "green"
         label_bottom: "OFF"
         label:
+          distance: "30mm"
           text: "BRIGHT"
           position: "bottom"
 

@@ -36,6 +36,7 @@ All elements (groups and components) support these properties:
 - `label`: Configuration for the main label.
     - `text`: The label text (string).
     - `position`: Position of the label (see Label Positioning below).
+    - `distance`: Custom distance from the component center (optional).
     - `font`: Font styling (see Font below). This font applies to the label and is used as the default for other text on the component (e.g., scales).
 
 ### Components
@@ -121,12 +122,14 @@ This structure is used for the main `label` parameter, toggle labels (`label_top
 label:
   text: "VOLUME"
   position: "bottom"
+  distance: "20mm"  # Optional distance from component center
   font:
     size: "12pt"
     color: "black"
     family: "serif"
     weight: "bold"
 ```
+*Note: `position` is applicable for the main component label. `distance` overrides automatic placement calculations.*
 
 #### Border
 Applies to Groups.
@@ -177,4 +180,5 @@ elements:
     label:
       text: "FUSE"
       position: "bottom"
+      distance: "15mm"
 ```

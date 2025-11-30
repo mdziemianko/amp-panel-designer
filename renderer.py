@@ -23,6 +23,30 @@ class PanelRenderer:
                 font_size = 3.0 # fallback
         return len(text) * font_size * 0.6
 
+    def _get_font_size_mm(self, font_style: Optional[FontStyle], default_mm=3.0) -> float:
+        if not font_style or not font_style.size:
+            return default_mm
+        
+        size = font_style.size
+        if isinstance(size, (int, float)):
+            return float(size)
+        
+        # Parse string
+        if isinstance(size, str):
+            val = size.strip().lower()
+            try:
+                if val.endswith('mm'):
+                    return float(val[:-2])
+                elif val.endswith('pt'):
+                    return float(val[:-2]) * (25.4 / 72.0)
+                elif val.endswith('px'):
+                    return float(val[:-2]) * (25.4 / 96.0)
+                else:
+                    return float(val) # assume mm if no unit? or pt? default assumption elsewhere is mm
+            except ValueError:
+                pass
+        return default_mm
+
     def _render_drill_pattern(self, x: float, y: float, mount: Optional[Component] = None, diameter=None, shape='circular', width=None, height=None):
         # Allow passing Mount object or legacy args for compatibility/simplicity
         # If mount object is passed, extract values
@@ -256,19 +280,27 @@ class PanelRenderer:
         # Label
         if pot.label and pot.label.text:
             pos = pot.label.position if pot.label.position else 'bottom'
+            font_style = self._get_element_font(pot)
+            font_size = self._get_font_size_mm(font_style)
             
+            # Default distance calculation
             outer_radius = (pot.border_diameter / 2)
             if pot.scale:
                 outer_radius += pot.scale.tick_size + 2
-                
             dist = max(outer_radius, pot.knob_diameter/2) + 2 
             
-            if pos == 'top':
-                 label_y = y - dist - 4 
-            else:
-                 label_y = y + dist + 4 + 2
+            # Override with explicit distance if provided
+            if pot.label.distance is not None:
+                dist = pot.label.distance
             
-            font_style = self._get_element_font(pot)
+            # Calculate position
+            # If bottom: Top of label at dist. Baseline = y + dist + font_size*0.7
+            # If top: Bottom of label at dist. Baseline = y - dist
+            if pos == 'top':
+                 label_y = y - dist
+            else:
+                 label_y = y + dist + font_size * 0.7
+            
             self._render_text(pot.label.text, x, label_y, font_style=font_style)
 
     def _render_socket(self, socket: Socket, x: float, y: float):
@@ -283,11 +315,18 @@ class PanelRenderer:
         
         if socket.label and socket.label.text:
             pos = socket.label.position if socket.label.position else 'bottom'
-            if pos == 'top':
-                 label_y = y - socket.radius - 5
-            else:
-                 label_y = y + socket.radius + 15
             font_style = self._get_element_font(socket)
+            font_size = self._get_font_size_mm(font_style)
+            
+            dist = socket.radius + 5
+            if socket.label.distance is not None:
+                dist = socket.label.distance
+                
+            if pos == 'top':
+                 label_y = y - dist
+            else:
+                 label_y = y + dist + font_size * 0.7
+                 
             self._render_text(socket.label.text, x, label_y, font_style=font_style)
 
     def _render_switch(self, switch: Switch, x: float, y: float):
@@ -302,21 +341,113 @@ class PanelRenderer:
             # Render labels always (printed)
             default_font_style = self._get_element_font(switch)
             
+            # Helper for toggle label pos
+            def render_toggle_label(lbl_obj, default_text, default_pos_offset):
+                # default_pos_offset is tuple (dx, dy) from center (x,y)
+                # If explicit distance is provided, it replaces the default offset magnitude?
+                # Toggle logic is tricky because 'top'/'bottom' are positions, not just distance.
+                # Let's keep existing logic but apply font shift if top/bottom
+                
+                # However, toggle labels (label_top, label_bottom) are separate from main label.
+                # They don't have 'distance' property in Label object usually?
+                # Wait, I added distance to Label. So yes they might.
+                
+                font = lbl_obj.font if lbl_obj and lbl_obj.font else default_font_style
+                text = lbl_obj.text if lbl_obj else default_text
+                if not text: return
+                
+                f_size = self._get_font_size_mm(font)
+                
+                # Base offset
+                dx, dy = default_pos_offset
+                
+                # Adjust dy for top/bottom based on distance logic?
+                # If lbl_obj.distance is set, use it.
+                # If top label (dy < 0): distance is from center to bottom of label?
+                #   y_target = y - distance.
+                # If bottom label (dy > 0): distance is from center to top of label?
+                #   y_target = y + distance + font_size * 0.7
+                
+                # We need to know if it's top or bottom label.
+                # Assume based on dy sign.
+                
+                final_x = x + dx
+                final_y = y + dy
+                
+                if lbl_obj and lbl_obj.distance is not None:
+                    d = lbl_obj.distance
+                    if dy < 0: # top
+                        final_y = y - d
+                    elif dy > 0: # bottom
+                        final_y = y + d + f_size * 0.7
+                    # Center label (dy=0)? Distance usually x-offset? 
+                    # Let's ignore distance for center label horizontal shift for now unless requested.
+                else:
+                    # Apply baseline correction to default positions too?
+                    # Default Top: y - height/2 - 5. This is baseline.
+                    # Text is above baseline. So bottom of text is at y - height/2 - 5.
+                    # This matches "Bottom of label if above". OK.
+                    
+                    # Default Bottom: y + height/2 + 8. This is baseline.
+                    # Text is above baseline.
+                    # Top of text is at y + height/2 + 8 - font_size*0.7.
+                    # User wants standard behavior to be "distance is to top of label".
+                    # Here "8" is the padding. 
+                    # If I want padding 5mm, I should set baseline to y + height/2 + 5 + font_size*0.7.
+                    # Current code was just +8. Let's stick to current unless distance is specified?
+                    # Or standardize it.
+                    # Let's standardize: dist = height/2 + 5.
+                    # Top: y - dist.
+                    # Bottom: y + dist + font_size*0.7.
+                    
+                    # But I don't want to break existing look too much if it was fine.
+                    # User complaint is about "specified distance".
+                    pass
+
+                self._render_text(text, final_x, final_y, font_style=font)
+
             if switch.label_top:
-                font = switch.label_top.font if switch.label_top.font else default_font_style
-                text = switch.label_top.text
-                self._render_text(text, x, y - switch.height/2 - 5, font_style=font)
+                # default distance approx
+                dist_top = switch.height/2 + 5
+                # Pass as negative dy for identification
+                render_toggle_label(switch.label_top, "", (0, -dist_top))
                 
             if switch.label_bottom:
-                font = switch.label_bottom.font if switch.label_bottom.font else default_font_style
-                text = switch.label_bottom.text
-                self._render_text(text, x, y + switch.height/2 + 8, font_style=font)
+                # default distance approx
+                dist_bot = switch.height/2 + 5 # use 5 padding like top
+                # But we need to account for font height for baseline
+                # render_toggle_label will handle it if I pass positive dy
+                # Wait, render_toggle_label logic above for default:
+                # "Let's stick to current unless distance is specified" -> I put 'pass' there.
+                # I should implement the standard logic there for consistency.
                 
+                # Re-do render_toggle_label logic inline for clarity
+                pass
+
+            # Refactored toggle label rendering
+            if switch.label_top:
+                font = switch.label_top.font if switch.label_top.font else default_font_style
+                f_size = self._get_font_size_mm(font)
+                dist = switch.label_top.distance if switch.label_top.distance is not None else (switch.height/2 + 5)
+                # Top label: bottom of text at dist. Baseline at y - dist.
+                self._render_text(switch.label_top.text, x, y - dist, font_style=font)
+
+            if switch.label_bottom:
+                font = switch.label_bottom.font if switch.label_bottom.font else default_font_style
+                f_size = self._get_font_size_mm(font)
+                dist = switch.label_bottom.distance if switch.label_bottom.distance is not None else (switch.height/2 + 5)
+                # Bottom label: top of text at dist. Baseline at y + dist + ascent.
+                self._render_text(switch.label_bottom.text, x, y + dist + f_size * 0.7, font_style=font)
+
             if switch.label_center:
                 font = switch.label_center.font if switch.label_center.font else default_font_style
-                text = switch.label_center.text
-                # To the right?
-                self._render_text(text, x + switch.width/2 + 8, y + 2, font_style=font)
+                # Center label to the right
+                dist_x = switch.label_center.distance if switch.label_center.distance is not None else (switch.width/2 + 8)
+                # Vertical align middle? SVG text is baseline. 
+                # Approx middle by shifting down by 0.35 * font_size
+                f_size = self._get_font_size_mm(font)
+                self._render_text(switch.label_center.text, x + dist_x, y + f_size * 0.35, font_style=font)
+
 
         # Rotary Switch Scale and Labels
         if switch.switch_type == 'rotary':
@@ -388,6 +519,8 @@ class PanelRenderer:
         # Main Label
         if switch.label and switch.label.text:
             pos = switch.label.position if switch.label.position else 'bottom'
+            font_style = self._get_element_font(switch)
+            font_size = self._get_font_size_mm(font_style)
             
             # Distance logic for toggle vs rotary
             if switch.switch_type == 'rotary':
@@ -399,12 +532,14 @@ class PanelRenderer:
             else:
                  dist = switch.height/2 + 10 # toggle height based
             
+            if switch.label.distance is not None:
+                dist = switch.label.distance
+
             if pos == 'top':
-                 label_y = y - dist - 5
+                 label_y = y - dist
             else:
-                 label_y = y + dist + 5
+                 label_y = y + dist + font_size * 0.7
             
-            font_style = self._get_element_font(switch)
             self._render_text(switch.label.text, x, label_y, font_style=font_style)
 
     def _render_custom(self, custom: Custom, x: float, y: float):
@@ -444,6 +579,8 @@ class PanelRenderer:
         if custom.label and custom.label.text:
             # Default to bottom if not specified
             pos = custom.label.position if custom.label.position else 'bottom'
+            font_style = self._get_element_font(custom)
+            font_size = self._get_font_size_mm(font_style)
             
             # Estimate distance based on mount size
             dist = 10.0 # fallback
@@ -453,12 +590,14 @@ class PanelRenderer:
                 elif custom.mount.height:
                     dist = custom.mount.height / 2 + 5
             
+            if custom.label.distance is not None:
+                dist = custom.label.distance
+
             if pos == 'top':
-                 label_y = y - dist - 5
+                 label_y = y - dist
             else:
-                 label_y = y + dist + 5
+                 label_y = y + dist + font_size * 0.7
             
-            font_style = self._get_element_font(custom)
             self._render_text(custom.label.text, x, label_y, font_style=font_style)
 
     def _render_text(self, text: str, x: float, y: float, default_size=12, default_weight='normal', font_style: FontStyle = None):

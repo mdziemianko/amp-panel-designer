@@ -27,7 +27,7 @@ def to_mm(value) -> float:
 
 DIMENSION_KEYS = {'x', 'y', 'width', 'height', 'radius', 'thickness', 'font_size', 'size', 
                   'knob_diameter', 'border_diameter', 'border_thickness', 'tick_size',
-                  'install_diameter', 'mount_width', 'mount_height', 'diameter'}
+                  'install_diameter', 'mount_width', 'mount_height', 'diameter', 'distance'}
 
 def normalize_data(data: dict) -> dict:
     new_data = data.copy()
@@ -48,6 +48,7 @@ class Label:
     text: str
     position: Optional[str] = None
     font: Optional[FontStyle] = None
+    distance: Optional[float] = None
 
 @dataclass
 class Mount:
@@ -80,7 +81,8 @@ class Element:
             
             lbl_text = value.pop('text', "")
             lbl_pos = value.pop('position', None)
-            return Label(text=lbl_text, position=lbl_pos, font=lbl_font)
+            lbl_dist = value.pop('distance', None)
+            return Label(text=lbl_text, position=lbl_pos, font=lbl_font, distance=lbl_dist)
         return None
 
     @staticmethod
