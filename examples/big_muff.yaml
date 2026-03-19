@@ -1,0 +1,101 @@
+name: "Big muff"
+width: 70mm
+height: 126mm
+background_color: "#ffffff"
+render_mode: "drill_mask"
+
+elements:
+  - type: group
+    id: "controls"
+    x: 5mm
+    y: 5mm
+    width: 60mm
+    height: 116mm
+    label: 
+      text: "Big Muff"
+      position: "bottom-inside"
+      distance: "10mm"
+      font:
+        size: "16pt"
+        family: "sans-serif"
+    border:
+      type: full
+      thickness: 0.5mm
+      color: "#000000"
+    elements:
+      - type: potentiometer
+        id: "mid"
+        x: 12mm
+        y: 14mm
+        label:
+          text: "Mid"
+          position: "bottom"
+          distance: "10mm"
+        knob_diameter: "15mm"
+        border_diameter: "18mm"
+        scale:
+          num_ticks: 11
+          tick_size: "1mm"
+          tick_style: "dot"
+
+
+      - type: potentiometer
+        id: "tone"
+        x: 48mm
+        y: 14mm
+        label:
+          text: "Tone"
+          position: "bottom"
+          distance: "10mm"
+        knob_diameter: "15mm"
+        border_diameter: "18mm"
+        scale:
+          num_ticks: 11
+          tick_size: "1mm"
+          tick_style: "dot"
+        
+      - type: potentiometer
+        id: "volume"
+        x: 12mm
+        y: 44mm
+        label:
+          text: "Volume"
+          position: "bottom"
+          distance: "10mm"
+        knob_diameter: "15mm"
+        border_diameter: "18mm"
+        scale:
+          num_ticks: 11
+          tick_size: "1mm"
+          tick_style: "dot"
+
+      - type: potentiometer
+        id: "sustain"
+        x: 48mm
+        y: 44mm
+        label:
+          text: "Sustain"
+          position: "bottom"
+          distance: "10mm"
+        knob_diameter: "15mm"
+        border_diameter: "18mm"
+        scale:
+          num_ticks: 11
+          tick_size: "1mm"
+          tick_style: "dot"
+
+      - type: custom
+        id: "power_led"
+        x: "30mm"
+        y: "67mm"
+        mount:
+          diameter: "5mm"
+
+      - type: custom
+        id: "switch"
+        x: "30mm"
+        y: "89mm"
+        mount:
+          diameter: "12mm"
+
+  

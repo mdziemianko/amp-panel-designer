@@ -1,0 +1,131 @@
+name: "Jeds 808 MAX"
+width: 70mm
+height: 126mm
+background_color: "#ffffff"
+render_mode: "drill_mask"
+
+elements:
+  - type: group
+    id: "controls"
+    x: 5mm
+    y: 5mm
+    width: 60mm
+    height: 116mm
+    label: 
+      text: "TS-808 MAX"
+      position: "bottom-inside"
+      distance: "10mm"
+      font:
+        size: "16pt"
+        family: "sans-serif"
+    border:
+      type: full
+      thickness: 1
+      color: "#000000"
+    elements:
+      - type: potentiometer
+        id: "volume"
+        x: 12mm
+        y: 14mm
+        label:
+          text: "Volume"
+          position: "bottom"
+          distance: "10mm"
+        knob_diameter: "15mm"
+        border_diameter: "18mm"
+        scale:
+          num_ticks: 11
+          tick_size: "1mm"
+          tick_style: "dot"
+
+
+      - type: potentiometer
+        id: "drive"
+        x: 48mm
+        y: 14mm
+        label:
+          text: "Drive"
+          position: "bottom"
+          distance: "10mm"
+        knob_diameter: "15mm"
+        border_diameter: "18mm"
+        scale:
+          num_ticks: 11
+          tick_size: "1mm"
+          tick_style: "dot"
+        
+      - type: potentiometer
+        id: "tone"
+        x: 12mm
+        y: 44mm
+        label:
+          text: "Tone"
+          position: "bottom"
+          distance: "10mm"
+        knob_diameter: "15mm"
+        border_diameter: "18mm"
+        scale:
+          num_ticks: 11
+          tick_size: "1mm"
+          tick_style: "dot"
+
+      - type: potentiometer
+        id: "voice"
+        x: 48mm
+        y: 44mm
+        label:
+          text: "Voice"
+          position: "bottom"
+          distance: "10mm"
+        knob_diameter: "15mm"
+        border_diameter: "18mm"
+        scale:
+          num_ticks: 11
+          tick_size: "1mm"
+          tick_style: "dot"
+      
+      - type: switch
+        id: "clip"
+        x: "30mm"
+        y: "14mm"
+        switch_type: "toggle"
+        label: 
+          text: "Clip"
+          position: "bottom"
+          distance: "5mm"
+
+      - type: switch
+        id: "bright"
+        x: "30mm"
+        y: "28mm"
+        switch_type: "toggle"
+        label: 
+          text: "Bright"
+          position: "bottom"
+          distance: "5mm"
+      
+      - type: switch
+        id: "fat"
+        x: "30mm"
+        y: "42mm"
+        switch_type: "toggle"
+        label: 
+          text: "Fat"
+          position: "bottom"
+          distance: "5mm"
+
+      - type: custom
+        id: "power_led"
+        x: "30mm"
+        y: "68mm"
+        mount:
+          diameter: "5mm"
+
+      - type: custom
+        id: "switch"
+        x: "30mm"
+        y: "90mm"
+        mount:
+          diameter: "12mm"
+
+  
