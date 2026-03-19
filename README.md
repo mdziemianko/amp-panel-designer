@@ -9,13 +9,14 @@ The generated output can be used to generate engraver or laser cutter gcode or i
 ## Usage
 
 1. Define your panel in a YAML file (e.g., `panel.yaml`).
-2. Run the generator: `python main.py panel.yaml output.svg`.
+2. Run the generator: `python main.py panel.yaml output.svg` (optional `--dpi <number>` to control `px` units).
 
 ## Features
 
 - **Components**: Potentiometers, Switches, Sockets, Custom components.
 - **Grouping**: Recursive groups with relative positioning.
 - **Styling**: Customizable borders, fonts, and label positioning.
+- **DPI**: Configure `px` to `mm` conversion with `--dpi` (default: 96).
 - **Units**: Support for `mm` (default), `cm`, `in` (inches), `pt` (points), and `px` (pixels).
 - **Output**: SVG.
 
@@ -203,4 +204,4 @@ If no unit is specified, `mm` is assumed.
 - `cm` (centimeters)
 - `in` or `"` (inches)
 - `pt` (points)
-- `px` (pixels)
+- `px` (pixels) (conversion depends on `--dpi`; default: 96).

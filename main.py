@@ -2,17 +2,19 @@ import argparse
 import yaml
 import sys
 import traceback
-from models import Panel
+from models import Panel, set_dpi
 from renderer import PanelRenderer
 
 def main():
     parser = argparse.ArgumentParser(description="Generate instrument panel SVG from YAML.")
+    parser.add_argument("--dpi", type=float, default=96.0, help="DPI used for converting `px` units to millimeters (default: 96).")
     parser.add_argument("input_file", help="Path to the input YAML file")
     parser.add_argument("output_file", help="Path to the output SVG file")
     
     args = parser.parse_args()
     
     try:
+        set_dpi(args.dpi)
         with open(args.input_file, 'r') as f:
             data = yaml.safe_load(f)
         

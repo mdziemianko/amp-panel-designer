@@ -1,7 +1,7 @@
 import svgwrite
 import math
 from typing import Optional, Tuple
-from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle, Component, Custom
+from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle, Component, Custom, to_mm
 
 class PanelRenderer:
     def __init__(self, panel: Panel):
@@ -17,16 +17,15 @@ class PanelRenderer:
     def _get_text_width(self, text: str, font_size: float) -> float:
         if isinstance(font_size, str):
             try:
-                val = font_size.lower().replace("pt", "").replace("px", "").replace("mm", "")
-                font_size = float(val)
-            except ValueError:
-                font_size = 12 * 25.4 / 72.0 # fallback 12pt
-        return len(text) * font_size * 0.6
+                font_size = to_mm(font_size)
+            except Exception:
+                font_size = to_mm("12pt")
+        return len(text) * float(font_size) * 0.6
 
     def _get_font_size_mm(self, font_style: Optional[FontStyle], default_mm=None) -> float:
         # Default to 12pt (~4.233mm) if not specified
         if default_mm is None:
-            default_mm = 12 * 25.4 / 72.0
+            default_mm = to_mm("12pt")
 
         if not font_style or not font_style.size:
             return default_mm
@@ -37,18 +36,11 @@ class PanelRenderer:
         
         # Parse string
         if isinstance(size, str):
-            val = size.strip().lower()
             try:
-                if val.endswith('mm'):
-                    return float(val[:-2])
-                elif val.endswith('pt'):
-                    return float(val[:-2]) * (25.4 / 72.0)
-                elif val.endswith('px'):
-                    return float(val[:-2]) * (25.4 / 96.0)
-                else:
-                    return float(val) # assume mm if no unit? or pt? default assumption elsewhere is mm
-            except ValueError:
-                pass
+                converted = to_mm(size)
+                return float(converted)
+            except (ValueError, TypeError):
+                return default_mm
         return default_mm
 
     def _render_drill_pattern(self, x: float, y: float, mount: Optional[Component] = None, diameter=None, shape='circular', width=None, height=None):
@@ -133,18 +125,8 @@ class PanelRenderer:
                     
                     font_style = self._get_element_font(element)
                     
-                    default_size = 12 * 25.4 / 72.0
-                    size = font_style.size if font_style and font_style.size else default_size
-                    
-                    # Convert font size to mm
-                    try:
-                        if isinstance(size, str):
-                             val = size.lower().replace("pt", "").replace("px", "").replace("mm", "")
-                             size_val = float(val)
-                        else:
-                             size_val = float(size)
-                    except ValueError:
-                        size_val = default_size
+                    default_size = to_mm("12pt")
+                    size_val = self._get_font_size_mm(font_style, default_mm=default_size)
 
                     raw_pos = element.label.position if element.label.position else 'top-outside'
                     side, mode = self._parse_position(raw_pos)

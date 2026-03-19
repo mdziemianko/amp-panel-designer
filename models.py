@@ -1,6 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List, Optional, Union
 
+_DPI_PX: float = 96.0  # default CSS px reference
+
+def set_dpi(dpi: Union[int, float]) -> None:
+    """Configure DPI used for converting `px` to millimeters."""
+    global _DPI_PX
+    dpi_f = float(dpi)
+    if dpi_f <= 0:
+        raise ValueError("dpi must be > 0")
+    _DPI_PX = dpi_f
+
 def to_mm(value) -> float:
     if isinstance(value, (int, float)):
         return float(value)
@@ -17,7 +27,7 @@ def to_mm(value) -> float:
         elif val.endswith('pt'):
             return float(val[:-2]) * (25.4 / 72.0)
         elif val.endswith('px'):
-            return float(val[:-2]) * (25.4 / 96.0)
+            return float(val[:-2]) * (25.4 / _DPI_PX)
         else:
             try:
                 return float(val)
