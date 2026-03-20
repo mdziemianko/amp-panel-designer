@@ -1,8 +1,10 @@
 name: "Jeds 808 MAX"
 width: 70mm
 height: 126mm
-background_color: "#ffffff"
-render_mode: "drill_mask"
+background:
+  color: "#05AA05"
+
+render_mode: "both"
 
 elements:
   - type: group
@@ -12,27 +14,33 @@ elements:
     width: 60mm
     height: 116mm
     label: 
-      text: "TS-808 MAX"
+      text: "Banshee"
       position: "bottom-inside"
       distance: "10mm"
       font:
-        size: "16pt"
-        family: "sans-serif"
+        size: "25pt"
+        family: "zapfino"
+        color: "black"
+        weight: "bold"
     border:
       type: full
-      thickness: 1
-      color: "#000000"
+      thickness: 0.5mm
+      color: "black"
     elements:
       - type: potentiometer
         id: "volume"
         x: 12mm
         y: 14mm
         label:
-          text: "Volume"
+          text: "LEVEL"
           position: "bottom"
           distance: "10mm"
-        knob_diameter: "15mm"
-        border_diameter: "18mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
+        knob_diameter: "12mm"
+        border_diameter: "15mm"
         scale:
           num_ticks: 11
           tick_size: "1mm"
@@ -44,11 +52,15 @@ elements:
         x: 48mm
         y: 14mm
         label:
-          text: "Drive"
+          text: "DRIVE"
           position: "bottom"
           distance: "10mm"
-        knob_diameter: "15mm"
-        border_diameter: "18mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
+        knob_diameter: "12mm"
+        border_diameter: "15mm"
         scale:
           num_ticks: 11
           tick_size: "1mm"
@@ -59,11 +71,15 @@ elements:
         x: 12mm
         y: 44mm
         label:
-          text: "Tone"
+          text: "TONE"
           position: "bottom"
           distance: "10mm"
-        knob_diameter: "15mm"
-        border_diameter: "18mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
+        knob_diameter: "12mm"
+        border_diameter: "15mm"
         scale:
           num_ticks: 11
           tick_size: "1mm"
@@ -74,11 +90,15 @@ elements:
         x: 48mm
         y: 44mm
         label:
-          text: "Voice"
+          text: "VOICE"
           position: "bottom"
           distance: "10mm"
-        knob_diameter: "15mm"
-        border_diameter: "18mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
+        knob_diameter: "12mm"
+        border_diameter: "15mm"
         scale:
           num_ticks: 11
           tick_size: "1mm"
@@ -90,9 +110,13 @@ elements:
         y: "14mm"
         switch_type: "toggle"
         label: 
-          text: "Clip"
+          text: "CLIP"
           position: "bottom"
           distance: "5mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
 
       - type: switch
         id: "bright"
@@ -100,9 +124,13 @@ elements:
         y: "28mm"
         switch_type: "toggle"
         label: 
-          text: "Bright"
+          text: "BRIGHT"
           position: "bottom"
           distance: "5mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
       
       - type: switch
         id: "fat"
@@ -110,9 +138,13 @@ elements:
         y: "42mm"
         switch_type: "toggle"
         label: 
-          text: "Fat"
+          text: "FAT"
           position: "bottom"
           distance: "5mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
 
       - type: custom
         id: "power_led"

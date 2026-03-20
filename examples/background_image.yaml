@@ -1,0 +1,38 @@
+# Panel with raster background: crop (source), fit, zoom, pan, opacity.
+# Image path is relative to this YAML file. See also README "Background image".
+name: Background image demo
+width: 120mm
+height: 80mm
+background_color: "#1a1a2e"
+background:
+  image:
+    path: assets/panel_texture.png
+    source:
+      x: 0.0
+      y: 0.0
+      width: 1.0
+      height: 1.0
+    source_units: normalized
+    fit: cover
+    zoom: 1.15
+    pan:
+      x: 0mm
+      y: -2mm
+    opacity: 0.45
+    align: center
+render_mode: both
+elements:
+  - id: p1
+    type: potentiometer
+    x: 35mm
+    y: 40mm
+    label:
+      text: GAIN
+      position: bottom
+  - id: j1
+    type: socket
+    x: 85mm
+    y: 40mm
+    label:
+      text: OUT
+      position: bottom

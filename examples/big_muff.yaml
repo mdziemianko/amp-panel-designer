@@ -14,10 +14,9 @@ elements:
     label: 
       text: "Big Muff"
       position: "bottom-inside"
-      distance: "10mm"
       font:
-        size: "16pt"
-        family: "sans-serif"
+        size: "25pt"
+        family: "copperplate"
     border:
       type: full
       thickness: 0.5mm
@@ -28,11 +27,15 @@ elements:
         x: 12mm
         y: 14mm
         label:
-          text: "Mid"
+          text: "MID"
           position: "bottom"
           distance: "10mm"
-        knob_diameter: "15mm"
-        border_diameter: "18mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
+        knob_diameter: "12mm"
+        border_diameter: "15mm"
         scale:
           num_ticks: 11
           tick_size: "1mm"
@@ -44,11 +47,15 @@ elements:
         x: 48mm
         y: 14mm
         label:
-          text: "Tone"
+          text: "TONE"
           position: "bottom"
           distance: "10mm"
-        knob_diameter: "15mm"
-        border_diameter: "18mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
+        knob_diameter: "12mm"
+        border_diameter: "15mm"
         scale:
           num_ticks: 11
           tick_size: "1mm"
@@ -59,11 +66,15 @@ elements:
         x: 12mm
         y: 44mm
         label:
-          text: "Volume"
+          text: "LEVEL"
           position: "bottom"
           distance: "10mm"
-        knob_diameter: "15mm"
-        border_diameter: "18mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
+        knob_diameter: "12mm"
+        border_diameter: "15mm"
         scale:
           num_ticks: 11
           tick_size: "1mm"
@@ -74,11 +85,15 @@ elements:
         x: 48mm
         y: 44mm
         label:
-          text: "Sustain"
+          text: "SUSTAIN"
           position: "bottom"
           distance: "10mm"
-        knob_diameter: "15mm"
-        border_diameter: "18mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
+        knob_diameter: "12mm"
+        border_diameter: "15mm"
         scale:
           num_ticks: 11
           tick_size: "1mm"

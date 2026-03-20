@@ -19,6 +19,7 @@ The generated output can be used to generate engraver or laser cutter gcode or i
 - **DPI**: Configure `px` to `mm` conversion with `--dpi` (default: 96).
 - **Units**: Support for `mm` (default), `cm`, `in` (inches), `pt` (points), and `px` (pixels).
 - **Output**: SVG.
+- **Background image**: Optional raster behind components with crop, fit, zoom, pan, and opacity.
 
 ## Element Types
 
@@ -56,18 +57,45 @@ Generic component defined by its mounting hole (circular or rectangular).
 ![Rumble Amp Panel](examples/rumble.svg)
 [Example Configuration](examples/rumble.yaml)
 
+### Background image (panel)
+Raster image drawn on top of `background_color`, clipped to the panel, under all components.
+
+![Background image](examples/background_image.svg)
+[Example Configuration](examples/background_image.yaml) · texture: [examples/assets/panel_texture.png](examples/assets/panel_texture.png)
+
 ## Configuration Reference
 
 ### Panel
 Top-level configuration.
 - `name`: Panel name.
 - `width`, `height`: Panel dimensions.
-- `background_color`: Hex color string (e.g., `"#dddddd"`).
+- `background_color`: Hex color string (e.g., `"#dddddd"`). Shown behind the optional background image.
+- `background` (optional): Group panel backdrop settings:
+    - `color`: Same as `background_color` (if both are set, this wins when inside `background`).
+    - `image`: Background image configuration (see **Background image** below).
+- `background_image` (optional): Same as `background.image` — use either nested under `background` or this top-level key.
 - `render_mode`: Controls component visualization. Options:
     - `"components"`: Render components fully.
     - `"drill_mask"`: Render drill patterns only (crosshairs + hole).
     - `"both"` (default): Render components with drill patterns underneath (components are semi-transparent).
 - `elements`: List of root elements.
+
+#### Background image
+Embeds a PNG/JPEG (etc.) via SVG `<image>`. The `path` is resolved relative to the **YAML file’s directory** (unless absolute). The SVG references the file with a relative URL from the **output SVG’s directory**, so keep the same relative layout when moving files, or open the SVG next to the assets it links to.
+
+- `path` (required): Path to the raster file.
+- `source` (optional): Crop rectangle on the bitmap:
+    - `x`, `y`, `width`, `height`
+    - With `source_units: normalized` (default), values are **fractions of the full image** (0–1 for `x`/`y`; `width`/`height` are fractions of image size, must be &gt; 0).
+    - With `source_units: pixels`, values are **pixels** in the original file (requires correct `intrinsic_width` / `intrinsic_height`, or **Pillow** installed so dimensions are read automatically).
+- `intrinsic_width`, `intrinsic_height` (optional): Pixel size of the image if you do not use Pillow.
+- `fit`: How the cropped region maps to the panel — `"cover"` (default, fill panel, may crop), `"contain"` (letterbox), `"fill"` (stretch).
+- `zoom`: Uniform scale after `fit`, centered on the panel (`1.0` = default). Must be &gt; 0.
+- `pan`: Offset in panel space after zoom — `x`, `y` (supports units, e.g. `"2mm"`).
+- `opacity`: `0`–`1`.
+- `align`: Placement when `fit` is `cover` or `contain`. Either a string such as `"center"`, `"top-left"`, `"bottom-right"`, or `{ horizontal: left|center|right, vertical: top|center|bottom }`.
+
+**Dependency:** [Pillow](https://pypi.org/project/pillow/) is listed in `requirements.txt` so bitmap dimensions can be detected when `intrinsic_*` are omitted.
 
 ### Common Properties
 All elements (groups and components) support these properties:
@@ -121,7 +149,7 @@ A generic component defined by its mounting hole.
 - `mount`: Mounting hole configuration (see below). Required for visualization.
 - `label`: Component label.
 
-When rendered (in `show` or `both` mode), it displays a generic shape (circle or rectangle) matching the mounting dimensions.
+When rendered (in `components` or `both` mode), it displays a generic shape (circle or rectangle) matching the mounting dimensions.
 
 ### Styling and Configuration
 
@@ -131,14 +159,18 @@ Applies to Potentiometers and Rotary Switches.
 - `major_tick_interval`: Interval for major (longer) ticks.
 - `tick_style`: `"line"` or `"dot"`.
 - `tick_size`: Length/size of major ticks (minor are half).
+- `color`: Stroke/fill color for **major** ticks (default: `"black"`). SVG color (name or hex).
+- `minor_color`: Optional color for **minor** ticks; if omitted, uses `color`.
 - `position`: Position of scale relative to border diameter: `"outside"` (default), `"inside"`, or `"inline"`.
-- `labels`: List of labels for ticks (mainly for Rotary Switches). Items can be strings or Label objects.
+- `labels`: List of labels for ticks (mainly for Rotary Switches). Items can be strings or Label objects. Label text color is controlled per label via `label.font.color`, not by `scale.color`.
 
 ```yaml
 scale:
   num_ticks: 11
   tick_size: "4mm"
   position: "outside"
+  color: "#cccccc"
+  minor_color: "#666666"
 ```
 
 #### Mount Configuration
@@ -169,6 +201,18 @@ label:
     weight: "bold"
 ```
 *Note: `position` is applicable for the main component label. `distance` overrides automatic placement calculations.*
+
+**Multiline `text`:** Use a newline in the string or a YAML block. Lines are rendered as stacked SVG `<tspan>`s (1.2em line spacing).
+
+```yaml
+label:
+  text: "LINE 1\nLINE 2"
+# or
+label:
+  text: |
+    LINE 1
+    LINE 2
+```
 
 #### Border
 Applies to Groups.

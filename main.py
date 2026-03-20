@@ -2,6 +2,7 @@ import argparse
 import yaml
 import sys
 import traceback
+from pathlib import Path
 from models import Panel, set_dpi
 from renderer import PanelRenderer
 
@@ -19,8 +20,9 @@ def main():
             data = yaml.safe_load(f)
         
         panel = Panel.from_dict(data)
-        
-        renderer = PanelRenderer(panel)
+
+        base_dir = str(Path(args.input_file).resolve().parent)
+        renderer = PanelRenderer(panel, base_dir=base_dir)
         renderer.render(args.output_file)
         
         print(f"Successfully generated {args.output_file}")

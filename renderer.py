@@ -1,18 +1,136 @@
+import os
 import svgwrite
 import math
+from pathlib import Path
 from typing import Optional, Tuple
-from models import Panel, Group, Potentiometer, Socket, Switch, Element, FontStyle, Component, Custom, to_mm
+from models import (
+    Panel,
+    Group,
+    Potentiometer,
+    Socket,
+    Switch,
+    Element,
+    FontStyle,
+    Component,
+    Custom,
+    BackgroundImage,
+    to_mm,
+)
+
+
+def _load_raster_intrinsic_size(path: Path) -> Tuple[float, float]:
+    try:
+        from PIL import Image
+    except ImportError as e:
+        raise RuntimeError(
+            "Background images need image dimensions. Install Pillow (pip install Pillow) "
+            "or set intrinsic_width and intrinsic_height on background_image in YAML."
+        ) from e
+    with Image.open(path) as im:
+        w, h = im.size
+        return float(w), float(h)
+
 
 class PanelRenderer:
-    def __init__(self, panel: Panel):
+    def __init__(self, panel: Panel, base_dir: Optional[str] = None):
         self.panel = panel
-        self.dwg = svgwrite.Drawing(size=(f"{panel.width}mm", f"{panel.height}mm"), viewBox=f"0 0 {panel.width} {panel.height}")
-        # Set background
-        self.dwg.add(self.dwg.rect(insert=(0, 0), size=(panel.width, panel.height), fill=panel.background_color))
+        self.base_dir = base_dir or os.getcwd()
+        self.dwg = svgwrite.Drawing(
+            size=(f"{panel.width}mm", f"{panel.height}mm"),
+            viewBox=f"0 0 {panel.width} {panel.height}",
+        )
+        # Solid color underlay (raster is drawn on top when present)
+        self.dwg.add(
+            self.dwg.rect(
+                insert=(0, 0),
+                size=(panel.width, panel.height),
+                fill=panel.background_color,
+            )
+        )
 
     def render(self, filename: str):
+        if self.panel.background_image:
+            self._render_background_image(filename)
         self._render_group(self.panel.elements, 0, 0)
         self.dwg.saveas(filename)
+
+    def _absolute_image_path(self, bg: BackgroundImage) -> Path:
+        p = Path(bg.path)
+        if p.is_absolute():
+            return p.resolve()
+        return (Path(self.base_dir) / p).resolve()
+
+    def _image_href_for_svg(self, image_abs: Path, output_path: str) -> str:
+        out_parent = Path(output_path).resolve().parent
+        try:
+            rel = os.path.relpath(image_abs, out_parent)
+        except ValueError:
+            return image_abs.as_uri()
+        return rel.replace(os.sep, "/")
+
+    @staticmethod
+    def _background_preserve_aspect_ratio(bg: BackgroundImage) -> str:
+        xm = {"left": "Min", "center": "Mid", "right": "Max"}
+        ym = {"top": "Min", "center": "Mid", "bottom": "Max"}
+        prefix = f"x{xm[bg.align_horizontal]}Y{ym[bg.align_vertical]}"
+        if bg.fit == "fill":
+            return f"{prefix} none"
+        if bg.fit == "contain":
+            return f"{prefix} meet"
+        return f"{prefix} slice"
+
+    def _render_background_image(self, output_path: str) -> None:
+        bg = self.panel.background_image
+        assert bg is not None
+        img_path = self._absolute_image_path(bg)
+        if not img_path.is_file():
+            raise FileNotFoundError(f"Background image not found: {img_path}")
+
+        iw, ih = bg.intrinsic_width, bg.intrinsic_height
+        if iw is None or ih is None:
+            iw, ih = _load_raster_intrinsic_size(img_path)
+        else:
+            iw, ih = float(iw), float(ih)
+
+        if bg.source_units == "normalized":
+            vx = bg.source_x * iw
+            vy = bg.source_y * ih
+            vw = bg.source_width * iw
+            vh = bg.source_height * ih
+        else:
+            vx, vy, vw, vh = bg.source_x, bg.source_y, bg.source_width, bg.source_height
+
+        if vw <= 0 or vh <= 0:
+            raise ValueError("Background image crop (view) width/height must be > 0")
+
+        W, H = float(self.panel.width), float(self.panel.height)
+        href = self._image_href_for_svg(img_path, output_path)
+        par = self._background_preserve_aspect_ratio(bg)
+
+        clip_id = f"panel_bg_clip_{id(self)}"
+        cp = self.dwg.defs.add(self.dwg.clipPath(id=clip_id))
+        cp.add(self.dwg.rect(insert=(0, 0), size=(W, H)))
+
+        outer = self.dwg.g(clip_path=f"url(#{clip_id})", opacity=float(bg.opacity))
+        cx, cy = W / 2.0, H / 2.0
+        transform = (
+            f"translate({bg.pan_x + cx:.6f},{bg.pan_y + cy:.6f}) "
+            f"scale({bg.zoom:.6f}) "
+            f"translate({-cx:.6f},{-cy:.6f})"
+        )
+        inner_g = outer.add(self.dwg.g(transform=transform))
+
+        nested = inner_g.add(
+            self.dwg.svg(
+                insert=(0, 0),
+                size=(W, H),
+                viewBox=f"{vx} {vy} {vw} {vh}",
+                preserveAspectRatio=par,
+            )
+        )
+        nested.add(self.dwg.image(href, insert=(0, 0), size=(iw, ih)))
+
+        self.dwg.add(outer)
 
     def _get_text_width(self, text: str, font_size: float) -> float:
         if isinstance(font_size, str):
@@ -20,7 +138,9 @@ class PanelRenderer:
                 font_size = to_mm(font_size)
             except Exception:
                 font_size = to_mm("12pt")
-        return len(text) * float(font_size) * 0.6
+        fs = float(font_size)
+        lines = text.splitlines() or [""]
+        return max(len(line) for line in lines) * fs * 0.6
 
     def _get_font_size_mm(self, font_style: Optional[FontStyle], default_mm=None) -> float:
         # Default to 12pt (~4.233mm) if not specified
@@ -452,12 +572,16 @@ class PanelRenderer:
                     base_radius = (pot.border_diameter / 2) if pot.border_diameter > pot.knob_diameter else (pot.knob_diameter / 2)
                     tick_r_start = base_radius + 1.0 
 
+                tick_major_color = s.color or "black"
+                tick_minor_color = s.minor_color if s.minor_color is not None else tick_major_color
+
                 for i in range(s.num_ticks):
                     angle_user = start_angle_user + i * step
                     angle_svg_deg = angle_user + 90
                     angle_rad = math.radians(angle_svg_deg)
                     
                     is_major = (i % s.major_tick_interval == 0) if s.major_tick_interval > 0 else True
+                    tick_stroke = tick_major_color if is_major else tick_minor_color
                     
                     current_tick_len = s.tick_size if is_major else s.tick_size * 0.5
                     
@@ -493,11 +617,11 @@ class PanelRenderer:
                         x_dot = x + r_center * math.cos(angle_rad)
                         y_dot = y + r_center * math.sin(angle_rad)
                         
-                        self.dwg.add(self.dwg.circle(center=(x_dot, y_dot), r=r_dot, fill='black'))
+                        self.dwg.add(self.dwg.circle(center=(x_dot, y_dot), r=r_dot, fill=tick_stroke))
                     else: # line
                         x2 = x + r_end * math.cos(angle_rad)
                         y2 = y + r_end * math.sin(angle_rad)
-                        self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), stroke='black', stroke_width=1 if not is_major else 1.5))
+                        self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), stroke=tick_stroke, stroke_width=1 if not is_major else 1.5))
 
         if self._should_show_component():
             self.dwg.add(self.dwg.circle(center=(x, y), r=knob_radius, fill='white', stroke='black', stroke_width=1, opacity=component_opacity))
@@ -577,6 +701,9 @@ class PanelRenderer:
                  # Rotary usually has knob_diameter
                  base_radius = switch.knob_diameter / 2
                  tick_r_start = base_radius + 1.0
+
+                 tick_major_color = s.color or "black"
+                 tick_minor_color = s.minor_color if s.minor_color is not None else tick_major_color
                  
                  for i in range(s.num_ticks):
                     angle_user = start_angle_user + i * step
@@ -584,6 +711,7 @@ class PanelRenderer:
                     angle_rad = math.radians(angle_svg_deg)
                     
                     is_major = (i % s.major_tick_interval == 0) if s.major_tick_interval > 0 else True
+                    tick_stroke = tick_major_color if is_major else tick_minor_color
                     
                     current_tick_len = s.tick_size if is_major else s.tick_size * 0.5
                     
@@ -595,12 +723,12 @@ class PanelRenderer:
                         r_dot = (current_tick_len / 2) if is_major else (current_tick_len * 0.5 / 2) # Minor tick dot radius is 50% of major
                         x_dot = x + (tick_r_start + r_dot) * math.cos(angle_rad)
                         y_dot = y + (tick_r_start + r_dot) * math.sin(angle_rad)
-                        self.dwg.add(self.dwg.circle(center=(x_dot, y_dot), r=r_dot, fill='black'))
+                        self.dwg.add(self.dwg.circle(center=(x_dot, y_dot), r=r_dot, fill=tick_stroke))
                         label_anchor_radius = tick_r_start + r_dot * 2 + 2 # push out
                     else: # line
                         x2 = x + (tick_r_start + current_tick_len) * math.cos(angle_rad)
                         y2 = y + (tick_r_start + current_tick_len) * math.sin(angle_rad)
-                        self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), stroke='black', stroke_width=1 if not is_major else 1.5))
+                        self.dwg.add(self.dwg.line(start=(x1, y1), end=(x2, y2), stroke=tick_stroke, stroke_width=1 if not is_major else 1.5))
                         label_anchor_radius = tick_r_start + current_tick_len + 3 # push out
                     
                     # Draw label if exists
@@ -759,9 +887,34 @@ class PanelRenderer:
             if font_style.family:
                 family = font_style.family
 
-        self.dwg.add(self.dwg.text(text, insert=(x, y), 
-                                   text_anchor=anchor, 
-                                   font_family=family, 
-                                   font_size=size,
-                                   font_weight=weight,
-                                   fill=color))
+        lines = text.splitlines()
+        if len(lines) <= 1:
+            self.dwg.add(
+                self.dwg.text(
+                    text,
+                    insert=(x, y),
+                    text_anchor=anchor,
+                    font_family=family,
+                    font_size=size,
+                    font_weight=weight,
+                    fill=color,
+                )
+            )
+            return
+
+        # SVG: line breaks need <tspan dy="...">; plain \n in <text> is ignored by most viewers.
+        t = self.dwg.text(
+            "",
+            insert=(x, y),
+            text_anchor=anchor,
+            font_family=family,
+            font_size=size,
+            font_weight=weight,
+            fill=color,
+        )
+        for i, line in enumerate(lines):
+            if i == 0:
+                t.add(self.dwg.tspan(line, x=[x]))
+            else:
+                t.add(self.dwg.tspan(line, x=[x], dy=["1.2em"]))
+        self.dwg.add(t)

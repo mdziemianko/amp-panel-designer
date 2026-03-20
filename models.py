@@ -202,6 +202,8 @@ class Scale:
     tick_style: str = "line"
     tick_size: float = 2.0
     position: str = "outside" # outside, inside, inline
+    color: str = "black"
+    minor_color: Optional[str] = None  # if unset, same as color
     labels: List[Label] = field(default_factory=list)
 
     @staticmethod
@@ -313,6 +315,144 @@ class Switch(Component):
         return obj
 
 @dataclass
+class BackgroundImage:
+    """Raster image drawn behind components (after solid panel color)."""
+    path: str
+    intrinsic_width: Optional[float] = None   # px; detected via Pillow if omitted
+    intrinsic_height: Optional[float] = None
+    source_x: float = 0.0
+    source_y: float = 0.0
+    source_width: float = 1.0
+    source_height: float = 1.0
+    source_units: str = "normalized"  # "normalized" (0–1 of bitmap) or "pixels"
+    fit: str = "cover"  # cover, contain, fill
+    zoom: float = 1.0
+    pan_x: float = 0.0  # mm in panel space
+    pan_y: float = 0.0
+    opacity: float = 1.0
+    align_horizontal: str = "center"  # left, center, right
+    align_vertical: str = "center"  # top, center, bottom
+
+    @staticmethod
+    def from_dict(data: dict) -> "BackgroundImage":
+        if not isinstance(data, dict):
+            raise ValueError("background image must be a mapping")
+        data = dict(data)
+        path = data.pop("path", None)
+        if not path or not isinstance(path, str):
+            raise ValueError("background image requires string 'path'")
+
+        def _num(v, default=None):
+            if v is None:
+                return default
+            if isinstance(v, (int, float)):
+                return float(v)
+            if isinstance(v, str):
+                return float(v.strip())
+            raise TypeError(f"expected number, got {type(v)}")
+
+        src = data.pop("source", None)
+        if isinstance(src, dict):
+            if "x" in src:
+                data.setdefault("source_x", _num(src.get("x")))
+            if "y" in src:
+                data.setdefault("source_y", _num(src.get("y")))
+            if "width" in src:
+                data.setdefault("source_width", _num(src.get("width")))
+            if "height" in src:
+                data.setdefault("source_height", _num(src.get("height")))
+
+        pan = data.pop("pan", None)
+        if isinstance(pan, dict):
+            if "x" in pan:
+                data["pan_x"] = to_mm(pan["x"])
+            if "y" in pan:
+                data["pan_y"] = to_mm(pan["y"])
+
+        align = data.pop("align", None)
+        if isinstance(align, dict):
+            h = align.get("horizontal", "center")
+            v = align.get("vertical", "center")
+            data["align_horizontal"] = str(h).lower()
+            data["align_vertical"] = str(v).lower()
+        elif isinstance(align, str):
+            a = align.strip().lower().replace("-", " ")
+            if a in ("center", "middle"):
+                data["align_horizontal"] = "center"
+                data["align_vertical"] = "center"
+            elif a in ("top left", "left top", "top-left"):
+                data["align_horizontal"] = "left"
+                data["align_vertical"] = "top"
+            elif a in ("top right", "right top"):
+                data["align_horizontal"] = "right"
+                data["align_vertical"] = "top"
+            elif a in ("bottom left", "left bottom"):
+                data["align_horizontal"] = "left"
+                data["align_vertical"] = "bottom"
+            elif a in ("bottom right", "right bottom"):
+                data["align_horizontal"] = "right"
+                data["align_vertical"] = "bottom"
+            elif a in ("top", "top center"):
+                data["align_horizontal"] = "center"
+                data["align_vertical"] = "top"
+            elif a in ("bottom", "bottom center"):
+                data["align_horizontal"] = "center"
+                data["align_vertical"] = "bottom"
+            elif a in ("left", "left center", "center left"):
+                data["align_horizontal"] = "left"
+                data["align_vertical"] = "center"
+            elif a in ("right", "right center", "center right"):
+                data["align_horizontal"] = "right"
+                data["align_vertical"] = "center"
+
+        for key in ("intrinsic_width", "intrinsic_height", "source_x", "source_y",
+                    "source_width", "source_height", "zoom", "opacity"):
+            if key in data and isinstance(data[key], str):
+                try:
+                    data[key] = float(data[key].strip())
+                except ValueError:
+                    pass
+
+        obj = BackgroundImage(path=path, **_filter_args(BackgroundImage, data))
+
+        su = (obj.source_units or "normalized").lower()
+        if su not in ("normalized", "pixels"):
+            raise ValueError("background_image.source_units must be 'normalized' or 'pixels'")
+        obj.source_units = su
+
+        ft = (obj.fit or "cover").lower()
+        if ft not in ("cover", "contain", "fill"):
+            raise ValueError("background_image.fit must be 'cover', 'contain', or 'fill'")
+        obj.fit = ft
+
+        if obj.zoom <= 0:
+            raise ValueError("background_image.zoom must be > 0")
+        if not (0.0 <= obj.opacity <= 1.0):
+            raise ValueError("background_image.opacity must be between 0 and 1")
+
+        for name, allowed in (
+            ("align_horizontal", ("left", "center", "right")),
+            ("align_vertical", ("top", "center", "bottom")),
+        ):
+            val = getattr(obj, name).lower()
+            if val not in allowed:
+                raise ValueError(f"background_image.{name} must be one of {allowed}")
+            setattr(obj, name, val)
+
+        if obj.source_units == "normalized":
+            if obj.source_width <= 0 or obj.source_height <= 0:
+                raise ValueError("normalized source width/height must be > 0")
+            for n, v in (("source_x", obj.source_x), ("source_y", obj.source_y)):
+                if not (0.0 <= v <= 1.0):
+                    raise ValueError(f"normalized {n} must be in [0,1]")
+        else:
+            if obj.source_width <= 0 or obj.source_height <= 0:
+                raise ValueError("background_image source width/height must be > 0 in pixels")
+
+        return obj
+
+
+@dataclass
 class Border:
     type: str = "none" 
     thickness: float = 1.0
@@ -350,14 +490,25 @@ class Panel:
     height: float
     elements: List[Element] = field(default_factory=list)
     background_color: str = "#ffffff"
+    background_image: Optional[BackgroundImage] = None
     render_mode: str = "both"
 
     @staticmethod
     def from_dict(data: dict):
+        data = dict(data)
+        bg_block = data.pop("background", None)
+        bg_img_data = data.pop("background_image", None)
+        if isinstance(bg_block, dict):
+            if "color" in bg_block:
+                data["background_color"] = bg_block["color"]
+            if "image" in bg_block and bg_img_data is None:
+                bg_img_data = bg_block["image"]
         data = normalize_data(data)
-        elements_data = data.pop('elements', [])
+        elements_data = data.pop("elements", [])
         clean_data = _filter_args(Panel, data)
         panel = Panel(**clean_data)
+        if bg_img_data is not None:
+            panel.background_image = BackgroundImage.from_dict(bg_img_data)
         for el_data in elements_data:
             panel.elements.append(Element.from_dict(el_data))
         return panel
