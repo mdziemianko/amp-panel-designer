@@ -332,12 +332,18 @@ class BackgroundImage:
     opacity: float = 1.0
     align_horizontal: str = "center"  # left, center, right
     align_vertical: str = "center"  # top, center, bottom
+    placement: Optional[dict] = None  # optional { x, y, width, height } in mm or % of panel
 
     @staticmethod
-    def from_dict(data: dict) -> "BackgroundImage":
+    def from_dict(data) -> "BackgroundImage":
+        if isinstance(data, str):
+            data = {"path": data}
         if not isinstance(data, dict):
-            raise ValueError("background image must be a mapping")
+            raise ValueError("background image must be a mapping or path string")
         data = dict(data)
+        placement = data.pop("placement", None)
+        if placement is not None and not isinstance(placement, dict):
+            raise ValueError("background_image.placement must be a mapping")
         path = data.pop("path", None)
         if not path or not isinstance(path, str):
             raise ValueError("background image requires string 'path'")
@@ -449,6 +455,7 @@ class BackgroundImage:
             if obj.source_width <= 0 or obj.source_height <= 0:
                 raise ValueError("background_image source width/height must be > 0 in pixels")
 
+        obj.placement = placement
         return obj
 
 

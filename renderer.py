@@ -79,6 +79,33 @@ class PanelRenderer:
             return f"{prefix} meet"
         return f"{prefix} slice"
 
+    def _resolve_bg_placement_rect(
+        self, bg: BackgroundImage, panel_w: float, panel_h: float
+    ) -> Tuple[float, float, float, float]:
+        """Region of the panel (mm) where the background image is drawn. Default: full panel."""
+        p = bg.placement
+        if not p:
+            return 0.0, 0.0, panel_w, panel_h
+
+        def res(key: str, ref: float, default: float) -> float:
+            if key not in p or p[key] is None:
+                return default
+            v = p[key]
+            if isinstance(v, str) and v.strip().endswith("%"):
+                return ref * float(v.strip()[:-1]) / 100.0
+            return float(to_mm(v))
+
+        ox = res("x", panel_w, 0.0)
+        oy = res("y", panel_h, 0.0)
+        ow = res("width", panel_w, panel_w) if p.get("width") is not None else panel_w
+        oh = res("height", panel_h, panel_h) if p.get("height") is not None else panel_h
+
+        ox = max(0.0, min(ox, panel_w))
+        oy = max(0.0, min(oy, panel_h))
+        ow = max(0.01, min(ow, panel_w - ox))
+        oh = max(0.01, min(oh, panel_h - oy))
+        return ox, oy, ow, oh
+
     def _render_background_image(self, output_path: str) -> None:
         bg = self.panel.background_image
         assert bg is not None
@@ -104,6 +131,7 @@ class PanelRenderer:
             raise ValueError("Background image crop (view) width/height must be > 0")
 
         W, H = float(self.panel.width), float(self.panel.height)
+        ox, oy, ow, oh = self._resolve_bg_placement_rect(bg, W, H)
         href = self._image_href_for_svg(img_path, output_path)
         par = self._background_preserve_aspect_ratio(bg)
 
@@ -111,19 +139,26 @@ class PanelRenderer:
         cp = self.dwg.defs.add(self.dwg.clipPath(id=clip_id))
         cp.add(self.dwg.rect(insert=(0, 0), size=(W, H)))
 
+        place_id = f"panel_bg_place_{id(self)}"
+        pcp = self.dwg.defs.add(self.dwg.clipPath(id=place_id))
+        pcp.add(self.dwg.rect(insert=(ox, oy), size=(ow, oh)))
+
         outer = self.dwg.g(clip_path=f"url(#{clip_id})", opacity=float(bg.opacity))
-        cx, cy = W / 2.0, H / 2.0
+        placed = outer.add(self.dwg.g(clip_path=f"url(#{place_id})"))
+
+        cx = ox + ow / 2.0
+        cy = oy + oh / 2.0
         transform = (
             f"translate({bg.pan_x + cx:.6f},{bg.pan_y + cy:.6f}) "
             f"scale({bg.zoom:.6f}) "
             f"translate({-cx:.6f},{-cy:.6f})"
         )
-        inner_g = outer.add(self.dwg.g(transform=transform))
+        inner_g = placed.add(self.dwg.g(transform=transform))
 
         nested = inner_g.add(
             self.dwg.svg(
-                insert=(0, 0),
-                size=(W, H),
+                insert=(ox, oy),
+                size=(ow, oh),
                 viewBox=f"{vx} {vy} {vw} {vh}",
                 preserveAspectRatio=par,
             )

@@ -83,17 +83,31 @@ Top-level configuration.
 #### Background image
 Embeds a PNG/JPEG (etc.) via SVG `<image>`. The `path` is resolved relative to the **YAML file’s directory** (unless absolute). The SVG references the file with a relative URL from the **output SVG’s directory**, so keep the same relative layout when moving files, or open the SVG next to the assets it links to.
 
-- `path` (required): Path to the raster file.
+- `path` (required): Path to the raster file. Shorthand: `image: "assets/photo.png"` under `background` is the same as `image: { path: "assets/photo.png" }`.
 - `source` (optional): Crop rectangle on the bitmap:
     - `x`, `y`, `width`, `height`
     - With `source_units: normalized` (default), values are **fractions of the full image** (0–1 for `x`/`y`; `width`/`height` are fractions of image size, must be &gt; 0).
     - With `source_units: pixels`, values are **pixels** in the original file (requires correct `intrinsic_width` / `intrinsic_height`, or **Pillow** installed so dimensions are read automatically).
 - `intrinsic_width`, `intrinsic_height` (optional): Pixel size of the image if you do not use Pillow.
 - `fit`: How the cropped region maps to the panel — `"cover"` (default, fill panel, may crop), `"contain"` (letterbox), `"fill"` (stretch).
-- `zoom`: Uniform scale after `fit`, centered on the panel (`1.0` = default). Must be &gt; 0.
+- `zoom`: Uniform scale after `fit`, centered on the **placement** rectangle (or full panel if no placement). Must be &gt; 0.
 - `pan`: Offset in panel space after zoom — `x`, `y` (supports units, e.g. `"2mm"`).
 - `opacity`: `0`–`1`.
 - `align`: Placement when `fit` is `cover` or `contain`. Either a string such as `"center"`, `"top-left"`, `"bottom-right"`, or `{ horizontal: left|center|right, vertical: top|center|bottom }`.
+- `placement` (optional): Draw the image only inside a rectangle on the panel (the rest stays solid `background_color`). Keys `x`, `y`, `width`, `height` — all optional. Missing `x`/`y` default to `0`. Missing `width`/`height` default to the full panel width/height. Each value may be a length (`"10mm"`) or a percentage of the panel (`"50%"` is half the panel width or height). Example — image in the **bottom half** only:
+
+```yaml
+background:
+  color: "#05AA05"
+  image:
+    path: assets/art.png
+    fit: cover
+    align: bottom
+    placement:
+      y: "50%"
+      height: "50%"
+      width: "100%"
+```
 
 **Dependency:** [Pillow](https://pypi.org/project/pillow/) is listed in `requirements.txt` so bitmap dimensions can be detected when `intrinsic_*` are omitted.
 

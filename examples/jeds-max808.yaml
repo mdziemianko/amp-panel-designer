@@ -2,9 +2,32 @@ name: "Jeds 808 MAX"
 width: 70mm
 height: 126mm
 background:
-  color: "#05AA05"
+  #color: "#05AA05"
+  color: "#ffffff"
+  image:
+    path: assets/bn.png
+    source:
+      x: 0.0
+      y: 0.0
+      width: 1.0
+      height: 1.0
+    source_units: normalized
+    fit: cover
+    zoom: 1.0
+    pan:
+      x: 0mm
+      y: 0mm
+    opacity: 0.5
+    # With fit: cover, vertical align picks which part of the bitmap stays visible.
+    # "top" keeps the top of the image (not the center/bottom).
+    align: top
+    # Raster only in the bottom half of the panel (top half stays solid green).
+    placement:
+      y: "50%"
+      height: "50%"
+      width: "100%"
 
-render_mode: "both"
+render_mode: "drill_mask"
 
 elements:
   - type: group
@@ -18,8 +41,8 @@ elements:
       position: "bottom-inside"
       distance: "10mm"
       font:
-        size: "25pt"
-        family: "zapfino"
+        size: "35pt"
+        family: "herculanum"
         color: "black"
         weight: "bold"
     border:
@@ -121,7 +144,7 @@ elements:
       - type: switch
         id: "bright"
         x: "30mm"
-        y: "28mm"
+        y: "27.5mm"
         switch_type: "toggle"
         label: 
           text: "BRIGHT"
@@ -135,7 +158,7 @@ elements:
       - type: switch
         id: "fat"
         x: "30mm"
-        y: "42mm"
+        y: "41mm"
         switch_type: "toggle"
         label: 
           text: "FAT"
@@ -149,7 +172,7 @@ elements:
       - type: custom
         id: "power_led"
         x: "30mm"
-        y: "68mm"
+        y: "66mm"
         mount:
           diameter: "5mm"
 

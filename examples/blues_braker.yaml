@@ -1,10 +1,10 @@
-name: "Big muff"
-width: 70mm
-height: 126mm
+name: "Blues Braker"
+width: 65mm
+height: 117mm
 background:
   color: "#ffffff"
   image:
-    path: assets/pi.png
+    path: assets/notes.png
     source:
       x: 0.0
       y: 0.0
@@ -16,13 +16,13 @@ background:
     pan:
       x: 0mm
       y: 0mm
-    opacity: 0.4
+    opacity: 0.5
     # With fit: cover, vertical align picks which part of the bitmap stays visible.
     # "top" keeps the top of the image (not the center/bottom).
     align: top
     # Raster only in the bottom half of the panel (top half stays solid green).
     placement:
-      y: "30%"
+      y: "25%"
       height: "100%"
       width: "100%"
 
@@ -33,16 +33,16 @@ elements:
     id: "controls"
     x: 5mm
     y: 5mm
-    width: 60mm
-    height: 116mm
+    width: 55mm
+    height: 107mm
     label: 
       # text: "Big Muff"
-      text: "BIG MUFF"
+      text: "Blues Braker"
       position: "bottom-inside"
       font:
-        size: "30pt"
-        #  family: "copperplate"
-        family: "impact"
+        size: "16pt"
+        #  family: "brush script"
+        family: "zapfino"
     
         # font_weight: "bold"
     border:
@@ -52,47 +52,8 @@ elements:
     elements:
       - type: potentiometer
         id: "mid"
-        x: 12.5mm
-        y: 14mm
-        label:
-          text: "MID"
-          position: "bottom"
-          distance: "10mm"
-          font:
-            color: "black"
-            size: "10pt"
-            weight: "bold"
-        knob_diameter: "12mm"
-        border_diameter: "15mm"
-        scale:
-          num_ticks: 11
-          tick_size: "1mm"
-          tick_style: "dot"
-
-
-      - type: potentiometer
-        id: "tone"
-        x: 47.5mm
-        y: 14mm
-        label:
-          text: "TONE"
-          position: "bottom"
-          distance: "10mm"
-          font:
-            color: "black"
-            size: "10pt"
-            weight: "bold"
-        knob_diameter: "12mm"
-        border_diameter: "15mm"
-        scale:
-          num_ticks: 11
-          tick_size: "1mm"
-          tick_style: "dot"
-        
-      - type: potentiometer
-        id: "volume"
-        x: 12.5mm
-        y: 43mm
+        x: 9.5mm
+        y: 16mm
         label:
           text: "LEVEL"
           position: "bottom"
@@ -102,18 +63,19 @@ elements:
             size: "10pt"
             weight: "bold"
         knob_diameter: "12mm"
-        border_diameter: "15mm"
+        border_diameter: "13mm"
         scale:
           num_ticks: 11
           tick_size: "1mm"
           tick_style: "dot"
 
+
       - type: potentiometer
-        id: "sustain"
-        x: 47.5mm
-        y: 43mm
+        id: "tone"
+        x: 27.5mm
+        y: 19mm
         label:
-          text: "SUSTAIN"
+          text: "TONE"
           position: "bottom"
           distance: "10mm"
           font:
@@ -121,23 +83,43 @@ elements:
             size: "10pt"
             weight: "bold"
         knob_diameter: "12mm"
-        border_diameter: "15mm"
+        border_diameter: "13mm"
+        scale:
+          num_ticks: 11
+          tick_size: "1mm"
+          tick_style: "dot"
+        
+      - type: potentiometer
+        id: "volume"
+        x: 45.5mm
+        y: 16mm
+        label:
+          text: "GAIN"
+          position: "bottom"
+          distance: "10mm"
+          font:
+            color: "black"
+            size: "10pt"
+            weight: "bold"
+        knob_diameter: "12mm"
+        border_diameter: "13mm"
         scale:
           num_ticks: 11
           tick_size: "1mm"
           tick_style: "dot"
 
+      
       - type: custom
         id: "power_led"
-        x: "30mm"
-        y: "66mm"
+        x: "27.5mm"
+        y: "53mm"
         mount:
           diameter: "5mm"
 
       - type: custom
         id: "switch"
-        x: "30mm"
-        y: "89mm"
+        x: "27.5mm"
+        y: "77mm"
         mount:
           diameter: "12mm"
 
