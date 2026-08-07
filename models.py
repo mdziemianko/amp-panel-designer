@@ -472,20 +472,35 @@ class Group(Element):
     width: Optional[float] = None
     height: Optional[float] = None
     border: Optional[Border] = None
+    background_color: Optional[str] = None
+    background_image: Optional["BackgroundImage"] = None
 
     @staticmethod
     def from_dict(data: dict):
         elements_data = data.pop('elements', [])
         border_data = data.pop('border', None)
+        bg_block = data.pop('background', None)
+        bg_img_data = data.pop('background_image', None)
         data = normalize_data(data)
-        
+
         clean_data = _filter_args(Group, data)
         group = Group(**clean_data)
-        
+
         if border_data:
             border_data = normalize_data(border_data)
             group.border = Border(**_filter_args(Border, border_data))
-            
+
+        if isinstance(bg_block, dict):
+            if 'color' in bg_block:
+                group.background_color = bg_block['color']
+            if 'image' in bg_block and bg_img_data is None:
+                bg_img_data = bg_block['image']
+        elif isinstance(bg_block, str):
+            group.background_color = bg_block
+
+        if bg_img_data is not None:
+            group.background_image = BackgroundImage.from_dict(bg_img_data)
+
         for el_data in elements_data:
             group.elements.append(Element.from_dict(el_data))
         return group

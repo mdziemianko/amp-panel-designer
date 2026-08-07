@@ -49,8 +49,14 @@ class PanelRenderer:
         )
 
     def render(self, filename: str):
+        self._output_path = filename
         if self.panel.background_image:
-            self._render_background_image(filename)
+            self._render_bg_image_in_rect(
+                self.panel.background_image,
+                0.0, 0.0,
+                float(self.panel.width), float(self.panel.height),
+                f"panel_bg_{id(self)}",
+            )
         self._render_group(self.panel.elements, 0, 0)
         self.dwg.saveas(filename)
 
@@ -106,9 +112,16 @@ class PanelRenderer:
         oh = max(0.01, min(oh, panel_h - oy))
         return ox, oy, ow, oh
 
-    def _render_background_image(self, output_path: str) -> None:
-        bg = self.panel.background_image
-        assert bg is not None
+    def _render_bg_image_in_rect(
+        self,
+        bg: BackgroundImage,
+        container_x: float,
+        container_y: float,
+        container_w: float,
+        container_h: float,
+        clip_prefix: str,
+    ) -> None:
+        """Render a BackgroundImage inside an arbitrary axis-aligned rectangle."""
         img_path = self._absolute_image_path(bg)
         if not img_path.is_file():
             raise FileNotFoundError(f"Background image not found: {img_path}")
@@ -130,21 +143,25 @@ class PanelRenderer:
         if vw <= 0 or vh <= 0:
             raise ValueError("Background image crop (view) width/height must be > 0")
 
-        W, H = float(self.panel.width), float(self.panel.height)
-        ox, oy, ow, oh = self._resolve_bg_placement_rect(bg, W, H)
-        href = self._image_href_for_svg(img_path, output_path)
+        # placement is relative to the container; convert to absolute SVG coords
+        rel_ox, rel_oy, ow, oh = self._resolve_bg_placement_rect(bg, container_w, container_h)
+        ox = container_x + rel_ox
+        oy = container_y + rel_oy
+
+        href = self._image_href_for_svg(img_path, self._output_path)
         par = self._background_preserve_aspect_ratio(bg)
 
-        clip_id = f"panel_bg_clip_{id(self)}"
-        cp = self.dwg.defs.add(self.dwg.clipPath(id=clip_id))
-        cp.add(self.dwg.rect(insert=(0, 0), size=(W, H)))
+        outer_clip_id = f"{clip_prefix}_outer"
+        place_clip_id = f"{clip_prefix}_place"
 
-        place_id = f"panel_bg_place_{id(self)}"
-        pcp = self.dwg.defs.add(self.dwg.clipPath(id=place_id))
+        cp = self.dwg.defs.add(self.dwg.clipPath(id=outer_clip_id))
+        cp.add(self.dwg.rect(insert=(container_x, container_y), size=(container_w, container_h)))
+
+        pcp = self.dwg.defs.add(self.dwg.clipPath(id=place_clip_id))
         pcp.add(self.dwg.rect(insert=(ox, oy), size=(ow, oh)))
 
-        outer = self.dwg.g(clip_path=f"url(#{clip_id})", opacity=float(bg.opacity))
-        placed = outer.add(self.dwg.g(clip_path=f"url(#{place_id})"))
+        outer = self.dwg.g(clip_path=f"url(#{outer_clip_id})", opacity=float(bg.opacity))
+        placed = outer.add(self.dwg.g(clip_path=f"url(#{place_clip_id})"))
 
         cx = ox + ow / 2.0
         cy = oy + oh / 2.0
@@ -271,9 +288,25 @@ class PanelRenderer:
             abs_y = offset_y + element.y
             
             if isinstance(element, Group):
+                # ── Background (rendered first, behind everything) ──────────
+                gw = element.width or 0
+                gh = element.height or 0
+                if element.background_color and gw and gh:
+                    self.dwg.add(self.dwg.rect(
+                        insert=(abs_x, abs_y),
+                        size=(gw, gh),
+                        fill=element.background_color,
+                    ))
+                if element.background_image and gw and gh:
+                    self._render_bg_image_in_rect(
+                        element.background_image,
+                        abs_x, abs_y, gw, gh,
+                        f"grp_bg_{id(element)}",
+                    )
+
                 label_gap = None
                 label_gap_side = None # 'top', 'bottom', 'left', 'right'
-                
+
                 # Render group label if exists
                 if element.label and element.label.text:
                     label_text = element.label.text
@@ -293,64 +326,76 @@ class PanelRenderer:
                     label_y = abs_y
                     anchor = 'middle'
 
+                    # Explicit distance overrides the per-side default.
+                    label_dist = element.label.distance  # None means "use side default"
+
                     # Calculate positions
                     if side == 'center':
                         label_x = abs_x + (element.width / 2 if element.width else 0)
-                        label_y = abs_y + (element.height / 2 if element.height else 0) + size_val * 0.35 # vertical center approx
+                        label_y = abs_y + (element.height / 2 if element.height else 0) + size_val * 0.35
                         anchor = 'middle'
-                    
+
                     elif side == 'top':
-                        label_x = abs_x + (element.width / 2 if element.width else 0)
-                        if mode == 'inline':
-                            label_y = abs_y + size_val * 0.35 
+                        dist = label_dist if label_dist is not None else 5.0
+                        if mode == 'left':
+                            label_x = abs_x
+                            label_y = abs_y - dist
+                            anchor = 'start'
+                        elif mode == 'right':
+                            label_x = abs_x + (element.width if element.width else 0)
+                            label_y = abs_y - dist
+                            anchor = 'end'
+                        elif mode == 'inline':
+                            label_x = abs_x + (element.width / 2 if element.width else 0)
+                            label_y = abs_y + size_val * 0.35
                             label_gap = (label_x - text_width/2 - 2, label_x + text_width/2 + 2)
                             label_gap_side = 'top'
                         elif mode == 'inside':
+                            label_x = abs_x + (element.width / 2 if element.width else 0)
                             label_y = abs_y + size_val + 2
-                        else: # outside
-                            label_y = abs_y - 5
-                    
+                        else:  # outside / default
+                            label_x = abs_x + (element.width / 2 if element.width else 0)
+                            label_y = abs_y - dist
+
                     elif side == 'bottom':
+                        dist = label_dist if label_dist is not None else None
                         label_x = abs_x + (element.width / 2 if element.width else 0)
                         base_y = abs_y + (element.height if element.height else 0)
-                        if mode == 'inline':
+                        if mode == 'left':
+                            label_x = abs_x
+                            label_y = base_y + (dist if dist is not None else size_val + 2)
+                            anchor = 'start'
+                        elif mode == 'right':
+                            label_x = abs_x + (element.width if element.width else 0)
+                            label_y = base_y + (dist if dist is not None else size_val + 2)
+                            anchor = 'end'
+                        elif mode == 'inline':
                             label_y = base_y + size_val * 0.35
                             label_gap = (label_x - text_width/2 - 2, label_x + text_width/2 + 2)
                             label_gap_side = 'bottom'
                         elif mode == 'inside':
                             label_y = base_y - 5
-                        else: # outside
-                            label_y = base_y + size_val + 2
-                            
+                        else:  # outside / default
+                            label_y = base_y + (dist if dist is not None else size_val + 2)
+
                     elif side == 'left':
+                        dist = label_dist if label_dist is not None else 5.0
                         label_y = abs_y + (element.height / 2 if element.height else 0) + size_val * 0.35
                         if mode == 'inline':
                             label_x = abs_x
-                            # Gap on vertical line: y-coordinates
-                            # text_width is horizontal width. 
-                            # Since we don't rotate text for now, the gap logic for left/right inline needs checking.
-                            # Usually side labels are rotated? If not, they just sit on the line.
-                            # If text is horizontal, it will cross the line.
-                            # gap is (y_start, y_end)
-                            # But current logic is horizontal text.
-                            # A horizontal text on a vertical line looks weird if inline.
-                            # Assuming horizontal text centered on line.
-                            # We'll gap the line around the text height? Or text width?
-                            # Text crosses line perpendicularly.
-                            # We can just gap around the middle.
-                            # Gap size = font_size (height) roughly?
                             gap_size = size_val
-                            label_gap = (label_y - gap_size/2 - 2, label_y + gap_size/2 + 2) # Vertical gap
+                            label_gap = (label_y - gap_size/2 - 2, label_y + gap_size/2 + 2)
                             label_gap_side = 'left'
                             anchor = 'middle'
                         elif mode == 'inside':
-                            label_x = abs_x + 5
+                            label_x = abs_x + dist
                             anchor = 'start'
-                        else: # outside
-                            label_x = abs_x - 5
+                        else:  # outside / default
+                            label_x = abs_x - dist
                             anchor = 'end'
 
                     elif side == 'right':
+                        dist = label_dist if label_dist is not None else 5.0
                         label_y = abs_y + (element.height / 2 if element.height else 0) + size_val * 0.35
                         base_x = abs_x + (element.width if element.width else 0)
                         if mode == 'inline':
@@ -360,10 +405,10 @@ class PanelRenderer:
                             label_gap_side = 'right'
                             anchor = 'middle'
                         elif mode == 'inside':
-                            label_x = base_x - 5
+                            label_x = base_x - dist
                             anchor = 'end'
-                        else: # outside
-                            label_x = base_x + 5
+                        else:  # outside / default
+                            label_x = base_x + dist
                             anchor = 'start'
 
                     self._render_text(label_text, label_x, label_y, default_size=default_size, default_weight='normal', font_style=font_style, anchor=anchor)

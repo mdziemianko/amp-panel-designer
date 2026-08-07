@@ -1,0 +1,2244 @@
+name: Big muff
+width: 255mm
+height: 168mm
+render_mode: drill_mask
+elements:
+- type: group
+  id: column_1
+  x: 10mm
+  y: 16mm
+  width: 60mm
+  height: 136mm
+  elements:
+  - type: group
+    id: major_triad
+    x: 0mm
+    y: 0mm
+    width: 40mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: MAJOR TRIAD
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: major_triad_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_triad_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_triad_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: 7_chord_dominant_7
+    x: 0mm
+    y: 16mm
+    width: 55mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: 7 CHORD - Dominant 7
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: 7_chord_dominant_7_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_chord_dominant_7_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_chord_dominant_7_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_chord_dominant_7_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: major_7_chord_major_7_maj7
+    x: 0mm
+    y: 32mm
+    width: 60mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: MAJOR 7 CHORD - Major 7 - maj7
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: major_7_chord_major_7_maj7_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_7_chord_major_7_maj7_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_7_chord_major_7_maj7_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_7_chord_major_7_maj7_7
+      x: 57.5mm
+      y: 4.0mm
+      label:
+        text: '7'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: 6_chord_major_6
+    x: 0mm
+    y: 48mm
+    width: 50mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: 6 CHORD - Major 6
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: 6_chord_major_6_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 6_chord_major_6_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 6_chord_major_6_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 6_chord_major_6_6
+      x: 47.5mm
+      y: 4.0mm
+      label:
+        text: '6'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: suspended_4_chord_sus4
+    x: 0mm
+    y: 64mm
+    width: 40mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: SUSPENDED 4 CHORD - sus4
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: suspended_4_chord_sus4_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: suspended_4_chord_sus4_4
+      x: 27.5mm
+      y: 4.0mm
+      label:
+        text: '4'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: suspended_4_chord_sus4_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: 9_chord_9
+    x: 0mm
+    y: 80mm
+    width: 75mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: 9 CHORD - 9
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: 9_chord_9_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 9_chord_9_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 9_chord_9_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 9_chord_9_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 9_chord_9_9
+      x: 72.5mm
+      y: 4.0mm
+      label:
+        text: '9'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: add_9_chord_add9
+    x: 0mm
+    y: 96mm
+    width: 75mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: ADD 9 CHORD - add9
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: add_9_chord_add9_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: add_9_chord_add9_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: add_9_chord_add9_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: add_9_chord_add9_9
+      x: 72.5mm
+      y: 4.0mm
+      label:
+        text: '9'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: 11_chord_11
+    x: 0mm
+    y: 112mm
+    width: 90mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: 11 CHORD - 11
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: 11_chord_11_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 11_chord_11_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 11_chord_11_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 11_chord_11_9
+      x: 72.5mm
+      y: 4.0mm
+      label:
+        text: '9'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 11_chord_11_11
+      x: 87.5mm
+      y: 4.0mm
+      label:
+        text: '11'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: 13_chord_13
+    x: 0mm
+    y: 128mm
+    width: 110mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: 13 CHORD - 13
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: 13_chord_13_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 13_chord_13_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 13_chord_13_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 13_chord_13_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 13_chord_13_9
+      x: 72.5mm
+      y: 4.0mm
+      label:
+        text: '9'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 13_chord_13_11
+      x: 87.5mm
+      y: 4.0mm
+      label:
+        text: '11'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 13_chord_13_13
+      x: 107.5mm
+      y: 4.0mm
+      label:
+        text: '13'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+- type: group
+  id: column_2
+  x: 70mm
+  y: 16mm
+  width: 60mm
+  height: 136mm
+  elements:
+  - type: group
+    id: augmented_triad
+    x: 0mm
+    y: 0mm
+    width: 45mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: AUGMENTED TRIAD
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: augmented_triad_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: augmented_triad_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: augmented_triad__5
+      x: 42.5mm
+      y: 4.0mm
+      label:
+        text: '#5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: 7_sharp_5_chord_7_5
+    x: 0mm
+    y: 64mm
+    width: 55mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: 7 SHARP 5 CHORD - 7#5
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: 7_sharp_5_chord_7_5_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_sharp_5_chord_7_5_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_sharp_5_chord_7_5__5
+      x: 42.5mm
+      y: 4.0mm
+      label:
+        text: '#5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_sharp_5_chord_7_5_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+- type: group
+  id: column_3
+  x: 130mm
+  y: 16mm
+  width: 80mm
+  height: 136mm
+  elements:
+  - type: group
+    id: minor_triad
+    x: 0mm
+    y: 0mm
+    width: 40mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: MINOR TRIAD
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: minor_triad_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_triad_b3
+      x: 17.5mm
+      y: 4.0mm
+      label:
+        text: b3
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_triad_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: minor_7_chord_m7
+    x: 0mm
+    y: 16mm
+    width: 55mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: MINOR 7 CHORD - m7
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: minor_7_chord_m7_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_7_chord_m7_b3
+      x: 17.5mm
+      y: 4.0mm
+      label:
+        text: b3
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_7_chord_m7_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_7_chord_m7_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: major_minor_7_chord_mmaj7
+    x: 0mm
+    y: 32mm
+    width: 60mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: MAJOR MINOR 7 CHORD -  Mmaj7
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: major_minor_7_chord_mmaj7_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_minor_7_chord_mmaj7_b3
+      x: 17.5mm
+      y: 4.0mm
+      label:
+        text: b3
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_minor_7_chord_mmaj7_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_minor_7_chord_mmaj7_7
+      x: 57.5mm
+      y: 4.0mm
+      label:
+        text: '7'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: minor_6_chord_m6
+    x: 0mm
+    y: 48mm
+    width: 50mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: MINOR 6 CHORD - m6
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: minor_6_chord_m6_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_6_chord_m6_b3
+      x: 17.5mm
+      y: 4.0mm
+      label:
+        text: b3
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_6_chord_m6_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_6_chord_m6_6
+      x: 47.5mm
+      y: 4.0mm
+      label:
+        text: '6'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: minor_9_chord_m9
+    x: 0mm
+    y: 80mm
+    width: 75mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: MINOR 9 CHORD - m9
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: minor_9_chord_m9_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_9_chord_m9_b3
+      x: 17.5mm
+      y: 4.0mm
+      label:
+        text: b3
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_9_chord_m9_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_9_chord_m9_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_9_chord_m9_9
+      x: 72.5mm
+      y: 4.0mm
+      label:
+        text: '9'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: major_6_add_9_chord_6_9
+    x: 0mm
+    y: 96mm
+    width: 75mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: MAJOR 6 ADD 9 CHORD - 6/9
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: major_6_add_9_chord_6_9_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_6_add_9_chord_6_9_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_6_add_9_chord_6_9_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_6_add_9_chord_6_9_6
+      x: 47.5mm
+      y: 4.0mm
+      label:
+        text: '6'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: major_6_add_9_chord_6_9_9
+      x: 72.5mm
+      y: 4.0mm
+      label:
+        text: '9'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: 7_sharp_9_chord_7_9
+    x: 0mm
+    y: 112mm
+    width: 80mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: 7 SHARP 9 CHORD - 7#9
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: 7_sharp_9_chord_7_9_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_sharp_9_chord_7_9_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_sharp_9_chord_7_9_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_sharp_9_chord_7_9_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_sharp_9_chord_7_9__9
+      x: 77.5mm
+      y: 4.0mm
+      label:
+        text: '#9'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: 7_flat_9_chord_7b9
+    x: 0mm
+    y: 128mm
+    width: 70mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: 7 FLAT 9 CHORD - 7b9
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: 7_flat_9_chord_7b9_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_flat_9_chord_7b9_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_flat_9_chord_7b9_5
+      x: 37.5mm
+      y: 4.0mm
+      label:
+        text: '5'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_flat_9_chord_7b9_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_flat_9_chord_7b9_b9
+      x: 67.5mm
+      y: 4.0mm
+      label:
+        text: b9
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+- type: group
+  id: column_4
+  x: 190mm
+  y: 16mm
+  width: 55mm
+  height: 136mm
+  elements:
+  - type: group
+    id: diminished_triad
+    x: 0mm
+    y: 0mm
+    width: 35mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: DIMINISHED TRIAD
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: diminished_triad_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: diminished_triad_b3
+      x: 17.5mm
+      y: 4.0mm
+      label:
+        text: b3
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: diminished_triad_b5
+      x: 32.5mm
+      y: 4.0mm
+      label:
+        text: b5
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: diminished_7_chord_dim7
+    x: 0mm
+    y: 16mm
+    width: 50mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: DIMINISHED 7 CHORD - dim7
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: diminished_7_chord_dim7_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: diminished_7_chord_dim7_b3
+      x: 17.5mm
+      y: 4.0mm
+      label:
+        text: b3
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: diminished_7_chord_dim7_b5
+      x: 32.5mm
+      y: 4.0mm
+      label:
+        text: b5
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: diminished_7_chord_dim7_bb7
+      x: 47.5mm
+      y: 4.0mm
+      label:
+        text: bb7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: minor_7_flat_5_chord_m7b5_half_dim
+    x: 0mm
+    y: 48mm
+    width: 55mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: MINOR 7 FLAT 5 CHORD - m7b5 - half dim
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: minor_7_flat_5_chord_m7b5_half_dim_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_7_flat_5_chord_m7b5_half_dim_b3
+      x: 17.5mm
+      y: 4.0mm
+      label:
+        text: b3
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_7_flat_5_chord_m7b5_half_dim_b5
+      x: 32.5mm
+      y: 4.0mm
+      label:
+        text: b5
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: minor_7_flat_5_chord_m7b5_half_dim_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+  - type: group
+    id: 7_flat_5_chord_7b5
+    x: 0mm
+    y: 64mm
+    width: 55mm
+    height: 8mm
+    background:
+      color: '#ccc'
+    border:
+      type: full
+      color: black
+      thickness: 0.1mm
+    label:
+      text: 7 FLAT 5 CHORD - 7b5
+      position: top-left
+      distance: 1mm
+      font:
+        color: black
+        size: 7pt
+        weight: bold
+    elements:
+    - type: custom
+      id: 7_flat_5_chord_7b5_1
+      x: 2.5mm
+      y: 4.0mm
+      label:
+        text: '1'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_flat_5_chord_7b5_3
+      x: 22.5mm
+      y: 4.0mm
+      label:
+        text: '3'
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_flat_5_chord_7b5_b5
+      x: 32.5mm
+      y: 4.0mm
+      label:
+        text: b5
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: custom
+      id: 7_flat_5_chord_7b5_b7
+      x: 52.5mm
+      y: 4.0mm
+      label:
+        text: b7
+        position: bottom
+        distance: 4.5mm
+        font:
+          size: 7pt
+          weight: bold
+      mount:
+        width: 5mm
+        height: 8mm
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black

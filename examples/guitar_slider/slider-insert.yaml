@@ -1,0 +1,9661 @@
+name: Big muff
+width: 315mm
+height: 168mm
+render_mode: drill_mask
+elements:
+  - type: group
+    id: major_triad
+    x: 0mm
+    y: 16mm
+    width: 40mm
+    height: 8mm
+    elements:
+    - type: group
+      id: A
+      x: 0mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 5mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 10mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 15mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 20mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 25mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 30mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 35mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 40mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 45mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 50mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 55mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black      
+#-----
+    - type: group
+      id: A
+      x: 60mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 65mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 70mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 75mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 80mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 85mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 90mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 95mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 100mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 105mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 110mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 115mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+#-----
+    - type: group
+      id: A
+      x: 120mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 125mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 130mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 135mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 140mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 145mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 150mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 155mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 160mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 165mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 170mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 175mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+#-----
+    - type: group
+      id: A
+      x: 180mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 185mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 190mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 195mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 200mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 205mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 210mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 215mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 220mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 225mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 230mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 235mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black              
+#-----
+    - type: group
+      id: A
+      x: 240mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 245mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 250mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 255mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 260mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 265mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 270mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 275mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 280mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 285mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 290mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 295mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+# ------
+    - type: group
+      id: A
+      x: 300mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 305mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 310mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+#--------------------------------------------------------
+  - type: group
+    id: major_triad
+    x: 0mm
+    y: 32mm
+    width: 40mm
+    height: 8mm
+    elements:
+    - type: group
+      id: A
+      x: 0mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 5mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 10mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 15mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 20mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 25mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 30mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 35mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 40mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 45mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 50mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 55mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black      
+#-----
+    - type: group
+      id: A
+      x: 60mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 65mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 70mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 75mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 80mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 85mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 90mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 95mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 100mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 105mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 110mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 115mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+#-----
+    - type: group
+      id: A
+      x: 120mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 125mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 130mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 135mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 140mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 145mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 150mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 155mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 160mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 165mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 170mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 175mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+#-----
+    - type: group
+      id: A
+      x: 180mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 185mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 190mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 195mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 200mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 205mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 210mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 215mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 220mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 225mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 230mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 235mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black              
+#-----
+    - type: group
+      id: A
+      x: 240mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 245mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 250mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 255mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 260mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 265mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 270mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 275mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 280mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 285mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 290mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 295mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+# ------
+    - type: group
+      id: A
+      x: 300mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 305mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 310mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+#--------------------------------------------------------
+  - type: group
+    id: major_triad
+    x: 0mm
+    y: 48mm
+    width: 40mm
+    height: 8mm
+    elements:
+    - type: group
+      id: A
+      x: 0mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 5mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 10mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 15mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 20mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 25mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 30mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 35mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 40mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 45mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 50mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 55mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black      
+#-----
+    - type: group
+      id: A
+      x: 60mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 65mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 70mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 75mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 80mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 85mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 90mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 95mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 100mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 105mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 110mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 115mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+#-----
+    - type: group
+      id: A
+      x: 120mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 125mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 130mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 135mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 140mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 145mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 150mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 155mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 160mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 165mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 170mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 175mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+#-----
+    - type: group
+      id: A
+      x: 180mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 185mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 190mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 195mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 200mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 205mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 210mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 215mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 220mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 225mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 230mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 235mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black              
+#-----
+    - type: group
+      id: A
+      x: 240mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 245mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 250mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 255mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 260mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 265mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 270mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 275mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 280mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 285mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 290mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 295mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+# ------
+    - type: group
+      id: A
+      x: 300mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 305mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 310mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+#--------------------------------------------------------
+  - type: group
+    id: major_triad
+    x: 0mm
+    y: 64mm
+    width: 40mm
+    height: 8mm
+    elements:
+    - type: group
+      id: A
+      x: 0mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 5mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 10mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 15mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 20mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 25mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 30mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 35mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 40mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 45mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 50mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 55mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black      
+#-----
+    - type: group
+      id: A
+      x: 60mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 65mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 70mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 75mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 80mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 85mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 90mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 95mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 100mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 105mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 110mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 115mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+#-----
+    - type: group
+      id: A
+      x: 120mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 125mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 130mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 135mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 140mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 145mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 150mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 155mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 160mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 165mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 170mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 175mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+#-----
+    - type: group
+      id: A
+      x: 180mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 185mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 190mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 195mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 200mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 205mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 210mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 215mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 220mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 225mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 230mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 235mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black              
+#-----
+    - type: group
+      id: A
+      x: 240mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 245mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 250mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 255mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 260mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 265mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 270mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 275mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 280mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 285mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 290mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 295mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+# ------
+    - type: group
+      id: A
+      x: 300mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 305mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 310mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+#--------------------------------------------------------
+  - type: group
+    id: major_triad
+    x: 0mm
+    y: 80mm
+    width: 40mm
+    height: 8mm
+    elements:
+    - type: group
+      id: A
+      x: 0mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 5mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 10mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 15mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 20mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 25mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 30mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 35mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 40mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 45mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 50mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 55mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black      
+#-----
+    - type: group
+      id: A
+      x: 60mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 65mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 70mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 75mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 80mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 85mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 90mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 95mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 100mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 105mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 110mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 115mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+#-----
+    - type: group
+      id: A
+      x: 120mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 125mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 130mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 135mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 140mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 145mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 150mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 155mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 160mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 165mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 170mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 175mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+#-----
+    - type: group
+      id: A
+      x: 180mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 185mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 190mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 195mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 200mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 205mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 210mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 215mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 220mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 225mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 230mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 235mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black              
+#-----
+    - type: group
+      id: A
+      x: 240mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 245mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 250mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 255mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 260mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 265mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 270mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 275mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 280mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 285mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 290mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 295mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+# ------
+    - type: group
+      id: A
+      x: 300mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 305mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 310mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+#--------------------------------------------------------
+  - type: group
+    id: major_triad
+    x: 0mm
+    y: 96mm
+    width: 40mm
+    height: 8mm
+    elements:
+    - type: group
+      id: A
+      x: 0mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 5mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 10mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 15mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 20mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 25mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 30mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 35mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 40mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 45mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 50mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 55mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black      
+#-----
+    - type: group
+      id: A
+      x: 60mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 65mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 70mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 75mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 80mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 85mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 90mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 95mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 100mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 105mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 110mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 115mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+#-----
+    - type: group
+      id: A
+      x: 120mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 125mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 130mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 135mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 140mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 145mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 150mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 155mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 160mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 165mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 170mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 175mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+#-----
+    - type: group
+      id: A
+      x: 180mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 185mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 190mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 195mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 200mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 205mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 210mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 215mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 220mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 225mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 230mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 235mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black              
+#-----
+    - type: group
+      id: A
+      x: 240mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 245mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 250mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 255mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 260mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 265mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 270mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 275mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 280mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 285mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 290mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 295mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+# ------
+    - type: group
+      id: A
+      x: 300mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 305mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 310mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+#--------------------------------------------------------
+  - type: group
+    id: major_triad
+    x: 0mm
+    y: 112mm
+    width: 40mm
+    height: 8mm
+    elements:
+    - type: group
+      id: A
+      x: 0mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 5mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 10mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 15mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 20mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 25mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 30mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 35mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 40mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 45mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 50mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 55mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black      
+#-----
+    - type: group
+      id: A
+      x: 60mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 65mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 70mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 75mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 80mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 85mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 90mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 95mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 100mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 105mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 110mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 115mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+#-----
+    - type: group
+      id: A
+      x: 120mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 125mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 130mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 135mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 140mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 145mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 150mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 155mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 160mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 165mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 170mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 175mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+#-----
+    - type: group
+      id: A
+      x: 180mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 185mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 190mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 195mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 200mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 205mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 210mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 215mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 220mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 225mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 230mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 235mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black              
+#-----
+    - type: group
+      id: A
+      x: 240mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 245mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 250mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 255mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 260mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 265mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 270mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 275mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 280mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 285mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 290mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 295mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+# ------
+    - type: group
+      id: A
+      x: 300mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 305mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 310mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+#--------------------------------------------------------
+  - type: group
+    id: major_triad
+    x: 0mm
+    y: 128mm
+    width: 40mm
+    height: 8mm
+    elements:
+    - type: group
+      id: A
+      x: 0mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 5mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 10mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 15mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 20mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 25mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 30mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 35mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 40mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 45mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 50mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 55mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black      
+#-----
+    - type: group
+      id: A
+      x: 60mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 65mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 70mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 75mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 80mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 85mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 90mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 95mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 100mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 105mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 110mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 115mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+#-----
+    - type: group
+      id: A
+      x: 120mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 125mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 130mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 135mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 140mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 145mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 150mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 155mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 160mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 165mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 170mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 175mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+#-----
+    - type: group
+      id: A
+      x: 180mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 185mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 190mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 195mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 200mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 205mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 210mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 215mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 220mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 225mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 230mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 235mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black              
+#-----
+    - type: group
+      id: A
+      x: 240mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 245mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 250mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 255mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 260mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 265mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 270mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 275mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 280mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 285mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 290mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 295mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+# ------
+    - type: group
+      id: A
+      x: 300mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 305mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 310mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+#--------------------------------------------------------
+  - type: group
+    id: major_triad
+    x: 0mm
+    y: 144mm
+    width: 40mm
+    height: 8mm
+    elements:
+    - type: group
+      id: A
+      x: 0mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 5mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 10mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 15mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 20mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 25mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 30mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 35mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 40mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 45mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 50mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 55mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black      
+#-----
+    - type: group
+      id: A
+      x: 60mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 65mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 70mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 75mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 80mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 85mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 90mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 95mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 100mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 105mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 110mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 115mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+#-----
+    - type: group
+      id: A
+      x: 120mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 125mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 130mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 135mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 140mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 145mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 150mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 155mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 160mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 165mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 170mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 175mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+#-----
+    - type: group
+      id: A
+      x: 180mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 185mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 190mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 195mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 200mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 205mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 210mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 215mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 220mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 225mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 230mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 235mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black              
+#-----
+    - type: group
+      id: A
+      x: 240mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 245mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 250mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: C
+      x: 255mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'C'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black        
+    - type: group
+      id: CD
+      x: 260mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "C#\nDb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: D
+      x: 265mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'D'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: DE
+      x: 270mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "D#\nEb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: E
+      x: 275mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'E'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: F
+      x: 280mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'F'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: FG
+      x: 285mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "F#\nGb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: G
+      x: 290mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'G'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black    
+    - type: group
+      id: GA
+      x: 295mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "G#\nAb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black  
+# ------
+    - type: group
+      id: A
+      x: 300mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'A'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: AB
+      x: 305mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: "A#\nBb"
+        position: top
+        distance: -3mm
+        font:
+          size: 8pt
+      background:
+          color: "#ccc"
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
+    - type: group
+      id: B
+      x: 310mm
+      y: 0mm
+      width: 5mm
+      height: 8mm
+      label:
+        text: 'B'
+        position: center
+        distance: 4.5mm
+        font:
+          size: 16pt
+      border:
+        type: full
+        thickness: 0.1mm
+        color: black
